@@ -1,14 +1,16 @@
-const Ship = require('./ship.mjs');
+import Ship from './ship';
 
 let ship;
 
 describe('throw errors if the ship is created with wrong length', () => {
-    test('throw "ship length should be between 1 and 5', () => {
-        expect(() => new Ship(0)).toThrow('ship length should be between 1 and 5');
+    test('throw "ship length should be between 2 and 5', () => {
+        expect(() => new Ship(0)).toThrow('ship length should be between 2 and 5');
 
-        expect(() => new Ship(6)).toThrow('ship length should be between 1 and 5');
+        expect(() => new Ship(6)).toThrow('ship length should be between 2 and 5');
 
-        expect(() => new Ship(1)).not.toThrow();
+        expect(() => new Ship(1)).toThrow();
+
+        expect(() => new Ship(2)).not.toThrow();
 
         expect(() => new Ship(5)).not.toThrow();
     })
