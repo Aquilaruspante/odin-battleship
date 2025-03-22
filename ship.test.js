@@ -1,42 +1,56 @@
-const Ship = require('./ship');
+const Ship = require('./ship.mjs');
 
-const ship = new Ship(3);
+let ship;
 
-describe('hit method increases hits property by one', () => {
-    beforeAll(() => {
-        ship.hitsNumber = 0;
+describe('throw errors if the ship is created with wrong length', () => {
+    test('throw "ship length should be between 1 and 5', () => {
+        expect(() => new Ship(0)).toThrow('ship length should be between 1 and 5');
+
+        expect(() => new Ship(6)).toThrow('ship length should be between 1 and 5');
+
+        expect(() => new Ship(1)).not.toThrow();
+
+        expect(() => new Ship(5)).not.toThrow();
     })
-    afterAll(() => {
-        ship.hitsNumber = 0;
-    })
+})
+
+describe('hit method', () => {    
     beforeEach(() => {
+        ship = new Ship(3);
+    })
+
+    test('hit method increases hitsNumber by 1', () => {
+        expect(ship.hitsNumber).toBe(0);
+
         ship.hit();
-    })
-    test('increase hits from 0 to 1', () => {
         expect(ship.hitsNumber).toBe(1);
-    })
-    test('increase hits from 1 to 2', () => {
+
+        ship.hit();
         expect(ship.hitsNumber).toBe(2);
     })
 })
 
-describe('isSunk retuns true only when hits === length', () => {
-    beforeAll(() => {
-        ship.hitsNumber =0;
-    })
-    afterAll(() => {
-        ship.hitsNumber = 0;
-    })
+describe('isSunk method', () => {
     beforeEach(() => {
-        ship.hit();
+        ship = new Ship(3);
     })
-    test('after first hit it should return false', () => {
+    
+    test('isSunk is false when hitsNumber is less than length', () => {
+        ship.hitsNumber = 2;
+        expect(ship.isSunk()).toBeFalsy();
+        
+        ship.hitsNumber = 1;
+        expect(ship.isSunk()).toBeFalsy();
+
+        ship.hitsNumber = 0;
         expect(ship.isSunk()).toBeFalsy();
     })
-    test('after second hit it should return false', () => {
-        expect(ship.isSunk()).toBeFalsy();
-    })
-    test('after third hit it should return true', () => {
+
+    test('isSunk is true when hitsNumber is greater or equal than length', () => {
+        ship.hitsNumber = 3;
+        expect(ship.isSunk()).toBeTruthy();
+
+        ship.hitsNumber = 4;
         expect(ship.isSunk()).toBeTruthy();
     })
 })
