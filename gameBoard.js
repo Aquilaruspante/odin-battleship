@@ -37,4 +37,32 @@ export default class GameBoard {
             }
         }
     }
+
+    receiveAttack(coordinates) {
+        const [row, col] = coordinates;
+
+        if (row > 10 || col > 10) throw new Error('receiveAttack coordinates must be less than 10!');
+
+        switch (this.grid[row][col]) {
+            case 'D':
+                this.destroyer.hit();
+                break;
+            case 'C':
+                this.cruiser.hit();
+                break;
+            case 'S':
+                this.submarine.hit();
+                nreak;
+            case 'B':
+                this.battleship.hit();
+                break;
+            case 'A':
+                this.carrier.hit();
+                break;
+            case null:
+                break;
+        }
+
+        this.grid[row][col] = 'X';
+    }
 }

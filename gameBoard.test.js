@@ -1,3 +1,4 @@
+import { expect, jest } from '@jest/globals';
 import GameBoard from './gameBoard';
 import Ship from './ship';
 
@@ -113,5 +114,31 @@ describe('ship instances are created correctly', () => {
     test('carrier length = 5, hitNumbers = 0', () => {
         expect(gameBoard.carrier.length).toBe(5);
         expect(gameBoard.carrier.hitsNumber).toBe(0);
+    })
+})
+
+describe('receiveAttack method', () => {
+    beforeEach(() => {
+        gameBoard = new GameBoard();
+        gameBoard.place(gameBoard.destroyer, [4, 6], 'horizontal', 'D');
+        gameBoard.destroyer.hit = jest.fn();
+    })
+
+    test('grid location has value "X" after hit and hit not called when missed', () => {
+        gameBoard.receiveAttack([1, 1]);
+        expect(gameBoard.grid[1][1]).toBe('X');
+        expect(gameBoard.destroyer.hit).not.toHaveBeenCalled();
+    })
+
+    test('grid location has value "X" after hit and hit called once', () => {
+        gameBoard.receiveAttack([4, 7]);
+        expect(gameBoard.grid[4][7]).toBe('X');
+        expect(gameBoard.destroyer.hit).toHaveBeenCalledTimes(1);
+    })
+
+    test('throws error when coordinates are invalid', () => {
+        expect(() => gameBoard.receiveAttack([1, 11])).toThrow('receiveAttack coordinates must be less than 10!');
+        expect(() => gameBoard.receiveAttack([11, 1])).toThrow('receiveAttack coordinates must be less than 10!');
+        expect(() => gameBoard.receiveAttack([11, 11])).toThrow('receiveAttack coordinates must be less than 10!');
     })
 })
