@@ -1,4 +1,4 @@
-import { expect, jest } from '@jest/globals';
+import { beforeEach, expect, jest } from '@jest/globals';
 import GameBoard from './gameBoard';
 import Ship from './ship';
 
@@ -140,5 +140,31 @@ describe('receiveAttack method', () => {
         expect(() => gameBoard.receiveAttack([1, 11])).toThrow('receiveAttack coordinates must be less than 10!');
         expect(() => gameBoard.receiveAttack([11, 1])).toThrow('receiveAttack coordinates must be less than 10!');
         expect(() => gameBoard.receiveAttack([11, 11])).toThrow('receiveAttack coordinates must be less than 10!');
+    })
+})
+
+describe('allShipsSunk method', () => {
+    beforeEach(() => {
+        gameBoard = new GameBoard();
+    })
+
+    test('all ships are sunk so allShipsSunk should be true', () => {
+        gameBoard.destroyer.isSunk = jest.fn(() => true);
+        gameBoard.cruiser.isSunk = jest.fn(() => true);
+        gameBoard.submarine.isSunk = jest.fn(() => true);
+        gameBoard.battleship.isSunk = jest.fn(() => true);
+        gameBoard.carrier.isSunk = jest.fn(() => true);
+
+        expect(gameBoard.allShipsSunk()).toBeTruthy();
+    })
+
+    test('all ships are sunk except one so allShipsSunk should be false', () => {
+        gameBoard.destroyer.isSunk = jest.fn(() => true);
+        gameBoard.cruiser.isSunk = jest.fn(() => true);
+        gameBoard.submarine.isSunk = jest.fn(() => false);
+        gameBoard.battleship.isSunk = jest.fn(() => true);
+        gameBoard.carrier.isSunk = jest.fn(() => true);
+
+        expect(gameBoard.allShipsSunk()).toBeFalsy();
     })
 })

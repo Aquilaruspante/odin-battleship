@@ -65,4 +65,12 @@ export default class GameBoard {
 
         this.grid[row][col] = 'X';
     }
+
+    allShipsSunk() {
+        if (this.destroyer.isSunk() && this.cruiser.isSunk() && this.submarine.isSunk() && this.battleship.isSunk() && this.carrier.isSunk()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
