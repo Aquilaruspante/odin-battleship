@@ -86,3 +86,32 @@ describe('place method', () => {
         expect(() => gameBoard.place(destroyer, [6, 15], 'horizontal', 'D')).toThrow('coordinates must be 2 numbers less than 10');
     })
 })
+
+describe('ship instances are created correctly', () => {
+    const gameBoard = new GameBoard()
+
+    test('destroyer length = 2, hitNumbers = 0', () => {
+        expect(gameBoard.destroyer.length).toBe(2);
+        expect(gameBoard.destroyer.hitsNumber).toBe(0);
+    })
+
+    test('cruiser length = 3, hitNumbers = 0', () => {
+        expect(gameBoard.cruiser.length).toBe(3);
+        expect(gameBoard.cruiser.hitsNumber).toBe(0);
+    })
+
+    test('submarine length = 3, hitNumbers = 0', () => {
+        expect(gameBoard.submarine.length).toBe(3);
+        expect(gameBoard.submarine.hitsNumber).toBe(0);
+    })
+
+    test('battleship length = 4, hitNumbers = 0', () => {
+        expect(gameBoard.battleship.length).toBe(4);
+        expect(gameBoard.battleship.hitsNumber).toBe(0);
+    })
+
+    test('carrier length = 5, hitNumbers = 0', () => {
+        expect(gameBoard.carrier.length).toBe(5);
+        expect(gameBoard.carrier.hitsNumber).toBe(0);
+    })
+})

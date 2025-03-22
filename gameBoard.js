@@ -14,6 +14,12 @@ export default class GameBoard {
             [null, null, null, null, null, null, null, null, null, null],
             [null, null, null, null, null, null, null, null, null, null],
         ]
+
+        this.destroyer = new Ship(2);
+        this.cruiser = new Ship(3);
+        this.submarine = new Ship(3);
+        this.battleship = new Ship(4);
+        this.carrier = new Ship(5);
     }
 
     place(ship, coordinates, orientation, symbol) {
