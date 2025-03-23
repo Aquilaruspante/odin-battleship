@@ -86,6 +86,23 @@ describe('place method', () => {
         expect(() => gameBoard.place(destroyer, [11, 15], 'horizontal', 'D')).toThrow('coordinates must be 2 numbers less than 10');
         expect(() => gameBoard.place(destroyer, [6, 15], 'horizontal', 'D')).toThrow('coordinates must be 2 numbers less than 10');
     })
+
+    test('placing a ship on an occupied position throws an error', () => {
+        const destroyer = new Ship(2);
+        const cruiser = new Ship(3);
+    
+        gameBoard.place(destroyer, [4, 5], 'horizontal', 'D');
+        expect(() => gameBoard.place(cruiser, [4, 5], 'horizontal', 'C'))
+            .toThrow('Position already occupied');
+    });
+    
+    test('placing a ship in a way it gets out of the border throws an error', () => {
+        // horizontal placement.
+        expect(() => gameBoard.place(gameBoard.destroyer, [1, 9], 'horizontal', 'D')).toThrow('ship not contained inside the board');
+
+        // vetical placement.
+        expect(() => gameBoard.place(gameBoard.carrier, [6, 1], 'vertical', 'A')).toThrow('ship not contained inside the board');
+    })
 })
 
 describe('ship instances are created correctly', () => {
@@ -141,6 +158,18 @@ describe('receiveAttack method', () => {
         expect(() => gameBoard.receiveAttack([11, 1])).toThrow('receiveAttack coordinates must be less than 10!');
         expect(() => gameBoard.receiveAttack([11, 11])).toThrow('receiveAttack coordinates must be less than 10!');
     })
+})
+
+test('a ship get hitsNumber max as high as its length', () => {
+    gameBoard = new GameBoard();
+    gameBoard.place(gameBoard.destroyer, [4, 6], 'horizontal', 'D');
+
+    gameBoard.receiveAttack([4, 6]);
+    gameBoard.receiveAttack([4, 7]);
+    gameBoard.receiveAttack([4, 6]);
+    
+    expect(gameBoard.destroyer.isSunk).toBeTruthy();
+    expect(gameBoard.destroyer.hitsNumber).toBe(2);
 })
 
 describe('allShipsSunk method', () => {

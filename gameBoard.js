@@ -28,12 +28,25 @@ export default class GameBoard {
         if (row > 10 || col > 10) throw new Error ('coordinates must be 2 numbers less than 10')
 
         if (orientation === 'horizontal') {
+            if (col + ship.length >= 10) throw new Error('ship not contained inside the board');
+
             for (let i = 0; i < ship.length; i++) {
-                this.grid[row][col + i] = symbol;
+                if (this.grid[row][col + i] === null) {
+                    this.grid[row][col + i] = symbol;
+                } else {
+                    throw new Error('Position already occupied');
+                }
             }
+                
         } else if (orientation === 'vertical') {
+            if (row + ship.length >= 10) throw new Error('ship not contained inside the board');
+            
             for (let i = 0; i < ship.length; i++) {
-                this.grid[row + i][col] = symbol;
+                if (this.grid[row][col + i] === null) {
+                    this.grid[row + i][col] = symbol;
+                } else {
+                    throw new Error('Position already occupied or ship not entirely inside edge of gameboard');
+                }
             }
         }
     }
@@ -41,7 +54,7 @@ export default class GameBoard {
     receiveAttack(coordinates) {
         const [row, col] = coordinates;
 
-        if (row > 10 || col > 10) throw new Error('receiveAttack coordinates must be less than 10!');
+        if (row >= 10 || col >= 10) throw new Error('receiveAttack coordinates must be less than 10!');
 
         switch (this.grid[row][col]) {
             case 'D':
@@ -52,7 +65,7 @@ export default class GameBoard {
                 break;
             case 'S':
                 this.submarine.hit();
-                nreak;
+                break;
             case 'B':
                 this.battleship.hit();
                 break;
