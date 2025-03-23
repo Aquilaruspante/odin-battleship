@@ -31,9 +31,18 @@ describe('initialize method', () => {
    })
 
    test('all ships hitsNumber get reset to 0', () => {
+        // playerOne
         gameController.playerOne.gameBoard.destroyer.hitsNumber = 1;
+        gameController.playerOne.gameBoard.cruiser.hitsNumber = 2;
+        gameController.playerOne.gameBoard.carrier.hitsNumber = 3;
+
+        // playerTwo
+        gameController.playerTwo.gameBoard.destroyer.hitsNumber = 1;    
+        gameController.playerTwo.gameBoard.cruiser.hitsNumber = 2;
+        gameController.playerTwo.gameBoard.carrier.hitsNumber = 3;
+
         gameController.initialize();
-        expect(gameController.playerOne.gameBoard.destroyer.hitsNumber).toBe(0);
+        expect(gameController.playerTwo.gameBoard.destroyer.hitsNumber).toBe(0);
    })
 })
 
