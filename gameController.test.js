@@ -29,6 +29,12 @@ describe('initialize method', () => {
     test('activePlayer is instance of Player', () => {
         expect(gameController.activePlayer).toBeInstanceOf(Player);
    })
+
+   test('all ships hitsNumber get reset to 0', () => {
+        gameController.playerOne.gameBoard.destroyer.hitsNumber = 1;
+        gameController.initialize();
+        expect(gameController.playerOne.gameBoard.destroyer.hitsNumber).toBe(0);
+   })
 })
 
 describe('attack method', () => {

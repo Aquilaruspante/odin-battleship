@@ -20,6 +20,8 @@ export default class GameBoard {
         this.submarine = new Ship(3);
         this.battleship = new Ship(4);
         this.carrier = new Ship(5);
+
+        this.shipArray = [this.destroyer, this.cruiser, this.submarine, this.battleship, this.carrier];
     }
 
     place(ship, coordinates, orientation, symbol) {
@@ -45,7 +47,7 @@ export default class GameBoard {
                 if (this.grid[row][col + i] === null) {
                     this.grid[row + i][col] = symbol;
                 } else {
-                    throw new Error('Position already occupied or ship not entirely inside edge of gameboard');
+                    throw new Error('Position already occupied');
                 }
             }
         }

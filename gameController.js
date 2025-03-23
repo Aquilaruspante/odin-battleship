@@ -6,7 +6,7 @@ export default class GameController {
         this.playerTwo = new Player('computer');
     }
 
-    initialize() {
+    #randomizeInitialPlayer() {
         const random = Math.floor(Math.random() * 2) + 1;
 
         if (random === 1) {
@@ -14,6 +14,21 @@ export default class GameController {
         } else {
             this.activePlayer = this.playerTwo;
         }
+    }
+
+    #resetShipsHits() {
+        for (let ship of this.playerOne.gameBoard.shipArray) {
+            ship.hitsNumber = 0;
+        }
+
+        for (let ship of this.playerTwo.gameBoard.shipArray) {
+            ship.hitsNumber = 0;
+        }
+    }
+
+    initialize() {
+        this.#randomizeInitialPlayer();
+        this.#resetShipsHits();
     }
 
     attack(coordinates) {
