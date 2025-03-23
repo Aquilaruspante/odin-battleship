@@ -23,10 +23,10 @@ describe('GameController instantiation', () => {
 describe('initialize method', () => {
     beforeEach(() => {
         gameController = new GameController()
-        gameController.initialize();
     })
 
     test('activePlayer is instance of Player', () => {
+        gameController.initialize();
         expect(gameController.activePlayer).toBeInstanceOf(Player);
    })
 
@@ -43,6 +43,15 @@ describe('initialize method', () => {
 
         gameController.initialize();
         expect(gameController.playerTwo.gameBoard.destroyer.hitsNumber).toBe(0);
+   })
+
+   test('all ships isPlaced property reset to false', () => {
+        gameController.playerOne.gameBoard.place(gameController.playerOne.gameBoard.cruiser, [3, 4], 'horizontal', 'C');
+        gameController.playerOne.gameBoard.place(gameController.playerOne.gameBoard.battleship, [5, 4], 'horizontal', 'B');
+        gameController.initialize();
+
+        expect(gameController.playerOne.gameBoard.cruiser.isPlaced).toBeFalsy();
+        expect(gameController.playerOne.gameBoard.battleship.isPlaced).toBeFalsy();
    })
 })
 

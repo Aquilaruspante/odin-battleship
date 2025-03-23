@@ -19,10 +19,12 @@ export default class GameController {
     #resetShipsHits() {
         for (let ship of this.playerOne.gameBoard.shipArray) {
             ship.hitsNumber = 0;
+            ship.isPlaced = false;
         }
 
         for (let ship of this.playerTwo.gameBoard.shipArray) {
             ship.hitsNumber = 0;
+            ship.isPlaced = false;
         }
     }
 
