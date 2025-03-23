@@ -103,6 +103,11 @@ describe('place method', () => {
         // vetical placement.
         expect(() => gameBoard.place(gameBoard.carrier, [6, 1], 'vertical', 'A')).toThrow('ship not contained inside the board');
     })
+
+    test('place method changes ship.isPlaced to true', () => {
+        gameBoard.place(gameBoard.cruiser, [4, 4], 'horizontal', 'C');
+        expect(gameBoard.cruiser.isPlaced).toBeTruthy();
+    })
 })
 
 describe('ship instances are created correctly', () => {

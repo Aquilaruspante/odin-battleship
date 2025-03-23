@@ -39,6 +39,8 @@ export default class GameBoard {
                     throw new Error('Position already occupied');
                 }
             }
+            
+            ship.isPlaced = true;
                 
         } else if (orientation === 'vertical') {
             if (row + ship.length >= 10) throw new Error('ship not contained inside the board');
@@ -50,6 +52,8 @@ export default class GameBoard {
                     throw new Error('Position already occupied');
                 }
             }
+
+            ship.isPlaced = true;
         }
     }
 
