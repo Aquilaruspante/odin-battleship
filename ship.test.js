@@ -1,3 +1,4 @@
+import { beforeEach } from '@jest/globals';
 import Ship from './ship';
 
 let ship;
@@ -54,5 +55,15 @@ describe('isSunk method', () => {
 
         ship.hitsNumber = 4;
         expect(ship.isSunk()).toBeTruthy();
+    })
+})
+
+describe('isPlaced property', () => {
+    beforeEach(() => {
+        ship = new Ship(3);
+    })
+
+    test('newly created ships have isPlaced equal to false', () => {
+        expect(ship.isPlaced).toBeFalsy();
     })
 })

@@ -5,6 +5,7 @@ export default class Ship {
         }
         this.length = length;
         this.hitsNumber = 0;
+        this.isPlaced = false;
     }
 
     hit() {
