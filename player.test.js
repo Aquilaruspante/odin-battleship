@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import Player from './player';
 import GameBoard from './gameBoard';
 import { expect } from '@jest/globals';
