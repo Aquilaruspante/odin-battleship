@@ -57,3 +57,17 @@ describe('attack method', () => {
     })
 })
 
+describe('switchPlayer method', () => {
+    beforeEach(() => {
+        gameController = new GameController();
+        gameController.activePlayer = gameController.playerOne;
+    })
+
+    test('activePlayer switches correctly', () => {
+        gameController.switchPlayer();
+        expect(gameController.activePlayer).toBe(gameController.playerTwo);
+
+        gameController.switchPlayer();
+        expect(gameController.activePlayer).toBe(gameController.playerOne);
+    })
+})
