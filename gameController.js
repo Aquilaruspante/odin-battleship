@@ -23,4 +23,12 @@ export default class GameController {
             this.playerOne.gameBoard.receiveAttack(coordinates);
         }
     }
+
+    switchPlayer() {
+        if (this.activePlayer === this.playerOne) {
+            this.activePlayer = this.playerTwo;
+        } else {
+            this.activePlayer = this.playerOne;
+        }
+    }
 }
