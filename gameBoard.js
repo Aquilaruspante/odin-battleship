@@ -15,16 +15,16 @@ export default class GameBoard {
             [null, null, null, null, null, null, null, null, null, null],
         ]
 
-        this.destroyer = new Ship(2);
-        this.cruiser = new Ship(3);
-        this.submarine = new Ship(3);
-        this.battleship = new Ship(4);
-        this.carrier = new Ship(5);
+        this.destroyer = new Ship(2, 'D');
+        this.cruiser = new Ship(3, 'C');
+        this.submarine = new Ship(3, 'S');
+        this.battleship = new Ship(4, 'B');
+        this.carrier = new Ship(5, 'A');
 
         this.shipArray = [this.destroyer, this.cruiser, this.submarine, this.battleship, this.carrier];
     }
 
-    place(ship, coordinates, orientation, symbol) {
+    place(ship, coordinates, orientation) {
         const [row, col] = coordinates;
 
         if (row > 10 || col > 10) throw new Error ('coordinates must be 2 numbers less than 10')
@@ -34,7 +34,7 @@ export default class GameBoard {
 
             for (let i = 0; i < ship.length; i++) {
                 if (this.grid[row][col + i] === null) {
-                    this.grid[row][col + i] = symbol;
+                    this.grid[row][col + i] = ship.symbol;
                 } else {
                     throw new Error('Position already occupied');
                 }
@@ -47,7 +47,7 @@ export default class GameBoard {
             
             for (let i = 0; i < ship.length; i++) {
                 if (this.grid[row][col + i] === null) {
-                    this.grid[row + i][col] = symbol;
+                    this.grid[row + i][col] = ship.symbol;
                 } else {
                     throw new Error('Position already occupied');
                 }

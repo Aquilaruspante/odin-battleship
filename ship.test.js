@@ -67,3 +67,13 @@ describe('isPlaced property', () => {
         expect(ship.isPlaced).toBeFalsy();
     })
 })
+
+describe('ship.symbol', () => {
+    test('ship symbol is second argument', () => {
+        const ship = new Ship(4, 'C');
+        const ship2 = new Ship(3, 'F');
+
+        expect(ship.symbol).toBe('C');
+        expect(ship2.symbol).toBe('F');
+    })
+})

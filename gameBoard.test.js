@@ -26,18 +26,18 @@ describe('place method', () => {
     })
 
     test('place cruiser at (3, 1) horizontally occupies (3, 1), (3, 2), (3, 3)', () => {
-        const cruiser = new Ship(3);
+        const cruiser = new Ship(3, 'C');
 
-        gameBoard.place(cruiser, [3, 1], 'horizontal', 'C');
+        gameBoard.place(cruiser, [3, 1], 'horizontal');
         expect(gameBoard.grid[3][1]).toBe('C');
         expect(gameBoard.grid[3][2]).toBe('C');
         expect(gameBoard.grid[3][3]).toBe('C');
     })
 
     test('place battleship at (3, 1) horizontally occupies (3, 1), (3, 2), (3, 3), (3, 4)', () => {
-        const battleship = new Ship(4);
+        const battleship = new Ship(4, 'B');
 
-        gameBoard.place(battleship, [3, 1], 'horizontal', 'B');
+        gameBoard.place(battleship, [3, 1], 'horizontal');
         expect(gameBoard.grid[3][1]).toBe('B');
         expect(gameBoard.grid[3][2]).toBe('B');
         expect(gameBoard.grid[3][3]).toBe('B');
@@ -45,26 +45,26 @@ describe('place method', () => {
     })
 
     test('place destroyer at (3, 1) horizontally occupies (3, 1), (3, 2),', () => {
-        const destroyer = new Ship(2);
+        const destroyer = new Ship(2, 'D');
 
-        gameBoard.place(destroyer, [3, 1], 'horizontal', 'D');
+        gameBoard.place(destroyer, [3, 1], 'horizontal');
         expect(gameBoard.grid[3][1]).toBe('D');
         expect(gameBoard.grid[3][2]).toBe('D');
     })
 
     test('place cruiser at (3, 1) vertically occupies (3, 1), (4, 1), (5, 1)', () => {
-        const cruiser = new Ship(3);
+        const cruiser = new Ship(3, 'C');
 
-        gameBoard.place(cruiser, [3, 1], 'vertical', 'C');
+        gameBoard.place(cruiser, [3, 1], 'vertical');
         expect(gameBoard.grid[3][1]).toBe('C');
         expect(gameBoard.grid[4][1]).toBe('C');
         expect(gameBoard.grid[5][1]).toBe('C');
     })
 
     test('place battleship at (3, 1) vertically occupies (3, 1), (4, 1), (5, 1), (6, 1)', () => {
-        const battleship = new Ship(4);
+        const battleship = new Ship(4, 'B');
 
-        gameBoard.place(battleship, [3, 1], 'vertical', 'B');
+        gameBoard.place(battleship, [3, 1], 'vertical');
         expect(gameBoard.grid[3][1]).toBe('B');
         expect(gameBoard.grid[4][1]).toBe('B');
         expect(gameBoard.grid[5][1]).toBe('B');
@@ -72,40 +72,40 @@ describe('place method', () => {
     })
 
     test('place destroyer at (3, 1) vertically occupies (3, 1), (4, 1),', () => {
-        const destroyer = new Ship(2);
+        const destroyer = new Ship(2, 'D');
 
-        gameBoard.place(destroyer, [3, 1], 'vertical', 'D');
+        gameBoard.place(destroyer, [3, 1], 'vertical');
         expect(gameBoard.grid[3][1]).toBe('D');
         expect(gameBoard.grid[4][1]).toBe('D');
     })
 
     test('coordinates higher than 10 throw error', () => {
-        const destroyer = new Ship(2);
+        const destroyer = new Ship(2, 'D');
 
-        expect(() => gameBoard.place(destroyer, [11, 8], 'horizontal', 'D')).toThrow('coordinates must be 2 numbers less than 10');
-        expect(() => gameBoard.place(destroyer, [11, 15], 'horizontal', 'D')).toThrow('coordinates must be 2 numbers less than 10');
-        expect(() => gameBoard.place(destroyer, [6, 15], 'horizontal', 'D')).toThrow('coordinates must be 2 numbers less than 10');
+        expect(() => gameBoard.place(destroyer, [11, 8], 'horizontal')).toThrow('coordinates must be 2 numbers less than 10');
+        expect(() => gameBoard.place(destroyer, [11, 15], 'horizontal')).toThrow('coordinates must be 2 numbers less than 10');
+        expect(() => gameBoard.place(destroyer, [6, 15], 'horizontal')).toThrow('coordinates must be 2 numbers less than 10');
     })
 
     test('placing a ship on an occupied position throws an error', () => {
-        const destroyer = new Ship(2);
-        const cruiser = new Ship(3);
+        const destroyer = new Ship(2, 'D');
+        const cruiser = new Ship(3, 'C');
     
-        gameBoard.place(destroyer, [4, 5], 'horizontal', 'D');
-        expect(() => gameBoard.place(cruiser, [4, 5], 'horizontal', 'C'))
+        gameBoard.place(destroyer, [4, 5], 'horizontal');
+        expect(() => gameBoard.place(cruiser, [4, 5], 'horizontal'))
             .toThrow('Position already occupied');
     });
     
     test('placing a ship in a way it gets out of the border throws an error', () => {
         // horizontal placement.
-        expect(() => gameBoard.place(gameBoard.destroyer, [1, 9], 'horizontal', 'D')).toThrow('ship not contained inside the board');
+        expect(() => gameBoard.place(gameBoard.destroyer, [1, 9], 'horizontal')).toThrow('ship not contained inside the board');
 
         // vetical placement.
-        expect(() => gameBoard.place(gameBoard.carrier, [6, 1], 'vertical', 'A')).toThrow('ship not contained inside the board');
+        expect(() => gameBoard.place(gameBoard.carrier, [6, 1], 'vertical')).toThrow('ship not contained inside the board');
     })
 
     test('place method changes ship.isPlaced to true', () => {
-        gameBoard.place(gameBoard.cruiser, [4, 4], 'horizontal', 'C');
+        gameBoard.place(gameBoard.cruiser, [4, 4], 'horizontal');
         expect(gameBoard.cruiser.isPlaced).toBeTruthy();
     })
 })
