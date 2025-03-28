@@ -55,32 +55,6 @@ describe('initialize method', () => {
    })
 })
 
-describe('attack method', () => {
-    beforeEach(() => {
-        gameController = new GameController();
-        gameController.playerOne.gameBoard.receiveAttack = jest.fn(array => array);
-        gameController.playerTwo.gameBoard.receiveAttack = jest.fn(array => array);
-    })
-
-    test('it calls receiveAttack on non playerTwo gameBoard when activePlayer is playerOne', () => {
-        gameController.activePlayer = gameController.playerOne;
-        gameController.attack();
-        expect(gameController.playerTwo.gameBoard.receiveAttack).toHaveBeenCalledTimes(1);
-    })
-
-    test('it calls receiveAttack on non playerOne gameBoard when activePlayer is playerTwo', () => {
-        gameController.activePlayer = gameController.playerTwo;
-        gameController.attack();
-        expect(gameController.playerOne.gameBoard.receiveAttack).toHaveBeenCalledTimes(1);
-    })
-
-    test('receiveAttack gets called with correct argument', () => {
-        gameController.activePlayer = gameController.playerOne;
-        gameController.attack([4, 5]);
-        expect(gameController.playerTwo.gameBoard.receiveAttack).toHaveBeenCalledWith([4, 5])
-    })
-})
-
 describe('switchPlayer method', () => {
     beforeEach(() => {
         gameController = new GameController();
@@ -93,5 +67,61 @@ describe('switchPlayer method', () => {
 
         gameController.switchPlayer();
         expect(gameController.activePlayer).toBe(gameController.playerOne);
+    })
+})
+
+describe('composeGameBoard method', () => {
+    beforeEach(() => {
+        gameController = new GameController();
+        gameController.playerOne.gameBoard.place = jest.fn((ship) => { ship.isPlaced = true });
+        gameController.playerTwo.gameBoard.place = jest.fn((ship) => { ship.isPlaced = true });
+    })
+
+    test('composeGameBoard calls place() for every ship', () => {
+        gameController.composeGameBoard();
+        expect(gameController.playerOne.gameBoard.place).toHaveBeenCalledTimes(5);
+        expect(gameController.playerTwo.gameBoard.place).toHaveBeenCalledTimes(5);
+    });
+    
+
+    test('composeGameBoard place one ship per type for every player', () => {
+        gameController.composeGameBoard();
+        expect(gameController.playerOne.gameBoard.destroyer.isPlaced).toBeTruthy();
+        expect(gameController.playerOne.gameBoard.cruiser.isPlaced).toBeTruthy();
+        expect(gameController.playerOne.gameBoard.submarine.isPlaced).toBeTruthy();
+        expect(gameController.playerOne.gameBoard.battleship.isPlaced).toBeTruthy();
+        expect(gameController.playerOne.gameBoard.carrier.isPlaced).toBeTruthy();       
+    })
+})
+
+describe('attackOnPlayerTwo method', () => {
+    beforeEach(() => {
+        gameController = new GameController();
+        gameController.playerTwo.gameBoard.receiveAttack = jest.fn((coordinates) => coordinates);
+        gameController.attackOnPlayerTwo([3, 4]);
+    })
+
+    test('attackOnPlayerTwo get called once', () => {
+        expect(gameController.playerTwo.gameBoard.receiveAttack).toBeCalledTimes(1);
+    })
+
+    test('attackOnPlayerTwo gets called with the right argument', () => {
+        expect(gameController.playerTwo.gameBoard.receiveAttack).toBeCalledWith([3, 4]);
+    })
+})
+
+describe('attackOnPlayerOnethod', () => {
+    beforeEach(() => {
+        gameController = new GameController();
+        gameController.playerOne.gameBoard.receiveAttack = jest.fn((coordinates) => coordinates);
+        gameController.attackOnPlayerOne([3, 4]);
+    })
+
+    test('attackOnPlayerOne get called once', () => {
+        expect(gameController.playerOne.gameBoard.receiveAttack).toBeCalledTimes(1);
+    })
+
+    test('attackOnPlayerOne gets called with the right argument', () => {
+        expect(gameController.playerOne.gameBoard.receiveAttack).toBeCalledWith([3, 4]);
     })
 })
