@@ -2,21 +2,28 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-mode: "development",
+  mode: "development",
   entry: './src/index.js',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  devServer: {
-    static: './dist',
+  module: {
+    rules: [
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+    ],
   },
-  optimization: {
-    runtimeChunk: 'single',
+  devtool: "eval-source-map",
+  devServer: {
+    watchFiles: ["./src/template.html"],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Development',
+      template: './src/index.html',
     }),
   ],
 };

@@ -1,4 +1,5 @@
 import gameController from './gameController';
+import './styles.css';
 
 window.onload = (event) => {
     const boardOne = document.querySelector('.gameboard-1');
