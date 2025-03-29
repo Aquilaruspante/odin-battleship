@@ -98,15 +98,24 @@ describe('attackOnPlayerTwo method', () => {
     beforeEach(() => {
         gameController = new GameController();
         gameController.playerTwo.gameBoard.receiveAttack = jest.fn((coordinates) => coordinates);
-        gameController.attackOnPlayerTwo([3, 4]);
     })
 
-    test('attackOnPlayerTwo get called once', () => {
+    test('attackOnPlayerTwo get called once when active player is playerOne', () => {
+        gameController.activePlayer = gameController.playerOne;
+        gameController.attackOnPlayerTwo([3, 4]);
         expect(gameController.playerTwo.gameBoard.receiveAttack).toBeCalledTimes(1);
     })
 
     test('attackOnPlayerTwo gets called with the right argument', () => {
+        gameController.activePlayer = gameController.playerOne;
+        gameController.attackOnPlayerTwo([3, 4]);
         expect(gameController.playerTwo.gameBoard.receiveAttack).toBeCalledWith([3, 4]);
+    })
+
+    test('attackOnePlayerTwo does not get called if active player is playertwo', () => {
+        gameController.activePlayer = gameController.playerTwo;
+        gameController.attackOnPlayerTwo();
+        expect(gameController.playerTwo.gameBoard.receiveAttack).not.toBeCalled()
     })
 })
 
@@ -114,14 +123,23 @@ describe('attackOnPlayerOnethod', () => {
     beforeEach(() => {
         gameController = new GameController();
         gameController.playerOne.gameBoard.receiveAttack = jest.fn((coordinates) => coordinates);
-        gameController.attackOnPlayerOne([3, 4]);
     })
 
-    test('attackOnPlayerOne get called once', () => {
+    test('attackOnPlayerOne get called once when acrive player is player 2', () => { 
+        gameController.activePlayer = gameController.playerTwo;
+        gameController.attackOnPlayerOne([3, 4]);
         expect(gameController.playerOne.gameBoard.receiveAttack).toBeCalledTimes(1);
     })
 
     test('attackOnPlayerOne gets called with the right argument', () => {
+        gameController.activePlayer = gameController.playerTwo;
+        gameController.attackOnPlayerOne([3, 4]);
         expect(gameController.playerOne.gameBoard.receiveAttack).toBeCalledWith([3, 4]);
+    })
+
+    test('attackOnePlayerOne does not get called if active player is playerOne', () => {
+        gameController.activePlayer = gameController.playerOne;
+        gameController.attackOnPlayerOne()
+        expect(gameController.playerOne.gameBoard.receiveAttack).not.toBeCalled()
     })
 })
