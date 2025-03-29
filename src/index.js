@@ -1,4 +1,4 @@
-import gameController from './gameController';
+import gameController from './gameController.js';
 import './styles.css';
 
 window.onload = (event) => {
