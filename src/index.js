@@ -1,9 +1,17 @@
-import gameController from './gameController.js';
+import GameController from './gameController.js';
 import './styles.css';
+
+const gameController = new GameController();
+
+const gameBoardOne = gameController.playerOne.gameBoard.grid;
+const gameboardtwo = gameController.playerTwo.gameBoard.grid;
 
 window.onload = (event) => {
     const boardOne = document.querySelector('.gameboard-1');
     const boardTwo = document.querySelector('.gameboard-2');
+
+    gameController.initialize();
+    gameController.composeGameBoard();
 
     for (let x = 0; x < 10; x++) {
         const row = document.createElement('div');
@@ -13,7 +21,7 @@ window.onload = (event) => {
             const col = document.createElement('div');
             col.setAttribute('class', `col col-${y}`);
             col.addEventListener('click', () => {
-                gameController.attackOnPlayerTwo(x, y);
+                gameController.attackOnPlayerOne([x, y]);
             })
             row.appendChild(col);
         }
@@ -29,7 +37,7 @@ window.onload = (event) => {
             const col = document.createElement('div');
             col.setAttribute('class', `col col-${y}`);
             col.addEventListener('click', () => {
-                gameController.attackOnPlayerOne(x, y);
+                gameController.attackOnPlayerTwo([x, y]);
             })
             row.appendChild(col);
         }
