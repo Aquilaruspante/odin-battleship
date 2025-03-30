@@ -61,11 +61,11 @@ export default class GameController {
         }
     }
 
-    attackOnPlayerTwo(coordinates) {
-        if (this.activePlayer === this.playerOne) { this.playerTwo.gameBoard.receiveAttack(coordinates); console.log('player one attacking'); }
+    attackOnPlayerTwo(coordinates, col) {
+        if (this.activePlayer === this.playerOne) this.playerTwo.gameBoard.receiveAttack(coordinates, col); 
     }
 
-    attackOnPlayerOne(coordinates) {
-        if (this.activePlayer === this.playerTwo) { this.playerOne.gameBoard.receiveAttack(coordinates); console.log('player two attacking') }
+    attackOnPlayerOne(coordinates, col) {
+        if (this.activePlayer === this.playerTwo) this.playerOne.gameBoard.receiveAttack(coordinates, col);
     }
 }

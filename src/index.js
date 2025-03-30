@@ -8,7 +8,7 @@ const gameboardtwo = gameController.playerTwo.gameBoard.grid;
 
 window.onload = (event) => {
     const boardOne = document.querySelector('.gameboard-1');
-    const boardTwo = document.querySelector('.gameboard-2');
+    const boardTwo = document.querySelector('.gameboard-2');        
 
     gameController.initialize();
     gameController.composeGameBoard();
@@ -37,7 +37,7 @@ window.onload = (event) => {
             const col = document.createElement('div');
             col.setAttribute('class', `col col-${y}`);
             col.addEventListener('click', () => {
-                gameController.attackOnPlayerTwo([x, y]);
+                gameController.attackOnPlayerTwo([x, y], col);
             })
             row.appendChild(col);
         }

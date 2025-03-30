@@ -57,7 +57,7 @@ export default class GameBoard {
         }
     }
 
-    receiveAttack(coordinates) {
+    receiveAttack(coordinates, column) {
         const [row, col] = coordinates;
 
         if (row >= 10 || col >= 10) throw new Error('receiveAttack coordinates must be less than 10!');
@@ -65,18 +65,23 @@ export default class GameBoard {
         switch (this.grid[row][col]) {
             case 'D':
                 this.destroyer.hit();
+                column.classList.toggle('hit');
                 break;
             case 'C':
                 this.cruiser.hit();
+                column.classList.toggle('hit');
                 break;
             case 'S':
                 this.submarine.hit();
+                column.classList.toggle('hit');
                 break;
             case 'B':
                 this.battleship.hit();
+                column.classList.toggle('hit');
                 break;
             case 'A':
                 this.carrier.hit();
+                column.classList.toggle('hit');
                 break;
             case null:
                 break;
