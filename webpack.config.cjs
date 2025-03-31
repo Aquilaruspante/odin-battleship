@@ -17,8 +17,11 @@ module.exports = {
       },
     ],
   },
-  devtool: "eval-source-map",
+  devtool: "cheap-module-source-map",
   devServer: {
+    static: {
+      directory: path.resolve(__dirname, "dist"),
+    },
     watchFiles: ["./src/template.html"],
   },
   plugins: [

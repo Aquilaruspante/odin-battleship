@@ -20,6 +20,8 @@ window.onload = (event) => {
         for (let y = 0; y < 10; y++) {
             const col = document.createElement('div');
             col.setAttribute('class', `col col-${y}`);
+            
+            if (gameBoardOne[x][y] !== null) col.innerText = gameBoardOne[x][y];
             col.addEventListener('click', () => {
                 gameController.attackOnPlayerOne([x, y]);
             })

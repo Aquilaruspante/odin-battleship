@@ -24,37 +24,77 @@ export default class GameBoard {
         this.shipArray = [this.destroyer, this.cruiser, this.submarine, this.battleship, this.carrier];
     }
 
+    #shipContainedHorizotally(ship, col) {
+        if (col + ship.length >= 10){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    #shipDoesNotOverlapOtherShipsHorizontally(ship, row, col) {
+        for (let i = 0; i < ship.length; i++) {
+            if (this.grid[row][col + i] !== null) {
+                return false
+            } 
+        } 
+        return true;
+    }
+
+    #shipContainedVertically(ship, row) {
+        if (row + ship.length >= 10) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    #shipDoesNotOverlapOthersShipsVertically(ship, row, col) {
+        for (let i = 0; i < ship.length; i++) {
+            if (this.grid[row + i][col] !== null) {
+                return false
+            } 
+        }
+        return true;
+    }
+
+    #shipIsPlaceableHorizontally(ship, row , col) {
+       if (this.#shipContainedHorizotally(ship, col) && this.#shipDoesNotOverlapOtherShipsHorizontally(ship, row, col)) {
+        return true;
+       } else {
+        return false;
+       }
+    }
+
+    #shipIsPlaceablevertically(ship, row , col) {
+        if (this.#shipContainedVertically(ship, row) && this.#shipDoesNotOverlapOthersShipsVertically(ship, row, col)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     place(ship, coordinates, orientation) {
         const [row, col] = coordinates;
 
-        if (row > 10 || col > 10) throw new Error ('coordinates must be 2 numbers less than 10')
+        if (row > 10 || col > 10) throw new Error('receiveAttack coordinates must be less than 10!');
 
-        if (orientation === 'horizontal') {
-            if (col + ship.length >= 10) throw new Error('ship not contained inside the board');
-
+        if (orientation === 'horizontal' && this.#shipIsPlaceableHorizontally(ship, row, col)) {
+            console.log('here');
             for (let i = 0; i < ship.length; i++) {
-                if (this.grid[row][col + i] === null) {
-                    this.grid[row][col + i] = ship.symbol;
-                } else {
-                    throw new Error('Position already occupied');
-                }
+                this.grid[row][col + i] = ship.symbol;
+            }        
+            ship.isPlaced = true;
+        } else if (orientation === 'vertical' && this.#shipIsPlaceablevertically(ship, row, col)) {      
+            for (let i = 0; i < ship.length; i++) {    
+                this.grid[row + i][col] = ship.symbol;
             }
             
             ship.isPlaced = true;
-                
-        } else if (orientation === 'vertical') {
-            if (row + ship.length >= 10) throw new Error('ship not contained inside the board');
-            
-            for (let i = 0; i < ship.length; i++) {
-                if (this.grid[row][col + i] === null) {
-                    this.grid[row + i][col] = ship.symbol;
-                } else {
-                    throw new Error('Position already occupied');
-                }
-            }
-
-            ship.isPlaced = true;
+        } else {
+            ship.isPlaced = false;
         }
+        
     }
 
     receiveAttack(coordinates, column) {

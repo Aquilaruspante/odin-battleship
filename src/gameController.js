@@ -44,28 +44,28 @@ export default class GameController {
     composeGameBoard() {
         for (let ship of this.playerOne.gameBoard.shipArray) {
             while (!ship.isPlaced) {
-                const row = Math.floor(Math.random() * 9);
-                const col = Math.floor(Math.random() * 9);
+                const row = Math.floor(Math.random() * 10);
+                const col = Math.floor(Math.random() * 10);
                 const orientation = (Math.floor(Math.random() * 2) + 1) === 1 ? 'horizontal' : 'vertical'; 
-                this.playerOne.gameBoard.place(ship, [row, col], orientation, ship.symbol)
+                this.playerOne.gameBoard.place(ship, [row, col], orientation)
             }      
         }
 
         for (let ship of this.playerTwo.gameBoard.shipArray) {
             while (!ship.isPlaced) {
-                const row = Math.floor(Math.random() * 9);
-                const col = Math.floor(Math.random() * 9);
+                const row = Math.floor(Math.random() * 10);
+                const col = Math.floor(Math.random() * 10);
                 const orientation = (Math.floor(Math.random() * 2) + 1) === 1 ? 'horizontal' : 'vertical'; 
-                this.playerTwo.gameBoard.place(ship, [row, col], orientation, ship.symbol)
+                this.playerTwo.gameBoard.place(ship, [row, col], orientation);
             }
         }
     }
 
-    attackOnPlayerTwo(coordinates, col) {
-        if (this.activePlayer === this.playerOne) this.playerTwo.gameBoard.receiveAttack(coordinates, col); 
+    attackOnPlayerTwo(coordinates, cell) {
+        if (this.activePlayer === this.playerOne) this.playerTwo.gameBoard.receiveAttack(coordinates, cell); 
     }
 
-    attackOnPlayerOne(coordinates, col) {
-        if (this.activePlayer === this.playerTwo) this.playerOne.gameBoard.receiveAttack(coordinates, col);
+    attackOnPlayerOne(coordinates, cell) {
+        if (this.activePlayer === this.playerTwo) this.playerOne.gameBoard.receiveAttack(coordinates, cell);
     }
 }
