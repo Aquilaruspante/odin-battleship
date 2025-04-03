@@ -23,7 +23,7 @@ window.onload = (event) => {
             
             if (gameBoardOne[x][y] !== null) col.innerText = gameBoardOne[x][y];
             col.addEventListener('click', () => {
-                gameController.attackOnPlayerOne([x, y]);
+                gameController.attackOnPlayerOne([x, y], col);
             })
             row.appendChild(col);
         }

@@ -98,6 +98,7 @@ export default class GameBoard {
     }
 
     receiveAttack(coordinates, cell) {
+        // console.log(cell);
         const [row, col] = coordinates;
 
         if (row >= 10 || col >= 10) throw new Error('receiveAttack coordinates must be less than 10!');
