@@ -24,6 +24,7 @@ window.onload = (event) => {
             if (gameBoardOne[x][y] !== null) col.innerText = gameBoardOne[x][y];
             col.addEventListener('click', () => {
                 gameController.attackOnPlayerOne([x, y], col);
+                console.log(gameController.activePlayer);
             })
             row.appendChild(col);
         }
@@ -40,6 +41,7 @@ window.onload = (event) => {
             col.setAttribute('class', `col col-${y}`);
             col.addEventListener('click', () => {
                 gameController.attackOnPlayerTwo([x, y], col);
+                console.log(gameController.activePlayer);
             })
             row.appendChild(col);
         }
