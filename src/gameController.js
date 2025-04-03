@@ -62,10 +62,12 @@ export default class GameController {
     }
 
     attackOnPlayerTwo(coordinates, cell) {
+        console.log('attack on player 2');
         if (this.activePlayer === this.playerOne) this.playerTwo.gameBoard.receiveAttack(coordinates, cell); 
     }
 
     attackOnPlayerOne(coordinates, cell) {
+        console.log('attack on player 1');
         if (this.activePlayer === this.playerTwo) this.playerOne.gameBoard.receiveAttack(coordinates, cell);
     }
 }
