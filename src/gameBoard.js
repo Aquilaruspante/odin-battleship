@@ -73,7 +73,7 @@ export default class GameBoard {
             return false;
         };
     };
-
+    
     place(ship, coordinates, orientation) {
         const [row, col] = coordinates;
 
