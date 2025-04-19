@@ -72,10 +72,12 @@ export default class GameController {
     };
 
     attackOnPlayerTwo(controller, coordinates, cell) {
-        if (controller.activePlayer === controller.playerOne) controller.playerTwo.gameBoard.receiveAttack(coordinates, cell, controller); 
+        if (controller.activePlayer === controller.playerOne) controller.playerTwo.gameBoard.receiveAttack(coordinates, cell, controller);
+        this.#checkWinner(); 
     };
 
     attackOnPlayerOne(controller, coordinates, cell) {
         if (controller.activePlayer === controller.playerTwo) controller.playerOne.gameBoard.receiveAttack(coordinates, cell, controller);
+        this.#checkWinner();
     };
 };
