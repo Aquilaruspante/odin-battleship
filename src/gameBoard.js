@@ -13,7 +13,7 @@ export default class GameBoard {
             [null, null, null, null, null, null, null, null, null, null],
             [null, null, null, null, null, null, null, null, null, null],
             [null, null, null, null, null, null, null, null, null, null],
-        ]
+        ];
 
         this.destroyer = new Ship(2, 'D');
         this.cruiser = new Ship(3, 'C');
@@ -22,57 +22,57 @@ export default class GameBoard {
         this.carrier = new Ship(5, 'A');
 
         this.shipArray = [this.destroyer, this.cruiser, this.submarine, this.battleship, this.carrier];
-    }
+    };
 
     #shipContainedHorizotally(ship, col) {
         if (col + ship.length >= 10){
             return false;
         } else {
             return true;
-        }
-    }
+        };
+    };
 
     #shipDoesNotOverlapOtherShipsHorizontally(ship, row, col) {
         for (let i = 0; i < ship.length; i++) {
             if (this.grid[row][col + i] !== null) {
                 return false
-            } 
-        } 
+            }; 
+        } ;
         return true;
-    }
+    };
 
     #shipContainedVertically(ship, row) {
         if (row + ship.length >= 10) {
             return false;
         } else {
             return true;
-        }
-    }
+        };
+    };
 
     #shipDoesNotOverlapOthersShipsVertically(ship, row, col) {
         for (let i = 0; i < ship.length; i++) {
             if (this.grid[row + i][col] !== null) {
                 return false
-            } 
-        }
+            }; 
+        };
         return true;
-    }
+    };
 
     #shipIsPlaceableHorizontally(ship, row , col) {
        if (this.#shipContainedHorizotally(ship, col) && this.#shipDoesNotOverlapOtherShipsHorizontally(ship, row, col)) {
         return true;
        } else {
         return false;
-       }
-    }
+       };
+    };
 
     #shipIsPlaceablevertically(ship, row , col) {
         if (this.#shipContainedVertically(ship, row) && this.#shipDoesNotOverlapOthersShipsVertically(ship, row, col)) {
             return true;
         } else {
             return false;
-        }
-    }
+        };
+    };
 
     place(ship, coordinates, orientation) {
         const [row, col] = coordinates;
@@ -83,19 +83,19 @@ export default class GameBoard {
             console.log('here');
             for (let i = 0; i < ship.length; i++) {
                 this.grid[row][col + i] = ship.symbol;
-            }        
+            };        
             ship.isPlaced = true;
         } else if (orientation === 'vertical' && this.#shipIsPlaceablevertically(ship, row, col)) {      
             for (let i = 0; i < ship.length; i++) {    
                 this.grid[row + i][col] = ship.symbol;
-            }
+            };
             
             ship.isPlaced = true;
         } else {
             ship.isPlaced = false;
-        }
+        };
         
-    }
+    };
 
     receiveAttack(coordinates, cell, gameController) {
         const [row, col] = coordinates;
@@ -134,16 +134,16 @@ export default class GameBoard {
             case null:
                 gameController.switchPlayer();
                 break;
-        }
+        };
 
         this.grid[row][col] = 'X';
-    }
+    };
 
     allShipsSunk() {
         if (this.destroyer.isSunk() && this.cruiser.isSunk() && this.submarine.isSunk() && this.battleship.isSunk() && this.carrier.isSunk()) {
             return true;
         } else {
             return false;
-        }
-    }
-}
+        };
+    };
+};

@@ -34,7 +34,6 @@ export default class GameController {
     }
 
     switchPlayer() {
-        console.log('here');
         if (this.activePlayer === this.playerOne) {
             this.activePlayer = this.playerTwo;
         } else {
