@@ -4,7 +4,7 @@ import './styles.css';
 const gameController = new GameController();
 
 const gameBoardOne = gameController.playerOne.gameBoard.grid;
-const gameboardtwo = gameController.playerTwo.gameBoard.grid;
+const gameBoardTwo = gameController.playerTwo.gameBoard.grid;
 
 window.onload = (event) => {
     const boardOne = document.querySelector('.gameboard-1');
@@ -39,6 +39,8 @@ window.onload = (event) => {
         for (let y = 0; y < 10; y++) {
             const col = document.createElement('div');
             col.setAttribute('class', `col col-${y}`);
+
+            if (gameBoardTwo[x][y] !== null) col.innerText = gameBoardTwo[x][y];
             col.addEventListener('click', () => {
                 gameController.attackOnPlayerTwo([x, y], col);
                 console.log(gameController.activePlayer);
