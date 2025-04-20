@@ -1,3 +1,11 @@
+import GameController from "./gameController";
+/**
+ * 
+ * @param {Array<Array<String|null>>} board 
+ * @param {(controller: GameController, coordinates: [number, number], cell: HTMLElement) => void} attackFunction 
+ * @param {HTMLElement} DOMBoard 
+ * @param {GameController} controller 
+ */
 export function renderBoard(board, attackFunction, DOMBoard, controller) {
     for (let x = 0; x < 10; x++) {
         const row = document.createElement('div');
