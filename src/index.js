@@ -14,6 +14,9 @@ window.onload = (event) => {
     gameController.initialize();
     gameController.composeGameBoard();
 
-    renderBoard(gameBoardOne, gameController.attackOnPlayerOne, boardOne, gameController);
-    renderBoard(gameBoardTwo, gameController.attackOnPlayerTwo, boardTwo, gameController);
+    const attackFunctionOnOne = gameController.attackOnPlayerOne.bind(gameController);
+    const attackFunctionOnTwo = gameController.attackOnPlayerTwo.bind(gameController);
+
+    renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController);
+    renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController);
 }

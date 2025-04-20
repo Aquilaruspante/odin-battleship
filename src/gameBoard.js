@@ -80,7 +80,6 @@ export default class GameBoard {
         if (row > 10 || col > 10) throw new Error('receiveAttack coordinates must be less than 10!');
 
         if (orientation === 'horizontal' && this.#shipIsPlaceableHorizontally(ship, row, col)) {
-            console.log('here');
             for (let i = 0; i < ship.length; i++) {
                 this.grid[row][col + i] = ship.symbol;
             };        
