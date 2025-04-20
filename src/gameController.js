@@ -28,7 +28,7 @@ export default class GameController {
         };
     };
 
-    checkWinner() {
+    #checkWinner() {
         console.log('here');
         if (this.playerOne.gameBoard.allShipsSunk()) {
             this.playerTwo.isWinner = true;
@@ -74,13 +74,13 @@ export default class GameController {
 
     attackOnPlayerTwo(controller, coordinates, cell) {
         if (controller.activePlayer === controller.playerOne) controller.playerTwo.gameBoard.receiveAttack(coordinates, cell, controller);
-        this.checkWinner(); 
+        this.#checkWinner(); 
         console.log('player one', this.playerOne.isWinner);
         console.log('player two', this.playerTwo.isWinner);
     };
 
     attackOnPlayerOne(controller, coordinates, cell) {
         if (controller.activePlayer === controller.playerTwo) controller.playerOne.gameBoard.receiveAttack(coordinates, cell, controller);
-        this.checkWinner();
+        this.#checkWinner();
     };
 };
