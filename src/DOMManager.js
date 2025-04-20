@@ -1,4 +1,4 @@
-import GameController from "./gameController";
+import GameController from "./gameController.js";
 /**
  * 
  * @param {Array<Array<String|null>>} board 

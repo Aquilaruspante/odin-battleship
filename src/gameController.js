@@ -16,6 +16,11 @@ export default class GameController {
         };
     };
 
+    #resetWinner() {
+        this.playerOne.isWinner = false;
+        this.playerTwo.isWinner = false;
+    }
+
     #resetShipsHits() {
         for (let ship of this.playerOne.gameBoard.shipArray) {
             ship.hitsNumber = 0;
@@ -53,6 +58,7 @@ export default class GameController {
     };
 
     composeGameBoard() {
+        this.#resetWinner();                                                        // Resets players' isWinner property before composing board.
         for (let ship of this.playerOne.gameBoard.shipArray) {
             while (!ship.isPlaced) {
                 const row = Math.floor(Math.random() * 10);
@@ -75,8 +81,6 @@ export default class GameController {
     attackOnPlayerTwo(controller, coordinates, cell) {
         if (controller.activePlayer === controller.playerOne) controller.playerTwo.gameBoard.receiveAttack(coordinates, cell, controller);
         this.#checkWinner(); 
-        console.log('player one', this.playerOne.isWinner);
-        console.log('player two', this.playerTwo.isWinner);
     };
 
     attackOnPlayerOne(controller, coordinates, cell) {
