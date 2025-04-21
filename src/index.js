@@ -2,14 +2,16 @@ import GameController from './gameController.js';
 import './styles.css';
 import { renderBoard } from './DOMManager.js';
 
-const gameController = new GameController();
-
-const gameBoardOne = gameController.playerOne.gameBoard.grid;
-const gameBoardTwo = gameController.playerTwo.gameBoard.grid;
-
 window.onload = (event) => {
     const boardOne = document.querySelector('.gameboard-1');
-    const boardTwo = document.querySelector('.gameboard-2');        
+    const boardTwo = document.querySelector('.gameboard-2');  
+
+    const gameOverDialog = document.querySelector('#game-over-dialog');     
+    
+    const gameController = new GameController(gameOverDialog);
+
+    const gameBoardOne = gameController.playerOne.gameBoard.grid;
+    const gameBoardTwo = gameController.playerTwo.gameBoard.grid;
 
     gameController.initialize();
     gameController.composeGameBoard();

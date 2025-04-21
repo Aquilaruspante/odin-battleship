@@ -34,7 +34,6 @@ export default class GameController {
     };
 
     #checkWinner() {
-        console.log('here');
         if (this.playerOne.gameBoard.allShipsSunk()) {
             this.playerTwo.isWinner = true;
         };
