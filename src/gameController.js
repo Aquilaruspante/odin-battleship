@@ -3,8 +3,8 @@ import { renderGameOverDialog } from "./DOMManager.js";
 
 export default class GameController {
     constructor () {
-        this.playerOne = new Player('human');
-        this.playerTwo = new Player('computer');
+        this.playerOne = new Player('human', 'player one');
+        this.playerTwo = new Player('computer', 'player two');
     };
 
     #randomizeInitialPlayer() {
@@ -31,11 +31,11 @@ export default class GameController {
 
     #checkWinner() {
         if (this.playerOne.gameBoard.allShipsSunk()) {
-            renderGameOverDialog(this.playerOne);
+            renderGameOverDialog(this.playerTwo);
         };
 
         if (this.playerTwo.gameBoard.allShipsSunk()) {
-            renderGameOverDialog(this.playerTwo);
+            renderGameOverDialog(this.playerOne);
         };
     };
 

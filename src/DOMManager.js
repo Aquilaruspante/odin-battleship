@@ -30,6 +30,6 @@ export function renderBoard(board, attackFunction, DOMBoard, controller) {
 };
 
 export function renderGameOverDialog(winner) {
-    winnerAnnounce.innerText = `${winner} won!!!`;
+    winnerAnnounce.innerText = `${winner.name} won!!!`;
     gameOverDialog.showModal();
 };
