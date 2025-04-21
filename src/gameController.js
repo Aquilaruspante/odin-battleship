@@ -53,7 +53,6 @@ export default class GameController {
     };
 
     composeGameBoard() {
-        this.#resetWinner();                                                        // Resets players' isWinner property before composing board.
         for (let ship of this.playerOne.gameBoard.shipArray) {
             while (!ship.isPlaced) {
                 const row = Math.floor(Math.random() * 10);
