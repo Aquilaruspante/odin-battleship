@@ -4,11 +4,9 @@ import { renderBoard } from './DOMManager.js';
 
 window.onload = (event) => {
     const boardOne = document.querySelector('.gameboard-1');
-    const boardTwo = document.querySelector('.gameboard-2');  
-
-    const gameOverDialog = document.querySelector('#game-over-dialog');     
+    const boardTwo = document.querySelector('.gameboard-2');       
     
-    const gameController = new GameController(gameOverDialog);
+    const gameController = new GameController();
 
     const gameBoardOne = gameController.playerOne.gameBoard.grid;
     const gameBoardTwo = gameController.playerTwo.gameBoard.grid;

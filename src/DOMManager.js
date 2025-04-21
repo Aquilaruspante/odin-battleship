@@ -1,7 +1,9 @@
 import GameController from "./gameController.js";
 
 const gameOverDialog = document.querySelector('#game-over-dialog');
+gameOverDialog.close();
 const winnerAnnounce = document.querySelector('#announce-winner');
+const playAgainButton = document.querySelector('#play-again-button');
 /**
  * 
  * @param {Array<Array<String|null>>} board 

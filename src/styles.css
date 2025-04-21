@@ -86,6 +86,10 @@ main {
 	background-color:red;
 }
 
+#game-over-dialog:not([open]) {
+	display: none;
+}
+
 #game-over-dialog {
 	width: 20%;
 	height: 30%;
