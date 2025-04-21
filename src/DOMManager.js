@@ -1,4 +1,7 @@
 import GameController from "./gameController.js";
+
+const gameOverDialog = document.querySelector('#game-over-dialog');
+const winnerAnnounce = document.querySelector('#announce-winner');
 /**
  * 
  * @param {Array<Array<String|null>>} board 
@@ -24,4 +27,9 @@ export function renderBoard(board, attackFunction, DOMBoard, controller) {
         }
         DOMBoard.appendChild(row);
     };
+};
+
+export function renderGameOverDialog(winner) {
+    winnerAnnounce.innerText = `${winner} won!!!`;
+    gameOverDialog.showModal();
 };
