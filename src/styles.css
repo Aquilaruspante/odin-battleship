@@ -85,3 +85,31 @@ main {
 .hit {
 	background-color:red;
 }
+
+#game-over-dialog {
+	width: 20%;
+	height: 30%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 10px;
+}
+
+#game-over-dialog h3 {
+	font-size: 1.6rem;
+	font-weight: 800;
+}
+
+#game-over-dialog p {
+	font-size: 1.4;
+}
+
+::backdrop {
+	background-color: rgb(143, 141, 141, 0.7);
+}
+
+#play-again-button {
+	width: 70%;
+	margin-left: 15%;
+}
