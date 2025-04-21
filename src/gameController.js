@@ -1,4 +1,5 @@
 import Player from "./player.js";
+import { renderGameOverDialog } from "./DOMManager.js";
 
 export default class GameController {
     constructor () {
@@ -16,11 +17,6 @@ export default class GameController {
         };
     };
 
-    #resetWinner() {
-        this.playerOne.isWinner = false;
-        this.playerTwo.isWinner = false;
-    }
-
     #resetShipsHits() {
         for (let ship of this.playerOne.gameBoard.shipArray) {
             ship.hitsNumber = 0;
@@ -35,11 +31,11 @@ export default class GameController {
 
     #checkWinner() {
         if (this.playerOne.gameBoard.allShipsSunk()) {
-            this.playerTwo.isWinner = true;
+            renderGameOverDialog(this.playerOne);
         };
 
         if (this.playerTwo.gameBoard.allShipsSunk()) {
-            this.playerOne.isWinner = true;
+            renderGameOverDialog(this.playerTwo);
         };
     };
 
