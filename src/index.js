@@ -16,8 +16,8 @@ window.onload = (event) => {
     const attackFunctionOnOne = gameController.attackOnPlayerOne.bind(gameController);
     const attackFunctionOnTwo = gameController.attackOnPlayerTwo.bind(gameController);
 
-    renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController);
-    renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController);
+    renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController, gameController.playerOne.type);
+    renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController, gameController.playerTwo.type);
 
     managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, boardOne, boardTwo, gameController);     // sets listener for play-again-button
 };
