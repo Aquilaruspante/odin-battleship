@@ -19,5 +19,5 @@ window.onload = (event) => {
     renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController);
     renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController);
 
-    managePlayAgainButton(attackFunctionOnOne, boardOne, boardTwo, gameController);     // sets listener for play-again-button
+    managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, boardOne, boardTwo, gameController);     // sets listener for play-again-button
 };

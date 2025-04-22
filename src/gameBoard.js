@@ -3,7 +3,6 @@ import Ship from './ship.js';
 export default class GameBoard {
     constructor() {
         this.resetBoard();
-        console.debug('grid at initialization', this.grid);
         this.destroyer = new Ship(2, 'D');
         this.cruiser = new Ship(3, 'C');
         this.submarine = new Ship(3, 'S');
@@ -71,13 +70,11 @@ export default class GameBoard {
         if (orientation === 'horizontal' && this.#shipIsPlaceableHorizontally(ship, row, col)) {
             for (let i = 0; i < ship.length; i++) {
                 this.grid[row][col + i] = ship.symbol;
-                console.debug(`${ship.symbol} placed at ${row}, ${col+i}`);
             };        
             ship.isPlaced = true;
         } else if (orientation === 'vertical' && this.#shipIsPlaceablevertically(ship, row, col)) {      
             for (let i = 0; i < ship.length; i++) {    
                 this.grid[row + i][col] = ship.symbol;
-                console.debug(`${ship.symbol} placed at ${row+i}, ${col}`);
             };
             
             ship.isPlaced = true;

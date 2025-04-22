@@ -7,13 +7,13 @@ const playAgainButton = document.querySelector('#play-again-button');
 
 const main = document.querySelector('main');
 
-export function managePlayAgainButton(attackFunction, DOMBoardOne, DOMBoardTwo, controller) {
+export function managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, DOMBoardOne, DOMBoardTwo, controller) {
     playAgainButton.addEventListener('click', () => {
         DOMBoardOne.innerHTML = '';
         DOMBoardTwo.innerHTML = '';
         controller.initialize();
-        renderBoard(controller.playerOne.gameBoard.grid, attackFunction, DOMBoardOne, controller);
-        renderBoard(controller.playerTwo.gameBoard.grid, attackFunction, DOMBoardTwo, controller);
+        renderBoard(controller.playerOne.gameBoard.grid, attackFunctionOnOne, DOMBoardOne, controller);
+        renderBoard(controller.playerTwo.gameBoard.grid, attackFunctionOnTwo, DOMBoardTwo, controller);
         gameOverDialog.close();
     });
 };
@@ -34,7 +34,6 @@ export function renderBoard(board, attackFunction, DOMBoard, controller) {
             const col = document.createElement('div');
             col.setAttribute('class', `col col-${y}`);
             
-            console.log(board[x][y]);
             if (board[x][y] !== null) col.innerText = board[x][y];
             col.addEventListener('click', () => {
                 attackFunction(controller, [x, y], col);

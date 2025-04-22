@@ -45,7 +45,6 @@ export default class GameController {
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
         this.#composeGameBoard();
-        console.debug('grid after composition ', this.playerOne.gameBoard.grid);
     };
 
     switchPlayer() {
