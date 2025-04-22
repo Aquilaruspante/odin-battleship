@@ -121,3 +121,29 @@ main {
 .miss {
 	background-color: rgb(14, 148, 148);
 }
+
+#header {
+	width: 20%;
+	height: 20%;
+	border: 3px solid grey;
+	margin: auto;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#turn-board {
+	height: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#turn-board h3 {
+	font-size: 1.4rem;
+}
+
+#turn-board p {
+	font-size: 1.2rem;
+}
+
