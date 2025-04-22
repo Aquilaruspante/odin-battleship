@@ -119,6 +119,7 @@ export default class GameBoard {
                 gameController.switchPlayer();
                 break;
             case null:
+                cell.classList.toggle('miss');
                 gameController.switchPlayer();
                 break;
         };

@@ -117,3 +117,7 @@ main {
 	width: 70%;
 	margin-left: 15%;
 }
+
+.miss {
+	background-color: rgb(14, 148, 148);
+}

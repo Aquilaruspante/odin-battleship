@@ -5,8 +5,6 @@ const winnerAnnounce = document.querySelector('#announce-winner');
 
 const playAgainButton = document.querySelector('#play-again-button');
 
-const main = document.querySelector('main');
-
 export function managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, DOMBoardOne, DOMBoardTwo, controller) {
     playAgainButton.addEventListener('click', () => {
         DOMBoardOne.innerHTML = '';
