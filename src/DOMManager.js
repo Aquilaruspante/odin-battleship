@@ -1,9 +1,23 @@
 import GameController from "./gameController.js";
 
 const gameOverDialog = document.querySelector('#game-over-dialog');
-gameOverDialog.close();
 const winnerAnnounce = document.querySelector('#announce-winner');
+
 const playAgainButton = document.querySelector('#play-again-button');
+
+const main = document.querySelector('main');
+
+export function managePlayAgainButton(attackFunction, DOMBoardOne, DOMBoardTwo, controller) {
+    playAgainButton.addEventListener('click', () => {
+        DOMBoardOne.innerHTML = '';
+        DOMBoardTwo.innerHTML = '';
+        controller.initialize();
+        renderBoard(controller.playerOne.gameBoard.grid, attackFunction, DOMBoardOne, controller);
+        renderBoard(controller.playerTwo.gameBoard.grid, attackFunction, DOMBoardTwo, controller);
+        gameOverDialog.close();
+    });
+};
+
 /**
  * 
  * @param {Array<Array<String|null>>} board 
@@ -20,10 +34,10 @@ export function renderBoard(board, attackFunction, DOMBoard, controller) {
             const col = document.createElement('div');
             col.setAttribute('class', `col col-${y}`);
             
+            console.log(board[x][y]);
             if (board[x][y] !== null) col.innerText = board[x][y];
             col.addEventListener('click', () => {
                 attackFunction(controller, [x, y], col);
-                console.log(controller.activePlayer);
             })
             row.appendChild(col);
         }

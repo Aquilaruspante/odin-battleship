@@ -42,6 +42,10 @@ export default class GameController {
     initialize() {
         this.#randomizeInitialPlayer();
         this.#resetShipsHits();
+        this.playerOne.gameBoard.resetBoard();
+        this.playerTwo.gameBoard.resetBoard();
+        this.#composeGameBoard();
+        console.debug('grid after composition ', this.playerOne.gameBoard.grid);
     };
 
     switchPlayer() {
@@ -52,7 +56,7 @@ export default class GameController {
         };
     };
 
-    composeGameBoard() {
+    #composeGameBoard() {
         for (let ship of this.playerOne.gameBoard.shipArray) {
             while (!ship.isPlaced) {
                 const row = Math.floor(Math.random() * 10);
