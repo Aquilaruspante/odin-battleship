@@ -1,5 +1,5 @@
 import Player from "./player.js";
-import { renderGameOverDialog } from "./DOMManager.js";
+import { renderGameOverDialog, updateTurnBoard } from "./DOMManager.js";
 
 export default class GameController {
     constructor () {
@@ -45,6 +45,7 @@ export default class GameController {
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
         this.#composeGameBoard();
+        updateTurnBoard(this);
     };
 
     switchPlayer() {
@@ -53,6 +54,7 @@ export default class GameController {
         } else {
             this.activePlayer = this.playerOne;
         };
+        updateTurnBoard(this);
     };
 
     #composeGameBoard() {

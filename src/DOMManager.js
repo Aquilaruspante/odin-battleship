@@ -5,6 +5,12 @@ const winnerAnnounce = document.querySelector('#announce-winner');
 
 const playAgainButton = document.querySelector('#play-again-button');
 
+const turnBoardActivePlayer = document.querySelector('#turn-board p');
+
+export function updateTurnBoard(controller) {
+    turnBoardActivePlayer.innerText = controller.activePlayer.name;
+}
+
 export function managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, DOMBoardOne, DOMBoardTwo, controller) {
     playAgainButton.addEventListener('click', () => {
         DOMBoardOne.innerHTML = '';
