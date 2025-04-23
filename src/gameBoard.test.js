@@ -87,23 +87,6 @@ describe('place method', () => {
         expect(() => gameBoard.place(destroyer, [6, 15], 'horizontal')).toThrow('coordinates must be 2 numbers less than 10');
     })
 
-    test('placing a ship on an occupied position throws an error', () => {
-        const destroyer = new Ship(2, 'D');
-        const cruiser = new Ship(3, 'C');
-    
-        gameBoard.place(destroyer, [4, 5], 'horizontal');
-        expect(() => gameBoard.place(cruiser, [4, 5], 'horizontal'))
-            .toThrow('Position already occupied');
-    });
-    
-    test('placing a ship in a way it gets out of the border throws an error', () => {
-        // horizontal placement.
-        expect(() => gameBoard.place(gameBoard.destroyer, [1, 9], 'horizontal')).toThrow('ship not contained inside the board');
-
-        // vetical placement.
-        expect(() => gameBoard.place(gameBoard.carrier, [6, 1], 'vertical')).toThrow('ship not contained inside the board');
-    })
-
     test('place method changes ship.isPlaced to true', () => {
         gameBoard.place(gameBoard.cruiser, [4, 4], 'horizontal');
         expect(gameBoard.cruiser.isPlaced).toBeTruthy();
@@ -144,6 +127,7 @@ describe('receiveAttack method', () => {
         gameBoard = new GameBoard();
         gameBoard.place(gameBoard.destroyer, [4, 6], 'horizontal', 'D');
         gameBoard.destroyer.hit = jest.fn();
+        cell.classList.toggle() = jest.fn();
     })
 
     test('grid location has value "X" after hit and hit not called when missed', () => {

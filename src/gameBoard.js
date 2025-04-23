@@ -65,7 +65,7 @@ export default class GameBoard {
     place(ship, coordinates, orientation) {
         const [row, col] = coordinates;
 
-        if (row > 10 || col > 10) throw new Error('receiveAttack coordinates must be less than 10!');
+        if (row > 10 || col > 10) throw new Error('coordinates must be 2 numbers less than 10');
 
         if (orientation === 'horizontal' && this.#shipIsPlaceableHorizontally(ship, row, col)) {
             for (let i = 0; i < ship.length; i++) {
