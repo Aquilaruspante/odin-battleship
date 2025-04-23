@@ -1,11 +1,5 @@
 import GameController from "./gameController.js";
-
-const gameOverDialog = document.querySelector('#game-over-dialog');
-const winnerAnnounce = document.querySelector('#announce-winner');
-
-const playAgainButton = document.querySelector('#play-again-button');
-
-const turnBoardActivePlayer = document.querySelector('#turn-board p');
+import { gameOverDialog, winnerAnnounce, playAgainButton, turnBoardActivePlayer } from "./index.js";
 
 export function updateTurnBoard(controller) {
     turnBoardActivePlayer.innerText = controller.activePlayer.name;

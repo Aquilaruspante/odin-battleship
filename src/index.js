@@ -2,7 +2,19 @@ import GameController from './gameController.js';
 import './styles.css';
 import { renderBoard, managePlayAgainButton } from './DOMManager.js';
 
+export let gameOverDialog;
+export let winnerAnnounce;
+export let playAgainButton;
+export let turnBoardActivePlayer;
+
 window.onload = (event) => {
+    gameOverDialog = document.querySelector('#game-over-dialog');
+    winnerAnnounce = document.querySelector('#announce-winner');
+
+    playAgainButton = document.querySelector('#play-again-button');
+
+    turnBoardActivePlayer = document.querySelector('#turn-board p');
+
     const boardOne = document.querySelector('.gameboard-1');
     const boardTwo = document.querySelector('.gameboard-2');       
     
