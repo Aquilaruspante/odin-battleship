@@ -8,7 +8,7 @@ function modality() {
     };
 };
 
-export function manageBoardRendering() {
+export default function manageBoardRendering() {
     if (modality() === 'human-human' && gameController.activePlayer === gameController.playeOne) {
         renderBoardOne();
     } else if(modality() === 'human-human' && gameController.activePlayer === gameController.playerTwo) {
