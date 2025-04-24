@@ -1,4 +1,4 @@
-import { gameController, renderBoardOne, renderBoardTwo } from "./index.js"
+import { gameController, renderBoardOne, renderBoardTwo, boardOne, boardTwo } from "./index.js"
 
 function modality() {
     if (gameController.playerTwo.type === 'human') {
@@ -9,6 +9,8 @@ function modality() {
 };
 
 export default function manageBoardRendering() {
+    boardOne.innerHTML = '';
+    boardTwo.innerHTML = '';
     if (modality() === 'human-human' && gameController.activePlayer === gameController.playeOne) {
         renderBoardOne();
     } else if(modality() === 'human-human' && gameController.activePlayer === gameController.playerTwo) {
