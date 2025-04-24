@@ -10,6 +10,8 @@ export let turnBoardActivePlayer;
 export let renderBoardOne;
 export let renderBoardTwo;
 
+export let gameController;
+
 window.onload = (event) => {
     gameOverDialog = document.querySelector('#game-over-dialog');
     winnerAnnounce = document.querySelector('#announce-winner');
@@ -21,7 +23,7 @@ window.onload = (event) => {
     const boardOne = document.querySelector('.gameboard-1');
     const boardTwo = document.querySelector('.gameboard-2');       
     
-    const gameController = new GameController();
+    gameController = new GameController();
 
     gameController.initialize();
 
