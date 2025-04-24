@@ -7,6 +7,9 @@ export let winnerAnnounce;
 export let playAgainButton;
 export let turnBoardActivePlayer;
 
+export let renderBoardOne;
+export let renderBoardTwo;
+
 window.onload = (event) => {
     gameOverDialog = document.querySelector('#game-over-dialog');
     winnerAnnounce = document.querySelector('#announce-winner');
@@ -28,8 +31,11 @@ window.onload = (event) => {
     const attackFunctionOnOne = gameController.attackOnPlayerOne.bind(gameController);
     const attackFunctionOnTwo = gameController.attackOnPlayerTwo.bind(gameController);
 
-    renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController, gameController.playerOne.type);
-    renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController, gameController.playerTwo.type);
+    renderBoardOne = (() => {renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController, gameController.playerOne.type)});
+    renderBoardTwo = (() => {renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController, gameController.playerTwo.type)});
+
+    renderBoardOne();
+    renderBoardTwo();
 
     managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, boardOne, boardTwo, gameController);     // sets listener for play-again-button
 };
