@@ -12,5 +12,9 @@ export function initDOMElements() {
         turnBoardActivePlayer: document.querySelector('#turn-board p'),
         boardOne: document.querySelector('.gameboard-1'),
         boardTwo: document.querySelector('.gameboard-2'),
+        initialDialog: document.querySelector('#initial-dialog'),
+        selectModality: document.querySelector('#modality'),
+        choosePlayerOneName: document.querySelector('#player-one'),
+        choosePlayerTwoName: document.querySelector('#player-two'),
     };
 }
