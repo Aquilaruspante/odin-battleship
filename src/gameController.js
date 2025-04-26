@@ -1,5 +1,5 @@
 import Player from "./player.js";
-import { renderGameOverDialog, updateTurnBoard, renderTimeOut } from "./DOMManager.js";
+import { renderGameOverDialog, updateTurnBoard, renderTimeOut } from "./views/DOMManager.js";
 
 export default class GameController {
     constructor () {

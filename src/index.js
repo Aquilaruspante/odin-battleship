@@ -1,41 +1,16 @@
 import GameController from './gameController.js';
 import './styles.css';
-import { renderBoard, managePlayAgainButton } from './DOMManager.js';
+import { renderBoard, managePlayAgainButton } from './views/DOMManager.js';
+import { elements, initDOMElements } from './views/DOMElements.js';
 
-export let gameOverDialog;
-export let winnerAnnounce;
-export let playAgainButton;
-export let turnBoardActivePlayer;
+export let gameController;
 
 export let renderBoardOne;
 export let renderBoardTwo;
 
-export let gameController;
-
-export let boardOne;
-export let boardTwo;
-
-export let timeOutDialog;
-export let doNotLook;
-export let yourTurn;
-export let counter;
-
 window.onload = (event) => {
-    timeOutDialog = document.querySelector('#timeout-dialog');
-    doNotLook = document.querySelector('#do-not-look');
-    yourTurn = document.querySelector('#active-player');
-    counter = document.querySelector('#counter');
+    initDOMElements();
 
-    gameOverDialog = document.querySelector('#game-over-dialog');
-    winnerAnnounce = document.querySelector('#announce-winner');
-
-    playAgainButton = document.querySelector('#play-again-button');
-
-    turnBoardActivePlayer = document.querySelector('#turn-board p');
-
-    boardOne = document.querySelector('.gameboard-1');
-    boardTwo = document.querySelector('.gameboard-2');       
-    
     gameController = new GameController();
 
     gameController.initialize();
@@ -46,13 +21,13 @@ window.onload = (event) => {
     const attackFunctionOnOne = gameController.attackOnPlayerOne.bind(gameController);
     const attackFunctionOnTwo = gameController.attackOnPlayerTwo.bind(gameController);
 
-    renderBoardOne = (() => {renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController, gameController.playerOne)});
-    renderBoardTwo = (() => {renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController, gameController.playerTwo)});
+    renderBoardOne = (() => {renderBoard(gameBoardOne, attackFunctionOnOne, elements.boardOne, gameController, gameController.playerOne)});
+    renderBoardTwo = (() => {renderBoard(gameBoardTwo, attackFunctionOnTwo, elements.boardTwo, gameController, gameController.playerTwo)});
 
     renderBoardOne();
     renderBoardTwo();
 
     document.querySelectorAll('.col').forEach(col => col.dispatchEvent(new Event('initBoard')));
 
-    managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, boardOne, boardTwo, gameController);     // sets listener for play-again-button
+    managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, elements.boardOne, elements.boardTwo, gameController);     // sets listener for play-again-button
 };
