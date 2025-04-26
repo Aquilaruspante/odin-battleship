@@ -1,6 +1,6 @@
 import { beforeEach, expect, jest } from '@jest/globals';
-import GameBoard from './gameBoard';
-import Ship from './ship';
+import GameBoard from './components/gameBoard';
+import Ship from './models/ship';
 
 let gameBoard;
 

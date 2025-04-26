@@ -1,5 +1,5 @@
-import Player from "./player.js";
-import { renderGameOverDialog, updateTurnBoard, renderTimeOut } from "./views/DOMManager.js";
+import Player from "../models/player.js";
+import { renderGameOverDialog, updateTurnBoard, renderTimeOut } from "../views/DOMManager.js";
 
 export default class GameController {
     constructor () {
@@ -50,17 +50,16 @@ export default class GameController {
     };
 
     async switchPlayer() {
-        if (this.activePlayer === this.playerOne) {
-            this.activePlayer = this.playerTwo;
-        } else {
-            this.activePlayer = this.playerOne;
-        };
-        await setTimeout(() => {
-            return;
-        }, 500);
+        this.activePlayer = (this.activePlayer === this.playerOne) ? this.playerTwo : this.playerOne;
+    
+        await new Promise(resolve => setTimeout(resolve, 500));
+    
         renderTimeOut(this);
         updateTurnBoard(this);
-    };
+    
+        document.querySelectorAll('.col').forEach(col => col.dispatchEvent(new Event('switchPlayer')));
+    }
+    
 
     #composeGameBoard() {
         for (let ship of this.playerOne.gameBoard.shipArray) {

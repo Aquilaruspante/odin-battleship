@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 import Player from './player';
-import GameBoard from './gameBoard';
+import GameBoard from '../components/gameBoard';
 import { expect } from '@jest/globals';
 
 test('player has gameBoard', () => {

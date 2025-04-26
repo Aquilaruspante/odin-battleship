@@ -1,4 +1,4 @@
-import GameBoard from "./gameBoard.js"
+import GameBoard from "../components/gameBoard.js"
 
 export default class Player {
     constructor (type, name) {

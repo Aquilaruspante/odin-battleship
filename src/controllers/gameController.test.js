@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, jest } from '@jest/globals';
 import GameController from './gameController';
-import Player from './player';
+import Player from '../models/player';
 
 let gameController;
 

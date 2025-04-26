@@ -1,4 +1,4 @@
-import Ship from './ship.js';
+import Ship from '../models/ship.js';
 
 export default class GameBoard {
     constructor() {

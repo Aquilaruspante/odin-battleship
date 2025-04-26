@@ -1,6 +1,6 @@
-import GameController from "../gameController.js";
+import GameController from "../controllers/gameController.js";
 import { elements } from './DOMElements.js';
-import isModalityHumanVsHuman from "../switchModality.js";
+import isModalityHumanVsHuman from "../utils/switchModality.js";
 
 export function renderTimeOut(controller) {
     elements.timeOutDialog.showModal();
@@ -28,9 +28,11 @@ function addEvent(col, event, controller, player, board, x, y) {
             } else {
                 col.innerText = '';
             }
-        })
+        });
     } else {
-        if (board[x][y] !== null && player.type === 'human') col.innerText = board[x][y];
+        if (board[x][y] !== null && player.type === 'human') {
+            col.innerText = board[x][y];
+        };
     };
 };
 
