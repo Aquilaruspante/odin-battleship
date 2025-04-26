@@ -42,5 +42,7 @@ window.onload = (event) => {
     renderBoardOne();
     renderBoardTwo();
 
+    document.querySelectorAll('.col').forEach(col => col.dispatchEvent(new Event('initBoard')));
+
     managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, boardOne, boardTwo, gameController);     // sets listener for play-again-button
 };

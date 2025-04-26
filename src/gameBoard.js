@@ -13,6 +13,11 @@ export default class GameBoard {
         this.shipArray = [this.destroyer, this.cruiser, this.submarine, this.battleship, this.carrier];
     };
 
+    #broadcastSwitchPlayer() {
+        document.querySelectorAll('.col').forEach(col => col.dispatchEvent(new Event('switchPlayer')));
+    }
+    
+
     #shipContainedHorizotally(ship, col) {
         if (col + ship.length >= 10){
             return false;
@@ -118,14 +123,14 @@ export default class GameBoard {
                 break;
             case 'X':
                 gameController.switchPlayer();
-                renderBoardOne();
-                renderBoardTwo();
+                this.#broadcastSwitchPlayer();
+                console.log('active player', gameController.activePlayer);
                 break;
             case null:
                 cell.classList.toggle('miss');
                 gameController.switchPlayer();
-                renderBoardOne();
-                renderBoardTwo();
+                this.#broadcastSwitchPlayer();
+                console.log('active player', gameController.activePlayer);
                 break;
         };
 
