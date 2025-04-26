@@ -2,8 +2,9 @@ import GameController from "./gameController.js";
 import { gameOverDialog, winnerAnnounce, playAgainButton, turnBoardActivePlayer } from "./index.js";
 import isModalityHumanVsHuman from "./switchModality.js";
 
-function addEvent(col, event, controller, player, board, x, y) {
+async function addEvent(col, event, controller, player, board, x, y) {
     if (isModalityHumanVsHuman()) {
+        await renderTimeOut(controller, player);
         col.addEventListener(event, () => {
             if (player === controller.activePlayer) {
                 col.innerText = board[x][y];

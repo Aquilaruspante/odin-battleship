@@ -4,7 +4,7 @@ import { renderGameOverDialog, updateTurnBoard } from "./DOMManager.js";
 export default class GameController {
     constructor () {
         this.playerOne = new Player('human', 'player one');
-        this.playerTwo = new Player('human', 'player two');
+        this.playerTwo = new Player('computer', 'player two');
     };
 
     #randomizeInitialPlayer() {
