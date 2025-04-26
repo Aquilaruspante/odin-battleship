@@ -1,5 +1,5 @@
 import Ship from './ship.js';
-import manageBoardRendering from './switchModality.js';
+import { renderBoardOne, renderBoardTwo } from './index.js';
 
 export default class GameBoard {
     constructor() {
@@ -118,12 +118,14 @@ export default class GameBoard {
                 break;
             case 'X':
                 gameController.switchPlayer();
-                manageBoardRendering();
+                renderBoardOne();
+                renderBoardTwo();
                 break;
             case null:
                 cell.classList.toggle('miss');
                 gameController.switchPlayer();
-                manageBoardRendering();
+                renderBoardOne();
+                renderBoardTwo();
                 break;
         };
 

@@ -36,8 +36,8 @@ window.onload = (event) => {
     const attackFunctionOnOne = gameController.attackOnPlayerOne.bind(gameController);
     const attackFunctionOnTwo = gameController.attackOnPlayerTwo.bind(gameController);
 
-    renderBoardOne = (() => {renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController, gameController.playerOne.type)});
-    renderBoardTwo = (() => {renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController, gameController.playerTwo.type)});
+    renderBoardOne = (() => {renderBoard(gameBoardOne, attackFunctionOnOne, boardOne, gameController, gameController.playerOne)});
+    renderBoardTwo = (() => {renderBoard(gameBoardTwo, attackFunctionOnTwo, boardTwo, gameController, gameController.playerTwo)});
 
     renderBoardOne();
     renderBoardTwo();

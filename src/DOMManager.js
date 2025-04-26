@@ -1,5 +1,6 @@
 import GameController from "./gameController.js";
 import { gameOverDialog, winnerAnnounce, playAgainButton, turnBoardActivePlayer } from "./index.js";
+import isModalityHumanVsHuman from "./switchModality.js";
 
 export function updateTurnBoard(controller) {
     turnBoardActivePlayer.innerText = controller.activePlayer.name;
@@ -23,9 +24,10 @@ export function managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, 
  * @param {HTMLElement} DOMBoard 
  * @param {GameController} controller 
  */
-export function renderBoard(board, attackFunction, DOMBoard, controller, type) {
-    console.log('rendering board', DOMBoard);
+export function renderBoard(board, attackFunction, DOMBoard, controller, player) {
     // Populates the DOM grid cells with ships.
+
+    DOMBoard.innerHTML = '';
 
     for (let x = 0; x < 10; x++) {
         const row = document.createElement('div');
@@ -34,8 +36,13 @@ export function renderBoard(board, attackFunction, DOMBoard, controller, type) {
         for (let y = 0; y < 10; y++) {
             const col = document.createElement('div');
             col.setAttribute('class', `col col-${y}`);
+
+            if (isModalityHumanVsHuman()) {
+                if (player === controller.activePlayer) col.innerText = board[x][y];
+            } else {
+                if (board[x][y] !== null && player.type === 'human') col.innerText = board[x][y];
+            }
             
-            if (board[x][y] !== null && type === 'human') col.innerText = board[x][y];
             col.addEventListener('click', () => {
                 attackFunction(controller, [x, y], col);
             })
