@@ -1,19 +1,28 @@
 import GameController from "./gameController.js";
-import { gameOverDialog, winnerAnnounce, playAgainButton, turnBoardActivePlayer, timeOutDialog, doNotLook, yourTurn } from "./index.js";
+import { gameOverDialog, winnerAnnounce, playAgainButton, turnBoardActivePlayer, timeOutDialog, doNotLook, yourTurn, counter } from "./index.js";
 import isModalityHumanVsHuman from "./switchModality.js";
 
-function renderTimeOut(controller, player) {
+export function renderTimeOut(controller) {
+    console.log('time out');
     timeOutDialog.showModal();
     doNotLook.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerTwo.name} look away!` : `${controller.playerOne.name} look away!`;
     yourTurn.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerOne.name} get ready!` : `${controller.playerTwo.name} get ready!`;
-    setTimeout(() => {
-        timeOutDialog.close();
-    }, 5000);
+    let timeOutCounter = 5;
+    counter.innerText = timeOutCounter;
+    const interval = setInterval(() => {
+        timeOutCounter--;
+        counter.innerText = timeOutCounter;
+        if (timeOutCounter === 0) {
+            clearInterval(interval);
+            setTimeout(() => {
+                timeOutDialog.close();
+            }, 1000);
+        };
+    }, 1000);
 };
 
 async function addEvent(col, event, controller, player, board, x, y) {
     if (isModalityHumanVsHuman()) {
-        await renderTimeOut(controller, player);
         col.addEventListener(event, () => {
             if (player === controller.activePlayer) {
                 col.innerText = board[x][y];

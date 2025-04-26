@@ -18,11 +18,13 @@ export let boardTwo;
 export let timeOutDialog;
 export let doNotLook;
 export let yourTurn;
+export let counter;
 
 window.onload = (event) => {
     timeOutDialog = document.querySelector('#timeout-dialog');
     doNotLook = document.querySelector('#do-not-look');
     yourTurn = document.querySelector('#active-player');
+    counter = document.querySelector('#counter');
 
     gameOverDialog = document.querySelector('#game-over-dialog');
     winnerAnnounce = document.querySelector('#announce-winner');
