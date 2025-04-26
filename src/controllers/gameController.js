@@ -1,10 +1,11 @@
 import Player from "../models/player.js";
-import { renderGameOverDialog, updateTurnBoard, renderTimeOut } from "../views/DOMManager.js";
+import { renderGameOverDialog, updateTurnBoard, renderTimeOut, showInitialDialog } from "../views/DOMManager.js";
 
 export default class GameController {
     constructor () {
         this.playerOne = new Player('human', 'Player One');
         this.playerTwo = new Player('human', 'Player Two');
+        this.initialized = false;
     };
 
     #randomizeInitialPlayer() {
@@ -40,13 +41,16 @@ export default class GameController {
     };
 
     initialize() {
-        this.#randomizeInitialPlayer();
-        this.#resetShipsHits();
-        this.playerOne.gameBoard.resetBoard();
-        this.playerTwo.gameBoard.resetBoard();
-        this.#composeGameBoard();
-        updateTurnBoard(this);
-        renderTimeOut(this);
+        showInitialDialog();
+        if (this.initialized) {
+            this.#randomizeInitialPlayer();
+            this.#resetShipsHits();
+            this.playerOne.gameBoard.resetBoard();
+            this.playerTwo.gameBoard.resetBoard();
+            this.#composeGameBoard();
+            updateTurnBoard(this);
+            renderTimeOut(this);
+        };
     };
 
     async switchPlayer() {
