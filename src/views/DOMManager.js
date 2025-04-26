@@ -2,6 +2,10 @@ import GameController from "../controllers/gameController.js";
 import { elements } from './DOMElements.js';
 import isModalityHumanVsHuman from "../utils/switchModality.js";
 
+export function showInitialDialog() {
+    elements.initialDialog.showModal();
+}
+
 export function renderTimeOut(controller) {
     elements.timeOutDialog.showModal();
     elements.doNotLook.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerTwo.name} look away!` : `${controller.playerOne.name} look away!`;
