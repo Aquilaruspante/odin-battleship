@@ -124,17 +124,13 @@ export default class GameBoard {
             case 'X':
                 gameController.switchPlayer();
                 this.#broadcastSwitchPlayer();
-                console.log('active player', gameController.activePlayer);
                 break;
             case null:
                 cell.classList.toggle('miss');
                 gameController.switchPlayer();
                 this.#broadcastSwitchPlayer();
-                console.log('active player', gameController.activePlayer);
                 break;
         };
-
-        this.grid[row][col] = 'X';
     };
 
     allShipsSunk() {
