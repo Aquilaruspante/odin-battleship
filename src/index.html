@@ -27,5 +27,19 @@
         <h3 id="active-player"></h3>
         <div id="counter"></div>
     </dialog>
+    <dialog id="initial-dialog">
+        <label for="modality">Select modality</label>
+        <select name="modality" id="modality">
+            <option value="human">Human vs Human</option>
+            <option value="computer">Human vs Computer</option>
+        </select>
+        <section id="choose-player-names">
+            <label for="player-one">Player One</label>
+            <input type="text" name="player-one" id="player-one">
+            <label for="player-two">Player Two</label>
+            <input type="text" name="player-two" id="player-two">
+        </section>
+        <button type="button">Start Game!</button>
+    </dialog>
 </body>
 </html>
