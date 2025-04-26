@@ -3,8 +3,8 @@ import { renderGameOverDialog, updateTurnBoard, renderTimeOut } from "./DOMManag
 
 export default class GameController {
     constructor () {
-        this.playerOne = new Player('human', 'player one');
-        this.playerTwo = new Player('human', 'player two');
+        this.playerOne = new Player('human', 'Player One');
+        this.playerTwo = new Player('human', 'Player Two');
     };
 
     #randomizeInitialPlayer() {
@@ -49,12 +49,15 @@ export default class GameController {
         renderTimeOut(this);
     };
 
-    switchPlayer() {
+    async switchPlayer() {
         if (this.activePlayer === this.playerOne) {
             this.activePlayer = this.playerTwo;
         } else {
             this.activePlayer = this.playerOne;
         };
+        await setTimeout(() => {
+            return;
+        }, 500);
         renderTimeOut(this);
         updateTurnBoard(this);
     };

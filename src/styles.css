@@ -90,7 +90,11 @@ main {
 	display: none;
 }
 
-#game-over-dialog {
+#timeout-dialog:not([open]) {
+	display: none;
+}
+
+#game-over-dialog, #timeout-dialog {
 	width: 20%;
 	height: 30%;
 	text-align: center;
@@ -148,3 +152,17 @@ main {
 	font-size: 1.4rem;
 }
 
+#timeout-dialog {
+	align-items: center;
+}
+
+#timeout-dialog h3 {
+	font-size: 1.4rem;
+}
+
+#counter {
+	background-color: grey;
+	width: 50px;
+	font-size: 2rem;
+	border-radius: 50%;
+}
