@@ -24,6 +24,7 @@ export function managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, 
  * @param {GameController} controller 
  */
 export function renderBoard(board, attackFunction, DOMBoard, controller, type) {
+    console.log('rendering board', DOMBoard);
     // Populates the DOM grid cells with ships.
 
     for (let x = 0; x < 10; x++) {

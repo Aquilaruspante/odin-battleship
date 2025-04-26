@@ -9,11 +9,15 @@ function modality() {
 };
 
 export default function manageBoardRendering() {
-    boardOne.innerHTML = '';
-    boardTwo.innerHTML = '';
+    
+    
+    console.log('modality', modality());
     if (modality() === 'human-human' && gameController.activePlayer === gameController.playeOne) {
+        console.log('human-hima');
+        boardOne.innerHTML = '';
         renderBoardOne();
     } else if(modality() === 'human-human' && gameController.activePlayer === gameController.playerTwo) {
+        boardTwo.innerHTML = '';
         renderBoardTwo();
     };  
 };
