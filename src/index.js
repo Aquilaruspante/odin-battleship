@@ -15,7 +15,15 @@ export let gameController;
 export let boardOne;
 export let boardTwo;
 
+export let timeOutDialog;
+export let doNotLook;
+export let yourTurn;
+
 window.onload = (event) => {
+    timeOutDialog = document.querySelector('#timeout-dialog');
+    doNotLook = document.querySelector('#do-not-look');
+    yourTurn = document.querySelector('#active-player');
+
     gameOverDialog = document.querySelector('#game-over-dialog');
     winnerAnnounce = document.querySelector('#announce-winner');
 

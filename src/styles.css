@@ -110,7 +110,7 @@ main {
 }
 
 ::backdrop {
-	background-color: rgb(143, 141, 141, 0.7);
+	background-color: rgb(143, 141, 141);
 }
 
 #play-again-button {

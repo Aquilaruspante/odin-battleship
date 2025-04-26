@@ -1,6 +1,15 @@
 import GameController from "./gameController.js";
-import { gameOverDialog, winnerAnnounce, playAgainButton, turnBoardActivePlayer } from "./index.js";
+import { gameOverDialog, winnerAnnounce, playAgainButton, turnBoardActivePlayer, timeOutDialog, doNotLook, yourTurn } from "./index.js";
 import isModalityHumanVsHuman from "./switchModality.js";
+
+function renderTimeOut(controller, player) {
+    timeOutDialog.showModal();
+    doNotLook.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerTwo.name} look away!` : `${controller.playerOne.name} look away!`;
+    yourTurn.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerOne.name} get ready!` : `${controller.playerTwo.name} get ready!`;
+    setTimeout(() => {
+        timeOutDialog.close();
+    }, 5000);
+};
 
 async function addEvent(col, event, controller, player, board, x, y) {
     if (isModalityHumanVsHuman()) {
@@ -15,11 +24,11 @@ async function addEvent(col, event, controller, player, board, x, y) {
     } else {
         if (board[x][y] !== null && player.type === 'human') col.innerText = board[x][y];
     };
-}
+};
 
 export function updateTurnBoard(controller) {
     turnBoardActivePlayer.innerText = controller.activePlayer.name;
-}
+};
 
 export function managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, DOMBoardOne, DOMBoardTwo, controller) {
     playAgainButton.addEventListener('click', () => {
