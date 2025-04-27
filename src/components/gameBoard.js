@@ -1,4 +1,5 @@
 import Ship from '../models/ship.js';
+import busEvent from '../utils/eventBus.js';
 
 export default class GameBoard {
     constructor() {
@@ -11,11 +12,6 @@ export default class GameBoard {
 
         this.shipArray = [this.destroyer, this.cruiser, this.submarine, this.battleship, this.carrier];
     };
-
-    #broadcastSwitchPlayer() {
-        document.querySelectorAll('.col').forEach(col => col.dispatchEvent(new Event('switchPlayer')));
-    }
-    
 
     #shipContainedHorizotally(ship, col) {
         if (col + ship.length >= 10){
@@ -121,13 +117,11 @@ export default class GameBoard {
                 cell.innerText = 'X';
                 break;
             case 'X':
-                gameController.switchPlayer();
-                this.#broadcastSwitchPlayer();
+                busEvent.dispatchEvent(new Event('switchPlayer'));
                 break;
             case null:
                 cell.classList.toggle('miss');
-                gameController.switchPlayer();
-                this.#broadcastSwitchPlayer();
+                busEvent.dispatchEvent(new Event('switchPlayer'));
                 break;
         };
     };
