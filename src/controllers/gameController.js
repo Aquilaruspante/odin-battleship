@@ -65,10 +65,9 @@ export default class GameController {
     switchPlayer() {
         this.activePlayer = (this.activePlayer === this.playerOne) ? this.playerTwo : this.playerOne;
     
-        renderTimeOut(this);
         updateTurnBoard(this);
     
-        document.querySelectorAll('.col').forEach(col => col.dispatchEvent(new Event('switchPlayer')));
+        eventBus.dispatchEvent(new CustomEvent('switchPlayer', { detail: { activePlayer: this.activePlayer }}));
     }
     
 

@@ -1,7 +1,6 @@
 import GameController from "../controllers/gameController.js";
 import { elements } from './DOMElements.js';
 import isModalityHumanVsHuman from "../utils/switchModality.js";
-import eventBus from "../utils/eventBus.js";
 
 export let controller;
 
@@ -38,7 +37,7 @@ export function startGame() {
     controller.initialize();
 };
 
-export function renderTimeOut(controller) {
+export function renderTimeOut() {
     elements.timeOutDialog.showModal();
     elements.doNotLook.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerTwo.name} look away!` : `${controller.playerOne.name} look away!`;
     elements.yourTurn.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerOne.name} get ready!` : `${controller.playerTwo.name} get ready!`;
