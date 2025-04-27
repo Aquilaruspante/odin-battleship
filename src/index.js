@@ -1,13 +1,14 @@
 import './styles.css';
-import { initGame, showInitialDialog } from './views/DOMManager.js';
 import { initDOMElements } from './views/DOMElements.js';
+import DOMManager from './views/DOMManager.js';
 import setupEventListeners from './controllers/eventListeners.js';
 
-export let gameController;
+export let domManager;
 
 window.onload = (event) => {
     initDOMElements();
-    setupEventListeners();
-    showInitialDialog();
-    initGame();
+    domManager = new DOMManager();
+    setupEventListeners(domManager);
+    domManager.showInitialDialog();
+    domManager.initGame();
 };

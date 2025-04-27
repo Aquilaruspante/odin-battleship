@@ -1,20 +1,12 @@
 import Player from "../models/player.js";
-import { renderGameOverDialog, updateTurnBoard, renderTimeOut, renderBoard, managePlayAgainButton } from "../views/DOMManager.js";
 import { elements } from "../views/DOMElements.js";
+import { domManager } from '../index.js';
 import eventBus from "../utils/eventBus.js";
 
 export default class GameController {
     constructor (modality, playerOneName='Player One', playertwoName='Player Two') {
         this.playerOne = new Player('human', playerOneName);
         this.playerTwo = new Player(modality, playertwoName);
-    };
-
-    renderBoardOne() {
-        renderBoard(this.playerOne.gameBoard.grid, this.attackOnPlayerOne.bind(this), elements.boardOne, this, this.playerOne);
-    };
-    
-    renderBoardTwo() {
-        renderBoard(this.playerTwo.gameBoard.grid, this.attackOnPlayerTwo.bind(this), elements.boardTwo, this, this.playerTwo);
     };
 
     #randomizeInitialPlayer() {
@@ -41,11 +33,11 @@ export default class GameController {
 
     #checkWinner() {
         if (this.playerOne.gameBoard.allShipsSunk()) {
-            renderGameOverDialog(this.playerTwo);
+            domManager.renderGameOverDialog(this.playerTwo);
         };
 
         if (this.playerTwo.gameBoard.allShipsSunk()) {
-            renderGameOverDialog(this.playerOne);
+            domManager.renderGameOverDialog(this.playerOne);
         };
     };
 
@@ -55,19 +47,18 @@ export default class GameController {
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
         this.#composeGameBoard();
-        updateTurnBoard(this);
-        renderTimeOut(this);
-        this.renderBoardOne();
-        this.renderBoardTwo();
-        managePlayAgainButton(this.attackOnPlayerOne, this.attackOnPlayerTwo, elements.boardOne, elements.boardTwo, this); 
+        eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { activePlayer: this.activePlayer }}));
+        domManager.updateTurnBoard(this);
+        domManager.managePlayAgainButton(this.attackOnPlayerOne, this.attackOnPlayerTwo, elements.boardOne, elements.boardTwo, this); 
     };
 
     switchPlayer() {
         this.activePlayer = (this.activePlayer === this.playerOne) ? this.playerTwo : this.playerOne;
     
-        updateTurnBoard(this);
-    
-        eventBus.dispatchEvent(new CustomEvent('switchPlayer', { detail: { activePlayer: this.activePlayer }}));
+        domManager.updateTurnBoard(this);
+        
+        const activePlayer = this.activePlayer === this.playerOne ? 'player-one' : 'player-two';
+        eventBus.dispatchEvent(new CustomEvent('switchPlayer', { detail: { activePlayer }}));
     }
     
 
@@ -89,6 +80,13 @@ export default class GameController {
                 this.playerTwo.gameBoard.place(ship, [row, col], orientation);
             };
         };
+
+        eventBus.dispatchEvent(new CustomEvent('gridComposed', { 
+            detail: {
+                gridOne: this.playerOne.gameBoard.grid,
+                gridTwo: this.playerTwo.gameBoard.grid,
+            }
+        }));
     };
 
     attackOnPlayerTwo(coordinates) {
