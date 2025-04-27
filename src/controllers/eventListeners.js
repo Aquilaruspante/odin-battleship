@@ -9,8 +9,8 @@ export default function setEventListeners(domManager) {
 
     eventBus.addEventListener('switchPlayer', (e) => {
         if (isModalityHumanVsHuman()) {
-            domManager.detailsrenderTimeOut();
-            e.details.activePlayer === 'player-one' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
+            domManager.renderTimeOut();
+            e.detail.activePlayer === 'player-one' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
         } else {
             domManager.showCells(elements.boardOne);
         }
@@ -20,8 +20,8 @@ export default function setEventListeners(domManager) {
         domManager.renderBoardOne();
         domManager.renderBoardTwo();
         if (isModalityHumanVsHuman()) {
-            domManager.detailsrenderTimeOut();
-            e.details.activePlayer === 'player-one' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
+            domManager.renderTimeOut();
+            e.detail.activePlayer === 'player-one' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
         } else {
             domManager.showCells(elements.boardOne);
         }
