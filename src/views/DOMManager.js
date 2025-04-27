@@ -107,7 +107,7 @@ export default class DOMManager {
     
     renderBoard(attackFunction, DOMBoard) {
         // Populates the DOM grid cells with ships.
-    
+
         for (let x = 0; x < 10; x++) {
             const row = document.createElement('div');
             row.setAttribute('class', `row row-${x}`);

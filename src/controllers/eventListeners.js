@@ -9,8 +9,6 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('switchPlayer', (e) => {
-        domManager.renderBoardOne();
-        domManager.renderBoardTwo();
         if (isModalityHumanVsHuman()) {
             domManager.detailsrenderTimeOut();
             e.details.activePlayer === 'player-one' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
