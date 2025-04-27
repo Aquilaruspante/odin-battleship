@@ -128,16 +128,16 @@ export default class DOMManager {
     showCells(board) {
         const gameBoardgrid = board === elements.boardOne ? this.gridOne : this.gridTwo;
         const domBoardName = board === elements.boardOne ? 'gameboard-1' : 'gameboard-2';
-
-        for (let gameBoardRow of gameBoardgrid) {
-            const domRow = document.querySelector(`.${domBoardName} .row-${gameBoardgrid.indexOf(gameBoardRow)}`);
-
-            for (let gameBoardCell of gameBoardRow) {
-                domRow.children[gameBoardRow.indexOf(gameBoardCell)].innerText = gameBoardgrid[gameBoardgrid.indexOf(gameBoardRow)][gameBoardRow.indexOf(gameBoardCell)];
-               
-            }
-        }
-    }
+    
+        gameBoardgrid.forEach((gameBoardRow, rowIndex) => {
+            const domRow = document.querySelector(`.${domBoardName} .row-${rowIndex}`);
+            const domRowCells = Array.from(domRow.children);
+    
+            gameBoardRow.forEach((gameBoardCell, colIndex) => {
+                domRowCells[colIndex].innerText = gameBoardgrid[rowIndex][colIndex];
+            });
+        });
+    };
     
     renderGameOverDialog(winner) {
         elements.winnerAnnounce.innerText = `${winner.name} won!!!`;
