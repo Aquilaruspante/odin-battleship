@@ -61,10 +61,8 @@ export default class GameController {
         managePlayAgainButton(this.attackOnPlayerOne, this.attackOnPlayerTwo, elements.boardOne, elements.boardTwo, this); 
     };
 
-    async switchPlayer() {
+    switchPlayer() {
         this.activePlayer = (this.activePlayer === this.playerOne) ? this.playerTwo : this.playerOne;
-    
-        await new Promise(resolve => setTimeout(resolve, 500));
     
         renderTimeOut(this);
         updateTurnBoard(this);
@@ -94,12 +92,34 @@ export default class GameController {
     };
 
     attackOnPlayerTwo(controller, coordinates, cell) {
-        if (controller.activePlayer === controller.playerOne) controller.playerTwo.gameBoard.receiveAttack(coordinates, cell, controller);
+        if (this.activePlayer === this.playerOne) {
+            const { result, coordinates: attackedCoordinates } = this.playerTwo.gameBoard.receiveAttack(coordinates);
+    
+            eventBus.dispatchEvent(new CustomEvent('attackResult', {
+                detail: { result, coordinates: attackedCoordinates }
+            }));
+    
+            if (result === 'miss' || result === 'alreadyHit') {
+                this.switchPlayer();
+            };
+        };
+
         this.#checkWinner(); 
     };
 
-    attackOnPlayerOne(controller, coordinates, cell) {
-        if (controller.activePlayer === controller.playerTwo) controller.playerOne.gameBoard.receiveAttack(coordinates, cell, controller);
+    attackOnPlayerOne(coordinates) {
+        if (this.activePlayer === this.plaerTwo) {
+            const { result, coordinates: attackedCoordinates } = this.playerOne.gameBoard.receiveAttack(coordinates);
+    
+            eventBus.dispatchEvent(new CustomEvent('attackResult', {
+                detail: { result, coordinates: attackedCoordinates }
+            }));
+    
+            if (result === 'miss' || result === 'alreadyHit') {
+                this.switchPlayer();
+            };
+        };        
+        
         this.#checkWinner();
     };
 };
