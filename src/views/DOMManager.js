@@ -95,7 +95,7 @@ export function renderBoard(board, attackFunction, DOMBoard, controller, player)
             addEvent(col, 'initBoard', controller, player, board, x, y);
             
             col.addEventListener('click', () => {
-                attackFunction(controller, [x, y], col);
+                attackFunction([x, y]);
             });
             row.appendChild(col);
         }
