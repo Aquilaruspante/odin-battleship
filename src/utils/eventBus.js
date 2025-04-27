@@ -1,2 +1,2 @@
-const busEvent = new EventTarget();
-export default busEvent;
+const eventBus = new EventTarget();
+export default eventBus;

@@ -1,7 +1,7 @@
 import Player from "../models/player.js";
 import { renderGameOverDialog, updateTurnBoard, renderTimeOut, renderBoard, managePlayAgainButton } from "../views/DOMManager.js";
 import { elements } from "../views/DOMElements.js";
-import busEvent from "../utils/eventBus.js";
+import eventBus from "../utils/eventBus.js";
 
 export default class GameController {
     constructor (modality, playerOneName='Player One', playertwoName='Player Two') {
@@ -97,7 +97,7 @@ export default class GameController {
             const receiver = this.playerTwo;
             const { result, coordinates: attackedCoordinates } = this.playerTwo.gameBoard.receiveAttack(coordinates);
     
-            busEvent.dispatchEvent(new CustomEvent('attackResult', {
+            eventBus.dispatchEvent(new CustomEvent('attackResult', {
                 detail: { receiver, result, coordinates: attackedCoordinates }
             }));
     
@@ -114,7 +114,7 @@ export default class GameController {
             const receiver = this.playerOne;
             const { result, coordinates: attackedCoordinates } = this.playerOne.gameBoard.receiveAttack(coordinates);
     
-            busEvent.dispatchEvent(new CustomEvent('attackResult', {
+            eventBus.dispatchEvent(new CustomEvent('attackResult', {
                 detail: { receiver, result, coordinates: attackedCoordinates }
             }));
     
