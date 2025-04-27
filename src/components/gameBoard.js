@@ -95,9 +95,33 @@ export default class GameBoard {
             this.grid[row][col] = 'M'; 
             return { result: 'miss', coordinates: [row, col] };
         } else {
-            this.grid[row][col] = 'X'; 
+            this.checkWhichShipHit(coordinates);
             return { result: 'hit', coordinates: [row, col] };
         }
+    };
+
+    checkWhichShipHit(coordinates) {
+        const [row, col] = coordinates;
+
+        switch (this.grid[row][col]) {
+            case 'D':
+                this.destroyer.hit();
+                break;
+            case 'C':
+                this.cruiser.hit();
+                break;
+            case 'S':
+                this.submarine.hit();
+                break;
+            case 'B':
+                this.battleship.hit();
+                break;
+            case 'A':
+                this.carrier.hit();
+                break;
+        };
+
+        this.grid[row][col] = 'X';
     };
 
     allShipsSunk() {

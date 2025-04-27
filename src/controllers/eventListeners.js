@@ -1,6 +1,5 @@
 import eventBus from "../utils/eventBus.js";
 import isModalityHumanVsHuman from "../utils/switchModality.js";
-import { domManager } from "../index.js";
 import { elements } from "../views/DOMElements.js";
 
 export default function setEventListeners(domManager) {
@@ -30,5 +29,9 @@ export default function setEventListeners(domManager) {
 
     eventBus.addEventListener('gridComposed', (e) => {
         domManager.getGrids([e.detail.gridOne, e.detail.gridTwo]);
+    });
+
+    eventBus.addEventListener('gameOver', (e) => {
+        domManager.renderGameOverDialog(e.detail.winner);
     });
 }
