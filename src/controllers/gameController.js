@@ -126,7 +126,3 @@ export default class GameController {
         this.#checkWinner();
     };
 };
-
-busEvent.addEventListener('attackResult', (e) => {
-    console.log(e.detail);
-})
