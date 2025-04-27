@@ -1,6 +1,7 @@
 import eventBus from "../utils/eventBus.js";
 import isModalityHumanVsHuman from "../utils/switchModality.js";
 import { domManager } from "../index.js";
+import { elements } from "../views/DOMElements.js";
 
 export default function setEventListeners(domManager) {
     eventBus.addEventListener('attackResult', (e) => {
@@ -12,9 +13,9 @@ export default function setEventListeners(domManager) {
         domManager.renderBoardTwo();
         if (isModalityHumanVsHuman()) {
             domManager.detailsrenderTimeOut();
-            e.details.activePlayer === 'player-one' ? domManager.showCells('gameboard-1') : domManager.showCells('gameboard-2');
+            e.details.activePlayer === 'player-one' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
         } else {
-            domManager.showCells('gameboard-1');
+            domManager.showCells(elements.boardOne);
         }
     });
 
@@ -23,9 +24,9 @@ export default function setEventListeners(domManager) {
         domManager.renderBoardTwo();
         if (isModalityHumanVsHuman()) {
             domManager.detailsrenderTimeOut();
-            e.details.activePlayer === 'player-one' ? domManager.showCells('gameboard-1') : domManager.showCells('gameboard-2');
+            e.details.activePlayer === 'player-one' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
         } else {
-            domManager.showCells('gameboard-1');
+            domManager.showCells(elements.boardOne);
         }
     });
 

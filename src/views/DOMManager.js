@@ -13,7 +13,8 @@ export default class DOMManager {
     getGrids(grids) {
         this.gridOne = grids[0];
         this.gridTwo = grids[1];
-    }
+    };
+
     renderHit(receiver, result, coordinates) {
         const [row, col] = coordinates;
         const board = receiver === controller.playerOne ? elements.boardOne : elements.boardTwo;
@@ -125,7 +126,17 @@ export default class DOMManager {
     };
     
     showCells(board) {
-        const row = document.querySelector(`.${board} `)
+        const gameBoardgrid = board === elements.boardOne ? this.gridOne : this.gridTwo;
+        const domBoardName = board === elements.boardOne ? 'gameboard-1' : 'gameboard-2';
+
+        for (let gameBoardRow of gameBoardgrid) {
+            const domRow = document.querySelector(`.${domBoardName} .row-${gameBoardgrid.indexOf(gameBoardRow)}`);
+
+            for (let gameBoardCell of gameBoardRow) {
+                domRow.children[gameBoardRow.indexOf(gameBoardCell)].innerText = gameBoardgrid[gameBoardgrid.indexOf(gameBoardRow)][gameBoardRow.indexOf(gameBoardCell)];
+               
+            }
+        }
     }
     
     renderGameOverDialog(winner) {
