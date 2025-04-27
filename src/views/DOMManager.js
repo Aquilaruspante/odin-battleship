@@ -2,9 +2,27 @@ import GameController from "../controllers/gameController.js";
 import { elements } from './DOMElements.js';
 import isModalityHumanVsHuman from "../utils/switchModality.js";
 
+export let controller;
+
 export function showInitialDialog() {
     elements.initialDialog.showModal();
-}
+};
+
+export function initGame() {
+    elements.startGameButton.addEventListener('click', () => {
+        startGame();
+        elements.initialDialog.close();
+    });
+};
+
+export function startGame() {
+    const modality = elements.selectModality.value;
+    const playerOneName = elements.choosePlayerOneName.value;
+    const playerTwoName = elements.choosePlayerTwoName.value;
+
+    controller = new GameController(modality, playerOneName, playerTwoName);
+    controller.initialize();
+};
 
 export function renderTimeOut(controller) {
     elements.timeOutDialog.showModal();

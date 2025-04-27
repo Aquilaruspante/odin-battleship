@@ -16,5 +16,6 @@ export function initDOMElements() {
         selectModality: document.querySelector('#modality'),
         choosePlayerOneName: document.querySelector('#player-one'),
         choosePlayerTwoName: document.querySelector('#player-two'),
+        startGameButton: document.querySelector('#start-game-btn'),
     };
 }

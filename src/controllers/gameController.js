@@ -1,11 +1,19 @@
 import Player from "../models/player.js";
-import { renderGameOverDialog, updateTurnBoard, renderTimeOut, showInitialDialog } from "../views/DOMManager.js";
+import { renderGameOverDialog, updateTurnBoard, renderTimeOut, renderBoard, managePlayAgainButton } from "../views/DOMManager.js";
+import { elements } from "../views/DOMElements.js";
 
 export default class GameController {
-    constructor () {
-        this.playerOne = new Player('human', 'Player One');
-        this.playerTwo = new Player('human', 'Player Two');
-        this.initialized = false;
+    constructor (modality, playerOneName='Player One', playertwoName='Player Two') {
+        this.playerOne = new Player('human', playerOneName);
+        this.playerTwo = new Player(modality, playertwoName);
+    };
+
+    renderBoardOne() {
+        renderBoard(this.playerOne.gameBoard.grid, this.attackOnPlayerOne.bind(this), elements.boardOne, this, this.playerOne);
+    };
+    
+    renderBoardTwo() {
+        renderBoard(this.playerTwo.gameBoard.grid, this.attackOnPlayerTwo.bind(this), elements.boardTwo, this, this.playerTwo);
     };
 
     #randomizeInitialPlayer() {
@@ -41,16 +49,16 @@ export default class GameController {
     };
 
     initialize() {
-        showInitialDialog();
-        if (this.initialized) {
-            this.#randomizeInitialPlayer();
-            this.#resetShipsHits();
-            this.playerOne.gameBoard.resetBoard();
-            this.playerTwo.gameBoard.resetBoard();
-            this.#composeGameBoard();
-            updateTurnBoard(this);
-            renderTimeOut(this);
-        };
+        this.#randomizeInitialPlayer();
+        this.#resetShipsHits();
+        this.playerOne.gameBoard.resetBoard();
+        this.playerTwo.gameBoard.resetBoard();
+        this.#composeGameBoard();
+        updateTurnBoard(this);
+        renderTimeOut(this);
+        this.renderBoardOne();
+        this.renderBoardTwo();
+        managePlayAgainButton(this.attackOnPlayerOne, this.attackOnPlayerTwo, elements.boardOne, elements.boardTwo, this); 
     };
 
     async switchPlayer() {

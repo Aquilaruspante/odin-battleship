@@ -1,5 +1,5 @@
-import { gameController } from "../index.js"
+import { controller } from "../views/DOMManager.js";
 
 export default function isModalityHumanVsHuman() {
-    return gameController.playerTwo.type === 'human' ? true : false;
+    return controller.playerTwo.type === 'human' ? true : false;
 };
