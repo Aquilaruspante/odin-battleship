@@ -85,7 +85,7 @@ export default class GameBoard {
         
     };
 
-    receiveAttack(coordinates, cell, gameController) {
+    receiveAttack(coordinates) {
         const [row, col] = coordinates;
 
         if (row >= 10 || col >= 10) throw new Error('receiveAttack coordinates must be less than 10!');
@@ -96,8 +96,8 @@ export default class GameBoard {
             case 'S': this.submarine.hit();
             case 'B': this.battleship.hit();
             case 'A': this.carrier.hit();
-                cell.classList.toggle('hit');
-                cell.innerText = 'X';
+                busEvent.dispatchEvent(new CustomEvent('hit', { detail: { coordinates: [row, col] }}));
+                this.grid[row][col] = 'X';
                 break;
             case 'X':
                 busEvent.dispatchEvent(new Event('switchPlayer'));
