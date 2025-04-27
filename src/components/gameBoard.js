@@ -1,5 +1,4 @@
 import Ship from '../models/ship.js';
-import busEvent from '../utils/eventBus.js';
 
 export default class GameBoard {
     constructor() {
@@ -90,23 +89,15 @@ export default class GameBoard {
 
         if (row >= 10 || col >= 10) throw new Error('receiveAttack coordinates must be less than 10!');
 
-        switch (this.grid[row][col]) {
-            case 'D': this.destroyer.hit();
-            case 'C': this.cruiser.hit();
-            case 'S': this.submarine.hit();
-            case 'B': this.battleship.hit();
-            case 'A': this.carrier.hit();
-                busEvent.dispatchEvent(new CustomEvent('hit', { detail: { coordinates: [row, col] }}));
-                this.grid[row][col] = 'X';
-                break;
-            case 'X':
-                busEvent.dispatchEvent(new Event('switchPlayer'));
-                break;
-            case null:
-                busEvent.dispatchEvent(new Event('switchPlayer'));
-                busEvent.dispatchEvent(new CustomEvent('miss', { detail: { coordinates: [row, col] }}));
-                break;
-        };
+        if (this.grid[row][col] === 'X' || this.grid[row][col] === 'M') {
+            return { result: 'alreadyHit', coordinates: [row, col] };
+        } else if (this.grid[row][col] === null) {
+            this.grid[row][col] = 'M'; 
+            return { result: 'miss', coordinates: [row, col] };
+        } else {
+            this.grid[row][col] = 'X'; 
+            return { result: 'hit', coordinates: [row, col] };
+        }
     };
 
     allShipsSunk() {
