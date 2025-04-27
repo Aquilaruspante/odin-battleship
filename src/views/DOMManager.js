@@ -1,8 +1,22 @@
 import GameController from "../controllers/gameController.js";
 import { elements } from './DOMElements.js';
 import isModalityHumanVsHuman from "../utils/switchModality.js";
+import eventBus from "../utils/eventBus.js";
 
 export let controller;
+
+export function renderHit(receiver, result, coordinates) {
+    const [row, col] = coordinates;
+    const board = receiver === controller.playerOne ? elements.boardOne : elements.boardTwo;
+    const boardName = board === elements.boardOne ? '.gameboard-1' : '.gameboard-2';
+    const cellX = document.querySelector(`${boardName} .row-${row}`);
+    
+    if (result === 'hit') {
+        cellX.children[col].classList.toggle('hit');
+    } else if (result === 'miss') {
+        cellX.children[col].classList.toggle('miss');
+    };
+};
 
 export function showInitialDialog() {
     elements.initialDialog.showModal();
