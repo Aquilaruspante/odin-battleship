@@ -91,28 +91,11 @@ export default class GameBoard {
         if (row >= 10 || col >= 10) throw new Error('receiveAttack coordinates must be less than 10!');
 
         switch (this.grid[row][col]) {
-            case 'D':
-                this.destroyer.hit();
-                cell.classList.toggle('hit');
-                cell.innerText = 'X';
-                break;
-            case 'C':
-                this.cruiser.hit();
-                cell.classList.toggle('hit');
-                cell.innerText = 'X';
-                break;
-            case 'S':
-                this.submarine.hit();
-                cell.classList.toggle('hit');
-                cell.innerText = 'X';
-                break;
-            case 'B':
-                this.battleship.hit();
-                cell.classList.toggle('hit');
-                cell.innerText = 'X';
-                break;
-            case 'A':
-                this.carrier.hit();
+            case 'D': this.destroyer.hit();
+            case 'C': this.cruiser.hit();
+            case 'S': this.submarine.hit();
+            case 'B': this.battleship.hit();
+            case 'A': this.carrier.hit();
                 cell.classList.toggle('hit');
                 cell.innerText = 'X';
                 break;
@@ -120,8 +103,8 @@ export default class GameBoard {
                 busEvent.dispatchEvent(new Event('switchPlayer'));
                 break;
             case null:
-                cell.classList.toggle('miss');
                 busEvent.dispatchEvent(new Event('switchPlayer'));
+                busEvent.dispatchEvent(new CustomEvent('miss', { detail: { coordinates: [row, col] }}));
                 break;
         };
     };
