@@ -1,7 +1,7 @@
 import eventBus from "../utils/eventBus.js";
 import isModalityHumanVsHuman from "../utils/switchModality.js";
 import { elements } from "../views/DOMElements.js";
-import { controller } from "../views/DOMManager.js";
+import { controller, createController } from "../index.js";
 
 export default function setEventListeners(domManager) {
     eventBus.addEventListener('attackResult', (e) => {
@@ -37,4 +37,14 @@ export default function setEventListeners(domManager) {
     eventBus.addEventListener('gameOver', (e) => {
         domManager.renderGameOverDialog(e.detail.winner);
     });
-}
+
+    eventBus.addEventListener('createController', (e) => {
+        const { modality, playerOneName, playerTwoName } = e.detail;
+        createController(modality, playerOneName, playerTwoName);
+    });
+
+    eventBus.addEventListener('restartGame', () => {
+        domManager.showInitialDialog();
+        domManager.initGame();
+    });
+};

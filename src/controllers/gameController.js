@@ -48,8 +48,6 @@ export default class GameController {
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
         this.#composeGameBoard();
-        eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { activePlayer: this.activePlayer }}));
-        domManager.managePlayAgainButton(this.attackOnPlayerOne, this.attackOnPlayerTwo, elements.boardOne, elements.boardTwo, this); 
     };
 
     switchPlayer() {
@@ -83,6 +81,7 @@ export default class GameController {
                 gridTwo: this.playerTwo.gameBoard.grid,
             }
         }));
+        eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { activePlayer: this.activePlayer }}));
     };
 
     attackOnPlayerTwo(coordinates) {

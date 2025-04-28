@@ -1,4 +1,4 @@
-import { controller } from "../views/DOMManager.js";
+import { controller } from "../index.js";
 
 export default function isModalityHumanVsHuman() {
     return controller.playerTwo.type === 'human' ? true : false;

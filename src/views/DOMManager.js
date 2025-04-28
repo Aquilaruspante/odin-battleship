@@ -1,8 +1,6 @@
-import GameController from "../controllers/gameController.js";
 import { elements } from './DOMElements.js';
-import isModalityHumanVsHuman from "../utils/switchModality.js";
-
-export let controller;
+import eventBus from "../utils/eventBus.js";
+import { controller } from '../index.js';
 
 export default class DOMManager {
     constructor () {
@@ -52,8 +50,7 @@ export default class DOMManager {
         const playerOneName = elements.choosePlayerOneName.value;
         const playerTwoName = elements.choosePlayerTwoName.value;
     
-        controller = new GameController(modality, playerOneName, playerTwoName);
-        controller.initialize();
+        eventBus.dispatchEvent(new CustomEvent('createController', { detail: { modality, playerOneName, playerTwoName }}));
     };
     
     renderTimeOut() {
@@ -74,34 +71,13 @@ export default class DOMManager {
         }, 1000);
     };
     
-    addEvent(col, event, controller, player, board, x, y) {
-        if (isModalityHumanVsHuman()) {
-            col.addEventListener(event, () => {
-                if (player === controller.activePlayer) {
-                    col.innerText = board[x][y];
-                } else {
-                    col.innerText = '';
-                }
-            });
-        } else {
-            if (board[x][y] !== null && player.type === 'human') {
-                col.innerText = board[x][y];
-            };
-        };
-    };
-    
     updateTurnBoard(activePlayer) {
         elements.turnBoardActivePlayer.innerText = activePlayer.name;
     };
     
-    managePlayAgainButton(attackFunctionOnOne, attackFunctionOnTwo, DOMBoardOne, DOMBoardTwo, controller) {
+    managePlayAgainButton() {
         elements.playAgainButton.addEventListener('click', () => {
-            DOMBoardOne.innerHTML = '';
-            DOMBoardTwo.innerHTML = '';
-            controller.initialize();
-            this.renderBoard(controller.playerOne.gameBoard.grid, attackFunctionOnOne, DOMBoardOne, controller, controller.playerOne.type);
-            this.renderBoard(controller.playerTwo.gameBoard.grid, attackFunctionOnTwo, DOMBoardTwo, controller, controller.playerTwo.type);
-            elements.gameOverDialog.close();
+            eventBus.dispatchEvent(new Event('restartGame'));
         });
     };
     
