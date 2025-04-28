@@ -49,17 +49,12 @@ export default class GameController {
         this.playerTwo.gameBoard.resetBoard();
         this.#composeGameBoard();
         eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { activePlayer: this.activePlayer }}));
-        domManager.updateTurnBoard(this);
         domManager.managePlayAgainButton(this.attackOnPlayerOne, this.attackOnPlayerTwo, elements.boardOne, elements.boardTwo, this); 
     };
 
     switchPlayer() {
         this.activePlayer = (this.activePlayer === this.playerOne) ? this.playerTwo : this.playerOne;
-    
-        domManager.updateTurnBoard(this);
-        
-        const activePlayer = this.activePlayer === this.playerOne ? 'player-one' : 'player-two';
-        eventBus.dispatchEvent(new CustomEvent('switchPlayer', { detail: { activePlayer }}));
+        eventBus.dispatchEvent(new CustomEvent('switchPlayer', { detail: { activePlayer: this.activePlayer }}));
     }
     
 
