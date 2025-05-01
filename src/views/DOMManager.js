@@ -3,9 +3,11 @@ import eventBus from "../utils/eventBus.js";
 import { controller } from '../index.js';
 
 export default class DOMManager {
-    constructor () {
+    constructor (functionOne, functionTwo) {
         this.gridOne = null;
         this.gridTwo = null;
+        this.functionOne = null;
+        this.functionTwo = null;
     };
 
     getGrids(grids) {
@@ -27,11 +29,11 @@ export default class DOMManager {
     };
     
     renderBoardOne() {
-        this.renderBoard(controller.attackOnPlayerOne.bind(controller), elements.boardOne);
+        this.renderBoard(elements.boardOne);
     };
     
     renderBoardTwo() {
-        this.renderBoard(controller.attackOnPlayerTwo.bind(controller), elements.boardTwo);
+        this.renderBoard(elements.boardTwo);
     };
     
     showInitialDialog() {
@@ -81,8 +83,10 @@ export default class DOMManager {
         });
     };
     
-    renderBoard(attackFunction, DOMBoard) {
+    renderBoard(DOMBoard) {
         // Populates the DOM grid cells with ships.
+        console.log(DOMBoard);
+        const attackFunction = DOMBoard === elements.boardOne ? this.functionOne : this.functionTwo;
 
         for (let x = 0; x < 10; x++) {
             const row = document.createElement('div');
@@ -93,6 +97,7 @@ export default class DOMManager {
                 col.setAttribute('class', `col col-${y}`);
                 
                 col.addEventListener('click', () => {
+                    eventBus.dispatchEvent(new CustomEvent('attackPosition', { detail: {}}))
                     attackFunction([x, y]);
                 });
                 row.appendChild(col);

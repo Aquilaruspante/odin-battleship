@@ -3,6 +3,7 @@ import { initDOMElements } from './views/DOMElements.js';
 import DOMManager from './views/DOMManager.js';
 import setupEventListeners from './controllers/eventListeners.js';
 import GameController from './controllers/gameController.js';
+import eventBus from './utils/eventBus.js';
 
 export let domManager;
 export let controller;

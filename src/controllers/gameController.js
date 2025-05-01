@@ -43,6 +43,7 @@ export default class GameController {
     };
 
     initialize() {
+        eventBus.dispatchEvent(new CustomEvent('attackFunction', { detail: { functionOne: this.attackOnPlayerOne.bind(this), functionTwo: this.attackOnPlayerTwo.bind(this) }}));
         this.#randomizeInitialPlayer();
         this.#resetShipsHits();
         this.playerOne.gameBoard.resetBoard();

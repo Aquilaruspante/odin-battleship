@@ -47,4 +47,9 @@ export default function setEventListeners(domManager) {
         domManager.showInitialDialog();
         domManager.initGame();
     });
+
+    eventBus.addEventListener('attackFunction', (e) => {
+        domManager.functionOne = e.detail.functionOne;
+        domManager.functionTwo = e.detail.functionTwo;
+    })
 };
