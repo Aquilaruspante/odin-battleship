@@ -11,7 +11,8 @@ export let controller;
 export function createController(modality, playerOneName, playerTwoName) {
     controller = new GameController(modality, playerOneName, playerTwoName);
     controller.initialize();
-}
+    eventBus.dispatchEvent(new CustomEvent('controllerCreated', { detail: { controller }}));
+};
 
 window.onload = (event) => {
     initDOMElements();

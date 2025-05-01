@@ -1,13 +1,13 @@
 import { elements } from './DOMElements.js';
 import eventBus from "../utils/eventBus.js";
-import { controller } from '../index.js';
 
 export default class DOMManager {
-    constructor (functionOne, functionTwo) {
+    constructor () {
         this.gridOne = null;
         this.gridTwo = null;
         this.functionOne = null;
         this.functionTwo = null;
+        this.controller = null;
     };
 
     getGrids(grids) {
@@ -17,7 +17,7 @@ export default class DOMManager {
 
     renderHit(receiver, result, coordinates) {
         const [row, col] = coordinates;
-        const board = receiver === controller.playerOne ? elements.boardOne : elements.boardTwo;
+        const board = receiver === this.controller.playerOne ? elements.boardOne : elements.boardTwo;
         const boardName = board === elements.boardOne ? '.gameboard-1' : '.gameboard-2';
         const cellX = document.querySelector(`${boardName} .row-${row}`);
         
@@ -57,8 +57,8 @@ export default class DOMManager {
     
     renderTimeOut() {
         elements.timeOutDialog.showModal();
-        elements.doNotLook.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerTwo.name} look away!` : `${controller.playerOne.name} look away!`;
-        elements.yourTurn.innerText = controller.activePlayer === controller.playerOne ? `${controller.playerOne.name} get ready!` : `${controller.playerTwo.name} get ready!`;
+        elements.doNotLook.innerText = this.controller.activePlayer === this.controller.playerOne ? `${this.controller.playerTwo.name} look away!` : `${this.controller.playerOne.name} look away!`;
+        elements.yourTurn.innerText = this.controller.activePlayer === this.controller.playerOne ? `${this.controller.playerOne.name} get ready!` : `${this.controller.playerTwo.name} get ready!`;
         let timeOutCounter = 5;
         elements.counter.innerText = timeOutCounter;
         const interval = setInterval(() => {

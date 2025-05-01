@@ -1,6 +1,4 @@
 import Player from "../models/player.js";
-import { elements } from "../views/DOMElements.js";
-import { domManager } from '../index.js';
 import eventBus from "../utils/eventBus.js";
 
 export default class GameController {
