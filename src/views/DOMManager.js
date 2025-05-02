@@ -117,5 +117,6 @@ export default class DOMManager {
     renderGameOverDialog(winner) {
         elements.winnerAnnounce.innerText = `${winner.name} won!!!`;
         elements.gameOverDialog.showModal();
+        this.managePlayAgainButton();
     };
 };
