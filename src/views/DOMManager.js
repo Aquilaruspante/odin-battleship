@@ -85,8 +85,7 @@ export default class DOMManager {
     
     renderBoard(DOMBoard) {
         // Populates the DOM grid cells with ships.
-        console.log(DOMBoard);
-        const attackFunction = DOMBoard === elements.boardOne ? this.functionOne : this.functionTwo;
+        const targetPlayer = DOMBoard === elements.boardOne ? 'playerOne': 'playerTwo';
 
         for (let x = 0; x < 10; x++) {
             const row = document.createElement('div');
@@ -97,8 +96,7 @@ export default class DOMManager {
                 col.setAttribute('class', `col col-${y}`);
                 
                 col.addEventListener('click', () => {
-                    eventBus.dispatchEvent(new CustomEvent('attackPosition', { detail: {}}))
-                    attackFunction([x, y]);
+                    eventBus.dispatchEvent(new CustomEvent('cellClicked', { detail: { targetPlayer, coordinates: [x, y] }}));
                 });
                 row.appendChild(col);
             }

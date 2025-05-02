@@ -56,4 +56,13 @@ export default function setEventListeners(domManager) {
     eventBus.addEventListener('controllerCreated', (e) => {
         domManager.controller = e.detail.controller;
     });
+
+    eventBus.addEventListener('cellClicked', (e) => {
+        if (e.detail.targetPlayer === 'playerOne' && controller.activePlayer === controller.playerTwo) {
+            controller.attackOnPlayerOne(e.detail.coordinates);
+        } else if (e.detail.targetPlayer === 'playerTwo' && controller.activePlayer === controller.playerOne){
+            controller.attackOnPlayerTwo(e.detail.coordinates);
+        };
+    });
 };
+
