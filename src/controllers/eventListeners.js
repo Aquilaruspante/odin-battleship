@@ -11,7 +11,7 @@ export default function setEventListeners(domManager) {
     eventBus.addEventListener('switchPlayer', (e) => {
         if (isModalityHumanVsHuman()) {
             domManager.renderTimeOut(e.detail.activePlayer.name);
-            e.detail.activePlayer === controller.playeOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
+            e.detail.activePlayer === controller.playerOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
         } else {
             domManager.showCells(elements.boardOne);
         };
