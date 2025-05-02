@@ -85,7 +85,7 @@ export default class GameController {
 
     attackOnPlayerTwo(coordinates) {
         if (this.activePlayer === this.playerOne) {
-            const receiver = this.playerTwo;
+            const receiver = 'playerTwo';
             const { result, coordinates: attackedCoordinates } = this.playerTwo.gameBoard.receiveAttack(coordinates);
     
             eventBus.dispatchEvent(new CustomEvent('attackResult', {
@@ -102,7 +102,7 @@ export default class GameController {
 
     attackOnPlayerOne(coordinates) {
         if (this.activePlayer === this.playerTwo) {
-            const receiver = this.playerOne;
+            const receiver = 'playerOne';
             const { result, coordinates: attackedCoordinates } = this.playerOne.gameBoard.receiveAttack(coordinates);
     
             eventBus.dispatchEvent(new CustomEvent('attackResult', {

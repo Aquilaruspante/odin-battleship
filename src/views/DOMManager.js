@@ -17,7 +17,7 @@ export default class DOMManager {
 
     renderHit(receiver, result, coordinates) {
         const [row, col] = coordinates;
-        const board = receiver === this.controller.playerOne ? elements.boardOne : elements.boardTwo;
+        const board = receiver === 'playerOne' ? elements.boardOne : elements.boardTwo;
         const boardName = board === elements.boardOne ? '.gameboard-1' : '.gameboard-2';
         const cellX = document.querySelector(`${boardName} .row-${row}`);
         
