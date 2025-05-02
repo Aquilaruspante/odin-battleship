@@ -55,10 +55,9 @@ export default class DOMManager {
         eventBus.dispatchEvent(new CustomEvent('createController', { detail: { modality, playerOneName, playerTwoName }}));
     };
     
-    renderTimeOut() {
+    renderTimeOut(activePlayerName) {
         elements.timeOutDialog.showModal();
-        elements.doNotLook.innerText = this.controller.activePlayer === this.controller.playerOne ? `${this.controller.playerTwo.name} look away!` : `${this.controller.playerOne.name} look away!`;
-        elements.yourTurn.innerText = this.controller.activePlayer === this.controller.playerOne ? `${this.controller.playerOne.name} get ready!` : `${this.controller.playerTwo.name} get ready!`;
+        elements.yourTurn.innerText = `${activePlayerName} get ready!`;
         let timeOutCounter = 5;
         elements.counter.innerText = timeOutCounter;
         const interval = setInterval(() => {
