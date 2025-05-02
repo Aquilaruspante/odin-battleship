@@ -5,9 +5,6 @@ export default class DOMManager {
     constructor () {
         this.gridOne = null;
         this.gridTwo = null;
-        this.functionOne = null;
-        this.functionTwo = null;
-        this.controller = null;
     };
 
     getGrids(grids) {
