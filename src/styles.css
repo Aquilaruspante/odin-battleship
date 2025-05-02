@@ -94,6 +94,10 @@ main {
 	display: none;
 }
 
+#initial-dialog:not([open]) {
+	display: none;
+}
+
 #game-over-dialog, #timeout-dialog, #initial-dialog {
 	width: 20%;
 	height: 30%;
