@@ -50,7 +50,12 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('restartGame', () => {
+        elements.gameOverDialog.close();
         domManager.showInitialDialog();
+    });
+
+    eventBus.addEventListener('controllerCreated', (e) => {
+        domManager.controller = e.detail.controller;
     });
 
     eventBus.addEventListener('cellClicked', (e) => {
