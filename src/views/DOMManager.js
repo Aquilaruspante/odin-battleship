@@ -8,7 +8,6 @@ export default class DOMManager {
     };
 
     getGrids(grids) {
-        console.log('updating grids');
         this.gridOne = grids[0];
         this.gridTwo = grids[1];
     };
