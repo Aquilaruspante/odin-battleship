@@ -11,7 +11,13 @@ export default function setEventListeners(domManager) {
     eventBus.addEventListener('switchPlayer', (e) => {
         if (isModalityHumanVsHuman()) {
             domManager.renderTimeOut(e.detail.activePlayer.name);
-            e.detail.activePlayer === controller.playerOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
+            if (e.detail.activePlayer === controller.playerOne) {
+                domManager.showCells(elements.boardOne);
+                domManager.hideCellsValues(elements.boardTwo);
+            } else if (e.detail.activePlayer === controller.playerTwo) {
+                domManager.showCells(elements.boardTwo);
+                domManager.hideCellsValues(elements.boardOne);
+            }
         } else {
             domManager.showCells(elements.boardOne);
         };
@@ -23,7 +29,7 @@ export default function setEventListeners(domManager) {
         domManager.renderBoardTwo();
         if (isModalityHumanVsHuman()) {
             domManager.renderTimeOut(e.detail.activePlayer.name);
-            e.detail.activePlayer === 'player-one' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
+            e.detail.activePlayer === controller.playerOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
         } else {
             domManager.showCells(elements.boardOne);
         };

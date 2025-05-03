@@ -31,7 +31,6 @@ export default class GameController {
 
     #checkWinner() {
         if (this.playerOne.gameBoard.allShipsSunk()) {
-            console.log('all player one ships sunk');
             eventBus.dispatchEvent(new CustomEvent('gameOver', { detail: { winner: this.playerTwo }}));
         };
 

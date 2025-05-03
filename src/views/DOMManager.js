@@ -113,6 +113,20 @@ export default class DOMManager {
             });
         });
     };
+
+    hideCellsValues(board) {
+        const gameBoardgrid = board === elements.boardOne ? this.gridOne : this.gridTwo;
+        const domBoardName = board === elements.boardOne ? 'gameboard-1' : 'gameboard-2';
+    
+        gameBoardgrid.forEach((gameBoardRow, rowIndex) => {
+            const domRow = document.querySelector(`.${domBoardName} .row-${rowIndex}`);
+            const domRowCells = Array.from(domRow.children);
+    
+            gameBoardRow.forEach((gameBoardCell, colIndex) => {
+                domRowCells[colIndex].innerText = '';
+            });
+        });
+    };
     
     renderGameOverDialog(winner) {
         elements.winnerAnnounce.innerText = `${winner.name} won!!!`;
