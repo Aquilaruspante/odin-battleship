@@ -17,7 +17,7 @@ export default class GameController {
         };
     };
 
-    #resetShipsHits() {
+    #resetShipsHitsAndPlacement() {
         for (let ship of this.playerOne.gameBoard.shipArray) {
             ship.hitsNumber = 0;
             ship.isPlaced = false;
@@ -41,7 +41,7 @@ export default class GameController {
 
     initialize() {
         this.#randomizeInitialPlayer();
-        this.#resetShipsHits();
+        this.#resetShipsHitsAndPlacement();
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
         this.#composeGameBoard();

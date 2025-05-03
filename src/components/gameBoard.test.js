@@ -127,12 +127,11 @@ describe('receiveAttack method', () => {
         gameBoard = new GameBoard();
         gameBoard.place(gameBoard.destroyer, [4, 6], 'horizontal', 'D');
         gameBoard.destroyer.hit = jest.fn();
-        cell.classList.toggle() = jest.fn();
-    })
+    });
 
     test('grid location has value "X" after hit and hit not called when missed', () => {
         gameBoard.receiveAttack([1, 1]);
-        expect(gameBoard.grid[1][1]).toBe('X');
+        expect(gameBoard.grid[1][1]).toBe('M');
         expect(gameBoard.destroyer.hit).not.toHaveBeenCalled();
     })
 

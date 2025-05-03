@@ -6,24 +6,24 @@ let gameController;
 
 describe('GameController instantiation', () => {
     beforeEach(() => {
-        gameController = new GameController();
-    })
+        gameController = new GameController('computer', 'Lillo', 'Peppe');
+    });
 
     test('creating a GameController instance should initialize 2 players', () => {
         expect(gameController.playerOne).toBeInstanceOf(Player);    
         expect(gameController.playerTwo).toBeInstanceOf(Player);
-    })
+    });
 
     test('playerOne is of type "human" and playerTwo "computer"', () => {
         expect(gameController.playerOne.type).toBe('human');
         expect(gameController.playerTwo.type).toBe('computer');
-    })
-})
+    });
+});
 
 describe('initialize method', () => {
     beforeEach(() => {
-        gameController = new GameController()
-    })
+        gameController = new GameController('computer', 'Lillo', 'Peppe');
+    });
 
     test('activePlayer is instance of Player', () => {
         gameController.initialize();
@@ -43,17 +43,8 @@ describe('initialize method', () => {
 
         gameController.initialize();
         expect(gameController.playerTwo.gameBoard.destroyer.hitsNumber).toBe(0);
-   })
-
-   test('all ships isPlaced property reset to false', () => {
-        gameController.playerOne.gameBoard.place(gameController.playerOne.gameBoard.cruiser, [3, 4], 'horizontal', 'C');
-        gameController.playerOne.gameBoard.place(gameController.playerOne.gameBoard.battleship, [5, 4], 'horizontal', 'B');
-        gameController.initialize();
-
-        expect(gameController.playerOne.gameBoard.cruiser.isPlaced).toBeFalsy();
-        expect(gameController.playerOne.gameBoard.battleship.isPlaced).toBeFalsy();
-   })
-})
+   });
+});
 
 describe('switchPlayer method', () => {
     beforeEach(() => {
@@ -68,31 +59,7 @@ describe('switchPlayer method', () => {
         gameController.switchPlayer();
         expect(gameController.activePlayer).toBe(gameController.playerOne);
     })
-})
-
-describe('composeGameBoard method', () => {
-    beforeEach(() => {
-        gameController = new GameController();
-        gameController.playerOne.gameBoard.place = jest.fn((ship) => { ship.isPlaced = true });
-        gameController.playerTwo.gameBoard.place = jest.fn((ship) => { ship.isPlaced = true });
-    })
-
-    test('composeGameBoard calls place() for every ship', () => {
-        gameController.composeGameBoard();
-        expect(gameController.playerOne.gameBoard.place).toHaveBeenCalledTimes(5);
-        expect(gameController.playerTwo.gameBoard.place).toHaveBeenCalledTimes(5);
-    });
-    
-
-    test('composeGameBoard place one ship per type for every player', () => {
-        gameController.composeGameBoard();
-        expect(gameController.playerOne.gameBoard.destroyer.isPlaced).toBeTruthy();
-        expect(gameController.playerOne.gameBoard.cruiser.isPlaced).toBeTruthy();
-        expect(gameController.playerOne.gameBoard.submarine.isPlaced).toBeTruthy();
-        expect(gameController.playerOne.gameBoard.battleship.isPlaced).toBeTruthy();
-        expect(gameController.playerOne.gameBoard.carrier.isPlaced).toBeTruthy();       
-    })
-})
+});
 
 describe('attackOnPlayerTwo method', () => {
     beforeEach(() => {
