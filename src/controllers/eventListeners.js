@@ -54,11 +54,6 @@ export default function setEventListeners(domManager) {
         domManager.initGame();
     });
 
-    eventBus.addEventListener('attackFunction', (e) => {
-        domManager.functionOne = e.detail.functionOne;
-        domManager.functionTwo = e.detail.functionTwo;
-    });
-
     eventBus.addEventListener('controllerCreated', (e) => {
         domManager.controller = e.detail.controller;
     });
