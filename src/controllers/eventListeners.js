@@ -50,6 +50,8 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('restartGame', () => {
+        elements.boardOne.innerHTML = '';
+        elements.boardTwo.innerHTML = '';
         elements.gameOverDialog.close();
         domManager.showInitialDialog();
     });
