@@ -51,7 +51,6 @@ export default function setEventListeners(domManager) {
 
     eventBus.addEventListener('restartGame', () => {
         domManager.showInitialDialog();
-        domManager.initGame();
     });
 
     eventBus.addEventListener('cellClicked', (e) => {
