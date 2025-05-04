@@ -10,14 +10,16 @@ export default function setEventListeners(domManager) {
 
     eventBus.addEventListener('switchPlayer', (e) => {
         if (isModalityHumanVsHuman()) {
-            domManager.renderTimeOut(e.detail.activePlayer.name);
-            if (e.detail.activePlayer === controller.playerOne) {
-                domManager.showCells(elements.boardOne);
-                domManager.hideCellsValues(elements.boardTwo);
-            } else if (e.detail.activePlayer === controller.playerTwo) {
-                domManager.showCells(elements.boardTwo);
-                domManager.hideCellsValues(elements.boardOne);
-            }
+            setTimeout(() => {
+                domManager.renderTimeOut(e.detail.activePlayer.name);
+                if (e.detail.activePlayer === controller.playerOne) {
+                    domManager.showCells(elements.boardOne);
+                    domManager.hideCellsValues(elements.boardTwo);
+                } else if (e.detail.activePlayer === controller.playerTwo) {
+                    domManager.showCells(elements.boardTwo);
+                    domManager.hideCellsValues(elements.boardOne);
+                }
+            }, 500);
         } else {
             domManager.showCells(elements.boardOne);
         };
