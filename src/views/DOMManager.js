@@ -116,7 +116,7 @@ export default class DOMManager {
             const domRowCells = Array.from(domRow.children);
     
             gameBoardRow.forEach((gameBoardCell, colIndex) => {
-                domRowCells[colIndex].innerText = gameBoardgrid[rowIndex][colIndex];
+                gameBoardgrid[rowIndex][colIndex] !== null && domRowCells[colIndex].classList.add('ship');
             });
         });
     };
@@ -130,7 +130,7 @@ export default class DOMManager {
             const domRowCells = Array.from(domRow.children);
     
             gameBoardRow.forEach((gameBoardCell, colIndex) => {
-                domRowCells[colIndex].innerText = '';
+                domRowCells[colIndex].classList.remove('ship');
             });
         });
     };

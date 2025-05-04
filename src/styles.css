@@ -85,6 +85,12 @@ body {
 	padding: 0;
 }
 
+.ship {
+	background-color: #6d757a;
+	border: 1px solid #2e2e2e;
+	box-shadow: inset 0 0 3px #000000aa;
+}
+
 main {
     display: flex;
 	justify-content: space-between;
@@ -234,3 +240,6 @@ dialog::backdrop {
 	height: 100%;
 	padding-top: 20px;
 }
+
+
+  
