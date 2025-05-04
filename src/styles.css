@@ -32,6 +32,30 @@ footer, header, hgroup, menu, nav, section {
     box-sizing: border-box;
 }
 
+
+.special-elite-regular {
+	font-family: "Special Elite", system-ui;
+	font-weight: 400;
+	font-style: normal;
+  }
+
+  
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+
+	--background-color: rgb(141, 156, 158, 0.5);
+	--background-color-less-transparent: rgb(141, 156, 158, 0.8);
+
+	--test:	rgb(124, 127, 133, 0.9);
+	--test-trans : rgb(124, 127, 133, 0.5);
+
+	--cell-border: rgb(43, 51, 35);
+
+	--border-color: rgb(169, 177, 184, 0.9); 
+}
+
 body {
 	line-height: 1;
 }
@@ -53,6 +77,10 @@ table {
 
 body {
 	height: 100vh;
+	position: relative; /* necessario per il posizionamento assoluto figlio */
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
 }
 
 main {
@@ -64,26 +92,29 @@ main {
 }
 
 .gameboard {
+	box-sizing: border-box;
     width: 500px;
 	height: 500px;
-	border: 1px solid black;
+	border: 5px solid var(--border-color);
+	background-color: var(--test);
 }
 
 .row {
-	width: 500px;
-	height: 50px;
+	width: 100%;
+	height: 10%;
 	display: flex;
-	border: 1px solid grey;
 }
 
 .col {
     width: 50px;
-    height: 50px;
-	border: 1px solid grey;
+    height: 100%;
+	border: 1px solid var(--cell-border);
+	box-sizing: border-box;
 }
 
 .hit {
-	background-color:red;
+	background-color:rgb(175, 9, 9);
+	background-color: rgb(161, 45, 47);
 }
 
 #game-over-dialog:not([open]) {
@@ -106,6 +137,7 @@ main {
 	flex-direction: column;
 	justify-content: space-around;
 	padding: 10px;
+	background-color: var(--test);
 }
 
 #game-over-dialog h3 {
@@ -114,12 +146,13 @@ main {
 }
 
 #game-over-dialog p {
-	font-size: 1.4;
+	font-size: 1.4rem;
 }
 
-::backdrop {
-	background-color: rgb(143, 141, 141);
-}
+dialog::backdrop {
+	background: url('./assets/images/battleship.webp') center center / cover no-repeat;
+  }
+  
 
 #play-again-button {
 	width: 70%;
@@ -127,24 +160,26 @@ main {
 }
 
 .miss {
-	background-color: rgb(14, 148, 148);
+	background-color: rgb(7, 62, 70);
+	background-color: rgb(60, 110, 88);
+	background-color: rgb(31, 58, 70) ;
 }
 
 #header {
 	width: 20%;
 	height: 20%;
-	border: 3px solid grey;
 	margin: auto;
 	text-align: center;
-	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
 #turn-board {
-	height: 80%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	background-color: var(--test-trans);
+	border: 2px solid rgb(158, 158, 158);
 }
 
 #turn-board h3 {
@@ -153,7 +188,7 @@ main {
 }
 
 #turn-board p {
-	font-size: 1.4rem;
+	font-size: 2rem;
 }
 
 #timeout-dialog {
@@ -180,4 +215,23 @@ main {
 .name-element {
 	display: flex;
 	justify-content: space-between;
+}
+
+#background-image {
+    position: fixed; /* meglio di absolute per i background */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    display: block; /* evita problemi da comportamento inline */
+}
+
+
+#game {
+	z-index: 1;
+	background-color: rgb(146, 144, 144, 0.4);
+	height: 100%;
+	padding-top: 20px;
 }

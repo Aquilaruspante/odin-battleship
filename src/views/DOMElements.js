@@ -1,6 +1,6 @@
 export let elements = {};
 
-export function initDOMElements() {
+export function initDOMElements(image) {
     elements = {
         timeOutDialog: document.querySelector('#timeout-dialog'),
         yourTurn: document.querySelector('#active-player'),
@@ -16,5 +16,6 @@ export function initDOMElements() {
         choosePlayerOneName: document.querySelector('#player-one'),
         choosePlayerTwoName: document.querySelector('#player-two'),
         startGameButton: document.querySelector('#start-game-btn'),
+        backgroundImage: document.querySelector('#background-image'),
     };
 }

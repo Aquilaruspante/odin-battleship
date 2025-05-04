@@ -3,46 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Special+Elite&display=swap" rel="stylesheet">
     <title>Battleship</title>
 </head>
 <body>
-    <section id="header">
-        <div id="turn-board">
-            <h3>Active Player</h3>
-            <p></p>
-        </div>
-    </section>
-    <main>
-        <div class="gameboard gameboard-1"></div>
-        <div class="gameboard gameboard-2"></div>
-    </main>
-    <section id="bottom"></section>
-    <dialog id="game-over-dialog" hidden>
-        <h3>Game Over</h3>
-        <p id="announce-winner"></p>
-        <button type="button" id="play-again-button" autofocus>Play again!</button>
-    </dialog>
-    <dialog id="timeout-dialog">
-        <h3 id="active-player"></h3>
-        <div id="counter"></div>
-    </dialog>
-    <dialog id="initial-dialog">
-        <label for="modality">Select modality</label>
-        <select name="modality" id="modality">
-            <option value="human">Human vs Human</option>
-            <option value="computer" selected>Human vs Computer</option>
-        </select>
-        <section id="choose-player-names">
-            <div class="name-element">
-                <label for="player-one">Player One</label>
-                <input type="text" name="player-one" id="player-one">
-            </div>
-            <div class="name-element">
-                <label for="player-two">Player Two</label>
-                <input type="text" name="player-two" id="player-two">
+    <img alt="battleship-image" id="background-image">
+    <section id="game" class="special-elite-regular">
+        <section id="header">
+            <div id="turn-board">
+                <h3>Active Player</h3>
+                <p></p>
             </div>
         </section>
-        <button type="button" id="start-game-btn">Start Game!</button>
-    </dialog>
+        <main>
+            <div class="gameboard gameboard-1"></div>
+            <div class="gameboard gameboard-2"></div>
+        </main>
+        <section id="bottom"></section>
+        <dialog id="game-over-dialog" hidden>
+            <h3>Game Over</h3>
+            <p id="announce-winner"></p>
+            <button type="button" id="play-again-button" autofocus>Play again!</button>
+        </dialog>
+        <dialog id="timeout-dialog">
+            <h3 id="active-player"></h3>
+            <div id="counter"></div>
+        </dialog>
+        <dialog id="initial-dialog">
+            <label for="modality">Select modality</label>
+            <select name="modality" id="modality">
+                <option value="human">Human vs Human</option>
+                <option value="computer" selected>Human vs Computer</option>
+            </select>
+            <section id="choose-player-names">
+                <div class="name-element">
+                    <label for="player-one">Player One</label>
+                    <input type="text" name="player-one" id="player-one">
+                </div>
+                <div class="name-element">
+                    <label for="player-two">Player Two</label>
+                    <input type="text" name="player-two" id="player-two">
+                </div>
+            </section>
+            <button type="button" id="start-game-btn">Start Game!</button>
+        </dialog>
+    </section>
 </body>
 </html>

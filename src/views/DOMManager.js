@@ -1,10 +1,16 @@
 import { elements } from './DOMElements.js';
 import eventBus from "../utils/eventBus.js";
 
+import battleshipImage from '../assets/images/battleship.webp';
+
 export default class DOMManager {
     constructor () {
         this.gridOne = null;
         this.gridTwo = null;
+    };
+
+    setBackgroundImage() {
+        elements.backgroundImage.setAttribute('src', battleshipImage);
     };
 
     getGrids(grids) {
@@ -38,6 +44,7 @@ export default class DOMManager {
     };
     
     initGame() {
+        this.setBackgroundImage();
         elements.startGameButton.addEventListener('click', () => {
             this.startGame();
             elements.initialDialog.close();
