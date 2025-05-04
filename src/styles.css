@@ -28,16 +28,18 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 * {
     box-sizing: border-box;
 }
 
 
-.special-elite-regular {
-	font-family: "Special Elite", system-ui;
+.share-tech-mono-regular {
+	font-family: "Share Tech Mono", monospace;
 	font-weight: 400;
 	font-style: normal;
   }
+  
 
   
 html {
@@ -48,12 +50,15 @@ html {
 	--background-color: rgb(141, 156, 158, 0.5);
 	--background-color-less-transparent: rgb(141, 156, 158, 0.8);
 
-	--test:	rgb(124, 127, 133, 0.9);
-	--test-trans : rgb(124, 127, 133, 0.5);
+	--test:	rgb(179, 181, 178, 0.8);
+	--test-trans : rgb(179, 181, 178, 0.5);
+	--test-background: rgb(179, 181, 178, 0.3);
 
-	--cell-border: rgb(43, 51, 35);
+	--cell-border: rgb(46, 46, 46);
 
-	--border-color: rgb(169, 177, 184, 0.9); 
+	--border-color: rgb(46, 46, 46, 0.8); 
+
+	color: rgb(46, 46, 46);
 }
 
 body {
@@ -95,7 +100,7 @@ main {
 	box-sizing: border-box;
     width: 500px;
 	height: 500px;
-	border: 5px solid var(--border-color);
+	border: 3px solid var(--border-color);
 	background-color: var(--test);
 }
 
@@ -115,6 +120,7 @@ main {
 .hit {
 	background-color:rgb(175, 9, 9);
 	background-color: rgb(161, 45, 47);
+	background-color: (122, 63, 44);
 }
 
 #game-over-dialog:not([open]) {
@@ -163,6 +169,7 @@ dialog::backdrop {
 	background-color: rgb(7, 62, 70);
 	background-color: rgb(60, 110, 88);
 	background-color: rgb(31, 58, 70) ;
+	background-color: (55, 83, 104);
 }
 
 #header {
@@ -179,7 +186,7 @@ dialog::backdrop {
 	flex-direction: column;
 	justify-content: space-around;
 	background-color: var(--test-trans);
-	border: 2px solid rgb(158, 158, 158);
+	border: 2px solid var(--border-color);
 }
 
 #turn-board h3 {
@@ -231,7 +238,7 @@ dialog::backdrop {
 
 #game {
 	z-index: 1;
-	background-color: rgb(146, 144, 144, 0.4);
+	background-color: var(--test-background);
 	height: 100%;
 	padding-top: 20px;
 }
