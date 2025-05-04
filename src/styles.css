@@ -47,9 +47,6 @@ html {
 	padding: 0;
 	height: 100%;
 
-	--background-color: rgb(141, 156, 158, 0.5);
-	--background-color-less-transparent: rgb(141, 156, 158, 0.8);
-
 	--test:	rgb(179, 181, 178, 0.8);
 	--test-trans : rgb(179, 181, 178, 0.5);
 	--test-background: rgb(179, 181, 178, 0.3);
@@ -118,9 +115,7 @@ main {
 }
 
 .hit {
-	background-color:rgb(175, 9, 9);
-	background-color: rgb(161, 45, 47);
-	background-color: (122, 63, 44);
+	background-color: rgb(122, 63, 44);
 }
 
 #game-over-dialog:not([open]) {
@@ -166,10 +161,7 @@ dialog::backdrop {
 }
 
 .miss {
-	background-color: rgb(7, 62, 70);
-	background-color: rgb(60, 110, 88);
-	background-color: rgb(31, 58, 70) ;
-	background-color: (55, 83, 104);
+	background-color: rgb(55, 83, 104);
 }
 
 #header {
