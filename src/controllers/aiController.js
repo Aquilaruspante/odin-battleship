@@ -29,7 +29,6 @@ export default class AIController {
             switch (index) {
                 case 0:
                     if (this.plotter.north) {
-                        console.log('north', this.plotter.north);
                         x = this.plotter.north[0];
                         y = this.plotter.north[1];
                     } else {
@@ -38,7 +37,6 @@ export default class AIController {
                     break;
                 case 1:
                     if (this.plotter.east) {
-                        console.log('east', this.plotter.east);
                         x = this.plotter.east[0];
                         y = this.plotter.east[1];
                     } else {
@@ -47,7 +45,6 @@ export default class AIController {
                     break;
                 case 2:
                     if (this.plotter.south) {
-                        console.log('south', this.plotter.south);
                         x = this.plotter.south[0];
                         y = this.plotter.south[1];
                     } else {
@@ -56,7 +53,6 @@ export default class AIController {
                     break;
                 case 3:
                     if (this.plotter.west) {
-                        console.log('west', this.plotter.west);
                         x = this.plotter.west[0];
                         y = this.plotter.west[1];
                     } else {
@@ -65,6 +61,7 @@ export default class AIController {
                     break;
             };
         };
+        console.log(this.plotter);
         this.controller.attackOnPlayerOne([x, y]);
     };
 };
