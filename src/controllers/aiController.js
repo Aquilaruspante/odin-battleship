@@ -5,11 +5,11 @@ export default class AIController {
     constructor (controller) {
         this.controller = controller;
     };
-    
+
     attack() {
         const x = Math.floor(Math.random() * 10);
         const y = Math.floor(Math.random() * 10);
 
-        controller.attackOnPlayerOne([x, y]);
+        this.controller.attackOnPlayerOne([x, y]);
     };
 };

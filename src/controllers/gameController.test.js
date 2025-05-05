@@ -48,7 +48,7 @@ describe('initialize method', () => {
 
 describe('switchPlayer method', () => {
     beforeEach(() => {
-        gameController = new GameController();
+        gameController = new GameController('human', 'p', 'l');
         gameController.activePlayer = gameController.playerOne;
     })
 
@@ -63,7 +63,7 @@ describe('switchPlayer method', () => {
 
 describe('attackOnPlayerTwo method', () => {
     beforeEach(() => {
-        gameController = new GameController();
+        gameController = new GameController('human', 'p', 'l');
         gameController.playerTwo.gameBoard.receiveAttack = jest.fn((coordinates) => coordinates);
     })
 
@@ -86,13 +86,13 @@ describe('attackOnPlayerTwo method', () => {
     })
 })
 
-describe('attackOnPlayerOnethod', () => {
+describe('attackOnPlayerOne method', () => {
     beforeEach(() => {
-        gameController = new GameController('computer', 'p', 'l');
+        gameController = new GameController('human', 'p', 'l');
         gameController.playerOne.gameBoard.receiveAttack = jest.fn((coordinates) => coordinates);
     });
 
-    test('attackOnPlayerOne get called once when acrive player is player 2', () => { 
+    test('attackOnPlayerOne get called once when active player is player 2', () => { 
         gameController.activePlayer = gameController.playerTwo;
         gameController.attackOnPlayerOne([3, 4]);
         expect(gameController.playerOne.gameBoard.receiveAttack).toBeCalledTimes(1);
