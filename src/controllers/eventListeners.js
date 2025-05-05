@@ -22,6 +22,12 @@ export default function setEventListeners(domManager) {
             }, 500);
         } else {
             domManager.showCells(elements.boardOne);
+            
+            if (controller.activePlayer === controller.playerTwo) {
+                setTimeout(() => {
+                    controller.aiController.attack();
+                }, 800);
+            };
         };
         domManager.updateTurnBoard(e.detail.activePlayer);
     });

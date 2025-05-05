@@ -1,10 +1,13 @@
 import Player from "../models/player.js";
 import eventBus from "../utils/eventBus.js";
+import isModalityHumanVsHuman from "../utils/switchModality.js";
+import AIController from "./aiController.js";
 
 export default class GameController {
     constructor (modality, playerOneName='Player One', playertwoName='Player Two') {
         this.playerOne = new Player('human', playerOneName);
         this.playerTwo = new Player(modality, playertwoName);
+        this.aiController = modality === 'computer' ? new AIController() : null;
     };
 
     #randomizeInitialPlayer() {
@@ -90,7 +93,7 @@ export default class GameController {
                 detail: { receiver, result, coordinates: attackedCoordinates }
             }));
     
-            if (result === 'miss' || result === 'alreadyHit') {
+            if (result === 'miss') {
                 this.switchPlayer();
             };
         };
@@ -99,6 +102,7 @@ export default class GameController {
     };
 
     attackOnPlayerOne(coordinates) {
+        console.log('attacking', 'active player', this.activePlayer);
         if (this.activePlayer === this.playerTwo) {
             const receiver = 'playerOne';
             const { result, coordinates: attackedCoordinates } = this.playerOne.gameBoard.receiveAttack(coordinates);
@@ -107,8 +111,16 @@ export default class GameController {
                 detail: { receiver, result, coordinates: attackedCoordinates }
             }));
     
-            if (result === 'miss' || result === 'alreadyHit') {
+            if (result === 'miss') {
                 this.switchPlayer();
+            } else if (!isModalityHumanVsHuman() && this.activePlayer === this.playerTwo) {
+                if (result === 'hit') {
+                    setTimeout(() => {
+                        this.aiController.attack();
+                    }, 800);
+                } else {
+                    this.aiController.attack();
+                };
             };
         };        
         
