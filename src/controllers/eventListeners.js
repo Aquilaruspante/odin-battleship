@@ -5,7 +5,12 @@ import { controller, createController } from "../index.js";
 
 export default function setEventListeners(domManager) {
     eventBus.addEventListener('attackResult', (e) => {
-        domManager.renderHit(e.detail.receiver, e.detail.result, e.detail.coordinates);
+        const { receiver, result, coordinates } = e.detail;
+        domManager.renderHit(receiver, result, coordinates);
+
+        if (controller.activePlayer === controller.playerTwo && !isModalityHumanVsHuman(controller)) {
+            controller.aiController.getAttackFeedback(result, coordinates);
+        }
     });
 
     eventBus.addEventListener('switchPlayer', (e) => {

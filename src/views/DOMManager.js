@@ -20,6 +20,7 @@ export default class DOMManager {
 
     renderHit(receiver, result, coordinates) {
         const [row, col] = coordinates;
+        //console.log(row, col);
         const board = receiver === 'playerOne' ? elements.boardOne : elements.boardTwo;
         const boardName = board === elements.boardOne ? '.gameboard-1' : '.gameboard-2';
         const cellX = document.querySelector(`${boardName} .row-${row}`);
