@@ -54,7 +54,9 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('gameOver', (e) => {
-        domManager.renderGameOverDialog(e.detail.winner);
+        setTimeout(() => {
+            domManager.renderGameOverDialog(e.detail.winner);
+        }, 300);
     });
 
     eventBus.addEventListener('createController', (e) => {
