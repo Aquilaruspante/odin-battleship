@@ -88,21 +88,21 @@ describe('attackOnPlayerTwo method', () => {
 
 describe('attackOnPlayerOnethod', () => {
     beforeEach(() => {
-        gameController = new GameController();
+        gameController = new GameController('computer', 'p', 'l');
         gameController.playerOne.gameBoard.receiveAttack = jest.fn((coordinates) => coordinates);
-    })
+    });
 
     test('attackOnPlayerOne get called once when acrive player is player 2', () => { 
         gameController.activePlayer = gameController.playerTwo;
         gameController.attackOnPlayerOne([3, 4]);
         expect(gameController.playerOne.gameBoard.receiveAttack).toBeCalledTimes(1);
-    })
+    });
 
     test('attackOnPlayerOne gets called with the right argument', () => {
         gameController.activePlayer = gameController.playerTwo;
         gameController.attackOnPlayerOne([3, 4]);
         expect(gameController.playerOne.gameBoard.receiveAttack).toBeCalledWith([3, 4]);
-    })
+    });
 
     test('attackOnePlayerOne does not get called if active player is playerOne', () => {
         gameController.activePlayer = gameController.playerOne;

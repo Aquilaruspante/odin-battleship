@@ -1,4 +1,4 @@
-import { expect } from '@jest/globals';
+import { expect, jest } from '@jest/globals';
 import AIController from './aiController.js';
 
 describe('attack method', () => {
@@ -7,8 +7,7 @@ describe('attack method', () => {
         const controller = {
             attackOnPlayerOne: jest.fn(),
         };
-        aiController.attack(coordinates);
+        aiController.attack();
         expect(controller.attackOnPlayerOne).toHaveBeenCalledTimes(1);
-        expect(controller.attackOnPlayerOne).toHaveBeenCalledWith(coordinates);
     });
 });

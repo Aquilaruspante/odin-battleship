@@ -1,5 +1,3 @@
-import { controller } from "../index.js";
-
-export default function isModalityHumanVsHuman() {
+export default function isModalityHumanVsHuman(controller) {
     return controller.playerTwo.type === 'human' ? true : false;
 };

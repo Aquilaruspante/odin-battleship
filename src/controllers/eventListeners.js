@@ -9,7 +9,7 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('switchPlayer', (e) => {
-        if (isModalityHumanVsHuman()) {
+        if (isModalityHumanVsHuman(controller)) {
             setTimeout(() => {
                 domManager.renderTimeOut(e.detail.activePlayer.name);
                 if (e.detail.activePlayer === controller.playerOne) {
@@ -35,7 +35,7 @@ export default function setEventListeners(domManager) {
     eventBus.addEventListener('initBoard', (e) => {
         domManager.renderBoardOne();
         domManager.renderBoardTwo();
-        if (isModalityHumanVsHuman()) {
+        if (isModalityHumanVsHuman(controller)) {
             domManager.renderTimeOut(e.detail.activePlayer.name);
             e.detail.activePlayer === controller.playerOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
         } else {
