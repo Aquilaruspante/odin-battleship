@@ -1,4 +1,4 @@
-import { beforeEach, expect, jest } from '@jest/globals';
+import { expect, jest } from '@jest/globals';
 import AIController from './aiController.js';
 
 describe('attack method', () => {
