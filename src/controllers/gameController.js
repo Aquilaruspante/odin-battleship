@@ -101,7 +101,7 @@ export default class GameController {
         this.#checkWinner(); 
     };
 
-    attackOnPlayerOne(coordinates) {
+    attackOnPlayerOne(coordinates, path = null) {
         if (this.activePlayer === this.playerTwo) {
             const receiver = 'playerOne';
             const { result, coordinates: attackedCoordinates } = this.playerOne.gameBoard.receiveAttack(coordinates);
@@ -117,7 +117,7 @@ export default class GameController {
                     setTimeout(() => {
                         this.aiController.attack();
                     }, 800);
-                } else {
+                } else if (result === 'alreadyHit') {
                     this.aiController.attack();
                 };
             };
