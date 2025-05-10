@@ -13,6 +13,14 @@ export default function setEventListeners(domManager) {
         }
     });
 
+    eventBus.addEventListener('isSunk', (e) => {
+        controller.aiController.firstOrigin = null;
+        controller.aiController.northPossible = true;
+        controller.aiController.eastPossible = true;
+        controller.aiController.southPossible = true;
+        controller.aiController.westPossible = true;
+    })
+
     eventBus.addEventListener('switchPlayer', (e) => {
         if (isModalityHumanVsHuman(controller)) {
             setTimeout(() => {

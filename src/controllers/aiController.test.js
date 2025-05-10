@@ -24,9 +24,19 @@ describe('getAttackFeedback method', () => {
         };
 
     })
-    test('getAttackFeedback calls getOrigin once with coordinates as argument', () => {
+    test('getAttackFeedback calls getOrigin once with coordinates as argument, originEsist = true and path is defined', () => {
         aiController.getAttackFeedback('hit', [4, 5]);
         expect(aiController.plotter.getOrigin).toHaveBeenCalledWith([4, 5]);
         expect(aiController.plotter.getOrigin).toHaveBeenCalledTimes(1);
+        expect(aiController.originExists).toBeTruthy();
+        expect(aiController.path).toBeDefined();
     }); 
+
+    test('if miss originExists = false and path - null', () => {
+        aiController.getAttackFeedback('miss', [4, 4]);
+
+        expect(aiController.originExists).toBeFalsy();
+        expect(aiController.path).toBeNull();
+    });
 });
+

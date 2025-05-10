@@ -1,4 +1,5 @@
 import Ship from '../models/ship.js';
+import eventBus from '../utils/eventBus.js';
 
 export default class GameBoard {
     constructor() {
@@ -10,6 +11,12 @@ export default class GameBoard {
         this.carrier = new Ship(5, 'A');
 
         this.shipArray = [this.destroyer, this.cruiser, this.submarine, this.battleship, this.carrier];
+    };
+
+    #dispatchIsSunkEvent() {
+        for (let ship of this.shipArray) {
+            if (ship.isSunk()) eventBus.dispatchEvent(new CustomEvent('isSunk', { detail: { ship }}));
+        };  
     };
 
     #shipContainedHorizotally(ship, col) {
@@ -97,7 +104,9 @@ export default class GameBoard {
         } else {
             this.checkWhichShipHit(coordinates);
             return { result: 'hit', coordinates: [row, col] };
-        }
+        };
+
+        this.#dispatchIsSunkEvent();
     };
 
     checkWhichShipHit(coordinates) {
