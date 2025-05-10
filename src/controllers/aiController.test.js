@@ -19,13 +19,14 @@ describe('getAttackFeedback method', () => {
     beforeEach(() => {
         const controller = {};
         aiController = new AIController(controller);
-        plotter = {
+        aiController.plotter = {
             getOrigin: jest.fn((coordinates) => coordinates),
         };
+
     })
     test('getAttackFeedback calls getOrigin once with coordinates as argument', () => {
         aiController.getAttackFeedback('hit', [4, 5]);
-        expect(plotter.getOrigin).toHaveBeenCalledWith([4, 5]);
-        expect(plotter.getOrigin).toHaveBeenCalledTimes(1);
+        expect(aiController.plotter.getOrigin).toHaveBeenCalledWith([4, 5]);
+        expect(aiController.plotter.getOrigin).toHaveBeenCalledTimes(1);
     }); 
 });
