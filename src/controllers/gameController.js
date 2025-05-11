@@ -48,6 +48,11 @@ export default class GameController {
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
         this.#composeGameBoard();
+        if (isModalityHumanVsHuman && this.activePlayer === this.playerTwo) {
+            setTimeout(() => {
+                this.aiController.attack();
+            }, 800);
+        };
     };
 
     switchPlayer() {
