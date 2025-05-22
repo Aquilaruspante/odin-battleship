@@ -252,7 +252,8 @@ dialog::backdrop {
 	width: 15%;
 	height: 50%;
 	display: flex;
-	justify-content: space-around;
+	flex-direction: column;
+	justify-content: space-between;
 	background-color: var(--test-trans);
 	border: 2px solid var(--border-color);
 	padding: 10px;
@@ -266,4 +267,9 @@ dialog::backdrop {
 .ship-container .ship {
 	height: 30px;
 	width: 30px;
+}
+
+.ships {
+	display: flex;
+	justify-content: space-around;
 }
