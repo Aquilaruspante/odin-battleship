@@ -250,7 +250,7 @@ dialog::backdrop {
   
 .fleet-manager {
 	width: 15%;
-	height: 50%;
+	height: 60%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -275,7 +275,7 @@ dialog::backdrop {
 .ships {
 	display: flex;
 	justify-content: space-around;
-	height: 80%;
+	height: 60%;
 }
 
 .row-orientation {
@@ -292,4 +292,27 @@ dialog::backdrop {
 
 .container-column {
 	flex-direction: column;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.buttons button {
+	background-color: rgb(55, 83, 104);
+	color: rgb(189, 193, 196);
+	border: none;
+	height: 24px;
+	border-radius: 5px;
+}
+
+.buttons button:hover {
+	background-color: rgb(83, 126, 158);
+	box-shadow: 2px 2px rgba(98, 100, 97, 0.5);
+	cursor: pointer;
+}
+
+.buttons button:active {
+	background-color: rgb(55, 83, 104);
 }
