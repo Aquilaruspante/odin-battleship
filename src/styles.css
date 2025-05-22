@@ -96,7 +96,7 @@ main {
 	justify-content: space-between;
     margin: auto;
 	height: 60%;
-	width: 80%;
+	width: 90%;
 }
 
 .gameboard {
@@ -241,5 +241,29 @@ dialog::backdrop {
 	padding-top: 20px;
 }
 
-
+.first-row, .second-row {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: space-around;
+}
   
+.fleet-manager {
+	width: 15%;
+	height: 50%;
+	display: flex;
+	justify-content: space-around;
+	background-color: var(--test-trans);
+	border: 2px solid var(--border-color);
+	padding: 10px;
+}
+
+.ship-container {
+	height: 50px;
+	width: 100%px;
+}
+
+.ship-container .ship {
+	height: 30px;
+	width: 30px;
+}
