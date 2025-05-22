@@ -50,6 +50,8 @@ export default class DOMManager {
             this.startGame();
             elements.initialDialog.close();
         });
+        this.renderBoardOne();
+        this.renderBoardTwo();
     };
     
     startGame() {
@@ -88,6 +90,7 @@ export default class DOMManager {
     };
     
     renderBoard(DOMBoard) {
+        console.log('rendering');
         // Populates the DOM grid cells with ships.
         const targetPlayer = DOMBoard === elements.boardOne ? 'playerOne': 'playerTwo';
 

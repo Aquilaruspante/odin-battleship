@@ -46,8 +46,6 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('initBoard', (e) => {
-        domManager.renderBoardOne();
-        domManager.renderBoardTwo();
         if (isModalityHumanVsHuman(controller)) {
             domManager.renderTimeOut(e.detail.activePlayer.name);
             e.detail.activePlayer === controller.playerOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
@@ -125,6 +123,14 @@ export default function setEventListeners(domManager) {
         elements.cruiserTwo.setAttribute('class', 'ship-container container-row');
         elements.submarineTwo.setAttribute('class', 'ship-container container-row');
         elements.destroyerTwo.setAttribute('class', 'ship-container container-row');
+    });
+
+    elements.randomPlaceOne.addEventListener('click', () => {
+        if (!controller.playerOne.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerOne);
+    });
+
+    elements.randomPlaceTwo.addEventListener('click', () => {
+        if (!controller.playerTwo.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerTwo);
     });
 };
 

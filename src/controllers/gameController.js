@@ -43,11 +43,14 @@ export default class GameController {
     };
 
     initialize() {
-        this.#randomizeInitialPlayer();
         this.#resetShipsHitsAndPlacement();
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
-        this.#composeGameBoard();
+        //this.startGame();
+    };
+
+    startGame() {
+        this.#randomizeInitialPlayer();
         if (isModalityHumanVsHuman && this.activePlayer === this.playerTwo) {
             setTimeout(() => {
                 this.aiController.attack();
@@ -61,23 +64,14 @@ export default class GameController {
     }
     
 
-    #composeGameBoard() {
-        for (let ship of this.playerOne.gameBoard.shipArray) {
+    composeGameBoard(player) {
+        for (let ship of player.gameBoard.shipArray) {
             while (!ship.isPlaced) {
                 const row = Math.floor(Math.random() * 10);
                 const col = Math.floor(Math.random() * 10);
                 const orientation = (Math.floor(Math.random() * 2) + 1) === 1 ? 'horizontal' : 'vertical'; 
                 this.playerOne.gameBoard.place(ship, [row, col], orientation)
             };      
-        };
-
-        for (let ship of this.playerTwo.gameBoard.shipArray) {
-            while (!ship.isPlaced) {
-                const row = Math.floor(Math.random() * 10);
-                const col = Math.floor(Math.random() * 10);
-                const orientation = (Math.floor(Math.random() * 2) + 1) === 1 ? 'horizontal' : 'vertical'; 
-                this.playerTwo.gameBoard.place(ship, [row, col], orientation);
-            };
         };
 
         eventBus.dispatchEvent(new CustomEvent('gridComposed', { 
