@@ -1,6 +1,6 @@
 export let elements = {};
 
-export function initDOMElements(image) {
+export function initDOMElements() {
     elements = {
         timeOutDialog: document.querySelector('#timeout-dialog'),
         yourTurn: document.querySelector('#active-player'),
@@ -17,5 +17,21 @@ export function initDOMElements(image) {
         choosePlayerTwoName: document.querySelector('#player-two'),
         startGameButton: document.querySelector('#start-game-btn'),
         backgroundImage: document.querySelector('#background-image'),
+        horizontalOne: document.querySelector('#horizontal-1'),
+        verticalOne: document.querySelector('#vertical-1'),
+        horizontalTwo: document.querySelector('#horizontal-2'),
+        verticalTwo: document.querySelector('#vertical-2'),
+        shipBoardOne: document.querySelector('#ships-board-1'),
+        shipBoardTwo: document.querySelector('#ships-board-2'),
+        carrierOne: document.querySelector('#carrier-1'),
+        battleshipOne: document.querySelector('#battleship-1'),
+        cruiserOne: document.querySelector('#cruiser-1'),
+        submarineOne: document.querySelector('#submarine-1'),
+        destroyerOne: document.querySelector('#destroyer-1'),
+        carrierTwo: document.querySelector('#carrier-2'),
+        battleshipTwo: document.querySelector('#battleship-2'),
+        cruiserTwo: document.querySelector('#cruiser-2'),
+        submarineTwo: document.querySelector('#submarine-2'),
+        destroyerTwo: document.querySelector('#destroyer-2'),
     };
-}
+};

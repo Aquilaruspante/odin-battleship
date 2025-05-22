@@ -90,5 +90,42 @@ export default function setEventListeners(domManager) {
             controller.attackOnPlayerTwo(e.detail.coordinates);
         };
     });
+
+    elements.horizontalOne.addEventListener('click', () => {
+        elements.shipBoardOne.setAttribute('class', 'ships row-orientation');
+        elements.carrierOne.setAttribute('class', 'ship-container container-column');
+        elements.battleshipOne.setAttribute('class', 'ship-container container-column');
+        elements.cruiserOne.setAttribute('class', 'ship-container container-column');
+        elements.submarineOne.setAttribute('class', 'ship-container container-column');
+        elements.destroyerOne.setAttribute('class', 'ship-container container-column');
+    });
+
+    elements.verticalOne.addEventListener('click', () => {
+        elements.shipBoardOne.setAttribute('class', 'ships column-orientation');
+        elements.carrierOne.setAttribute('class', 'ship-container container-row');
+        elements.battleshipOne.setAttribute('class', 'ship-container container-row');
+        elements.cruiserOne.setAttribute('class', 'ship-container container-row');
+        elements.submarineOne.setAttribute('class', 'ship-container container-row');
+        elements.destroyerOne.setAttribute('class', 'ship-container container-row');
+    });
+
+    elements.horizontalTwo.addEventListener('click', () => {
+        elements.shipBoardTwo.setAttribute('class', 'ships row-orientation');
+        elements.carrierTwo.setAttribute('class', 'ship-container container-column');
+        elements.battleshipTwo.setAttribute('class', 'ship-container container-column');
+        elements.cruiserTwo.setAttribute('class', 'ship-container container-column');
+        elements.submarineTwo.setAttribute('class', 'ship-container container-column');
+        elements.destroyerTwo.setAttribute('class', 'ship-container container-column');
+    });
+
+    elements.verticalTwo.addEventListener('click', () => {
+        elements.shipBoardTwo.setAttribute('class', 'ships column-orientation');
+        elements.carrierTwo.setAttribute('class', 'ship-container container-row');
+        elements.battleshipTwo.setAttribute('class', 'ship-container container-row');
+        elements.cruiserTwo.setAttribute('class', 'ship-container container-row');
+        elements.submarineTwo.setAttribute('class', 'ship-container container-row');
+        elements.destroyerTwo.setAttribute('class', 'ship-container container-row');
+    });
 };
+
 
