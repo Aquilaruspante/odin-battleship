@@ -33,5 +33,6 @@ export function initDOMElements() {
         cruiserTwo: document.querySelector('#cruiser-2'),
         submarineTwo: document.querySelector('#submarine-2'),
         destroyerTwo: document.querySelector('#destroyer-2'),
+        draggableShips: document.querySelectorAll('.ship-container'),
     };
 };
