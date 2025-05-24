@@ -65,12 +65,13 @@ export default class GameController {
     
 
     composeGameBoard(player) {
+        console.log(player);
         for (let ship of player.gameBoard.shipArray) {
             while (!ship.isPlaced) {
                 const row = Math.floor(Math.random() * 10);
                 const col = Math.floor(Math.random() * 10);
                 const orientation = (Math.floor(Math.random() * 2) + 1) === 1 ? 'horizontal' : 'vertical'; 
-                this.playerOne.gameBoard.place(ship, [row, col], orientation)
+                player.gameBoard.place(ship, [row, col], orientation)
             };      
         };
 

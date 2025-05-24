@@ -56,6 +56,7 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('gridComposed', (e) => {
+        console.log(e.detail);
         domManager.getGrids([e.detail.gridOne, e.detail.gridTwo]);
     });
 

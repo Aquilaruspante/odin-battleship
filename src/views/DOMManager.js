@@ -80,7 +80,9 @@ export default class DOMManager {
     };
     
     updateTurnBoard(activePlayer) {
-        elements.turnBoardActivePlayer.innerText = activePlayer.name;
+        if (activePlayer) {
+            elements.turnBoardActivePlayer.innerText = activePlayer.name;
+        };
     };
     
     managePlayAgainButton() {
