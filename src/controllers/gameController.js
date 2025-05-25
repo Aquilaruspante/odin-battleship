@@ -2,6 +2,7 @@ import Player from "../models/player.js";
 import eventBus from "../utils/eventBus.js";
 import isModalityHumanVsHuman from "../utils/switchModality.js";
 import AIController from "./aiController.js";
+import { dispatchGridComposed } from "./eventListeners.js";
 
 export default class GameController {
     constructor (modality, playerOneName='Player One', playertwoName='Player Two') {
@@ -46,6 +47,8 @@ export default class GameController {
         this.#resetShipsHitsAndPlacement();
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
+        this.placingTurn = this.playerOne;
+        eventBus.dispatchEvent(new Event('shipsReadyForPlacement'));
         //this.startGame();
     };
 
@@ -75,12 +78,8 @@ export default class GameController {
             };      
         };
 
-        eventBus.dispatchEvent(new CustomEvent('gridComposed', { 
-            detail: {
-                gridOne: this.playerOne.gameBoard.grid,
-                gridTwo: this.playerTwo.gameBoard.grid,
-            }
-        }));
+        dispatchGridComposed(this);
+        
         eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { activePlayer: this.activePlayer }}));
     };
 

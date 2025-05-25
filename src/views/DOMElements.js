@@ -8,6 +8,7 @@ export function initDOMElements() {
         gameOverDialog: document.querySelector('#game-over-dialog'),
         winnerAnnounce: document.querySelector('#announce-winner'),
         playAgainButton: document.querySelector('#play-again-button'),
+        turnBoardTitle: document.querySelector('#turn-board h3'),
         turnBoardActivePlayer: document.querySelector('#turn-board p'),
         boardOne: document.querySelector('.gameboard-1'),
         boardTwo: document.querySelector('.gameboard-2'),

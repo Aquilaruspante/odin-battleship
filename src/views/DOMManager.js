@@ -5,8 +5,11 @@ import battleshipImage from '../assets/images/battleship.webp';
 
 export default class DOMManager {
     constructor () {
-        this.gridOne = null;
-        this.gridTwo = null;
+        this.gridOne = Array.from({ length: 10 }, () => Array(10).fill(null));
+        this.gridTwo = Array.from({ length: 10 }, () => Array(10).fill(null));
+        this.dragged = null;
+        this.orientationOne = 'vertical';
+        this.orientationTwo = 'vertical';
     };
 
     setBackgroundImage() {
@@ -20,7 +23,6 @@ export default class DOMManager {
 
     renderHit(receiver, result, coordinates) {
         const [row, col] = coordinates;
-        //console.log(row, col);
         const board = receiver === 'playerOne' ? elements.boardOne : elements.boardTwo;
         const boardName = board === elements.boardOne ? '.gameboard-1' : '.gameboard-2';
         const cellX = document.querySelector(`${boardName} .row-${row}`);
@@ -79,10 +81,14 @@ export default class DOMManager {
         }, 1000);
     };
     
-    updateTurnBoard(activePlayer) {
+    updateTurnBoard(activePlayer, placingTurn = null) {
         if (activePlayer) {
+            elements.turnBoardTitle.innerText = 'Active Player';
             elements.turnBoardActivePlayer.innerText = activePlayer.name;
-        };
+        } else if (placingTurn) {
+            elements.turnBoardTitle.innerText = 'Place Ships';
+            elements.turnBoardActivePlayer.innerHTML = `<b>${placingTurn.name}</b> drag and drop your ships on the board`;
+        }
     };
     
     managePlayAgainButton() {
@@ -92,8 +98,6 @@ export default class DOMManager {
     };
     
     renderBoard(DOMBoard) {
-        console.log('rendering');
-        // Populates the DOM grid cells with ships.
         const targetPlayer = DOMBoard === elements.boardOne ? 'playerOne': 'playerTwo';
 
         for (let x = 0; x < 10; x++) {
@@ -107,6 +111,15 @@ export default class DOMManager {
                 col.addEventListener('click', () => {
                     eventBus.dispatchEvent(new CustomEvent('cellClicked', { detail: { targetPlayer, coordinates: [x, y] }}));
                 });
+
+                col.addEventListener('dragover', (event) => {
+                    event.preventDefault();
+                }, false);
+                col.addEventListener('drop', (event) => {
+                    event.preventDefault();
+                    const orientation = targetPlayer === 'playerOne' ? this.orientationOne : this.orientationTwo;
+                    eventBus.dispatchEvent(new CustomEvent('placeShip', { detail: { ship: this.dragged, coordinates: [x, y], targetPlayer, orientation }}));
+                })
                 row.appendChild(col);
             }
             DOMBoard.appendChild(row);
@@ -145,5 +158,80 @@ export default class DOMManager {
         elements.winnerAnnounce.innerText = `${winner.name} won!!!`;
         elements.gameOverDialog.showModal();
         this.managePlayAgainButton();
+    };
+
+    manageManualPlacing(player) {
+        if (player === 'player-1') {
+            elements.carrierOne.addEventListener('dragstart', () => {
+                this.dragged = 'carrier-1';
+            });
+            elements.carrierOne.addEventListener('dragend', () => {
+                this.dragged = null;
+            });
+
+            elements.battleshipOne.addEventListener('dragstart', () => {
+                this.dragged = 'battleship-1';
+            });
+            elements.battleshipOne.addEventListener('dragend', () => {
+                this.dragged = null;
+            });
+
+            elements.cruiserOne.addEventListener('dragstart', () => {
+                this.dragged = 'cruiser-1';
+            });
+            elements.cruiserOne.addEventListener('dragend', () => {
+                this.dragged = null;
+            });
+
+            elements.submarineOne.addEventListener('dragstart', () => {
+                this.dragged = 'submarine-1';
+            });
+            elements.submarineOne.addEventListener('dragend', () => {
+                this.dragged = null;
+            });
+
+            elements.destroyerOne.addEventListener('dragstart', () => {
+                this.dragged = 'destroyer-1';
+            });
+            elements.destroyerOne.addEventListener('dragend', () => {
+                this.dragged = null;
+            }); 
+        } else if (player === 'player-2') {
+            elements.carrierTwo.addEventListener('dragstart', () => {
+                this.dragged = 'carrier-2';
+            });
+            elements.carrierTwo.addEventListener('dragend', () => {
+                this.dragged = null;
+            });
+
+            elements.battleshipTwo.addEventListener('dragstart', () => {
+                this.dragged = 'battleship-2';
+            });
+            elements.battleshipTwo.addEventListener('dragend', () => {
+                this.dragged = null;
+            });
+
+            elements.cruiserTwo.addEventListener('dragstart', () => {
+                this.dragged = 'cruiser-2';
+            });
+            elements.cruiserTwo.addEventListener('dragend', () => {
+                this.dragged = null;
+            });
+
+            elements.submarineTwo.addEventListener('dragstart', () => {
+                this.dragged = 'submarine-2';
+            });
+            elements.submarineTwo.addEventListener('dragend', () => {
+                this.dragged = null;
+            });
+
+            elements.destroyerTwo.addEventListener('dragstart', () => {
+                this.dragged = 'destroyer-2';
+            });
+            elements.destroyerTwo.addEventListener('dragend', () => {
+                this.dragged = null;
+            }); 
+        }
+        
     };
 };

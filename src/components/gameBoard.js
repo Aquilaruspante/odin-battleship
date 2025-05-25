@@ -88,7 +88,6 @@ export default class GameBoard {
         } else {
             ship.isPlaced = false;
         };
-        
     };
 
     receiveAttack(coordinates) {

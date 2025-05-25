@@ -3,6 +3,15 @@ import isModalityHumanVsHuman from "../utils/switchModality.js";
 import { elements } from "../views/DOMElements.js";
 import { controller, createController } from "../index.js";
 
+export function dispatchGridComposed(controller) {
+    eventBus.dispatchEvent(new CustomEvent('gridComposed', { 
+            detail: {
+                gridOne: controller.playerOne.gameBoard.grid,
+                gridTwo: controller.playerTwo.gameBoard.grid,
+            }
+        }));
+}
+
 export default function setEventListeners(domManager) {
     eventBus.addEventListener('attackResult', (e) => {
         const { receiver, result, coordinates } = e.detail;
@@ -56,7 +65,6 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('gridComposed', (e) => {
-        console.log(e.detail);
         domManager.getGrids([e.detail.gridOne, e.detail.gridTwo]);
     });
 
@@ -90,6 +98,68 @@ export default function setEventListeners(domManager) {
         };
     });
 
+    eventBus.addEventListener('shipsReadyForPlacement', () => {
+        elements.carrierOne.setAttribute('draggable', true);
+        elements.battleshipOne.setAttribute('draggable', true);
+        elements.cruiserOne.setAttribute('draggable', true);
+        elements.submarineOne.setAttribute('draggable', true);
+        elements.destroyerOne.setAttribute('draggable', true);
+
+        domManager.manageManualPlacing('player-1');
+        domManager.updateTurnBoard(null, controller.playerOne);
+    });
+
+    eventBus.addEventListener('placeShip', (e) => {
+        const { ship, coordinates, targetPlayer } = e.detail;
+        
+        const orientation = targetPlayer === 'playerOne' ? domManager.orientationOne : domManager.orientationTwo;
+
+        let shipToPlace;
+
+        switch (ship) {
+            case 'carrier-1':
+                shipToPlace = controller.playerOne.gameBoard.carrier;
+                break;
+            case 'battleship-1':
+                shipToPlace = controller.playerOne.gameBoard.battleship;
+                break;
+            case 'cruiser-1':
+                shipToPlace = controller.playerOne.gameBoard.cruiser;
+                break;
+            case 'submarine-1':
+                shipToPlace = controller.playerOne.gameBoard.submarine;
+                break;
+            case 'destroyer-1':
+                shipToPlace = controller.playerOne.gameBoard.destroyer;
+                break;
+            
+            case 'carrier-2':
+                shipToPlace = controller.playerTwo.gameBoard.carrier;
+                break;
+            case 'battleship-2':
+                shipToPlace = controller.playerTwo.gameBoard.battleship;
+                break;
+            case 'cruiser-2':
+                shipToPlace = controller.playerOne.gameBoard.cruiser;
+                break;
+            case 'submarine-2':
+                shipToPlace = controller.playerOne.gameBoard.submarine;
+                break;
+            case 'destroyer-2':
+                shipToPlace = controller.playerOne.gameBoard.destroyer;
+                break;
+        }
+
+        const player = targetPlayer === 'playerOne' ? controller.playerOne : controller.playerTwo;
+        if (!shipToPlace.isPlaced) {
+            controller.placingTurn === player && controller.placingTurn.gameBoard.place(shipToPlace, coordinates, orientation);
+        };
+
+        dispatchGridComposed(controller);
+
+        (isModalityHumanVsHuman(controller) && controller.placingTurn === controller.playerTwo) ? domManager.showCells(elements.boardTwo) : domManager.showCells(elements.boardOne);
+    });
+
     elements.horizontalOne.addEventListener('click', () => {
         elements.shipBoardOne.setAttribute('class', 'ships row-orientation');
         elements.carrierOne.setAttribute('class', 'ship-container container-column');
@@ -97,6 +167,8 @@ export default function setEventListeners(domManager) {
         elements.cruiserOne.setAttribute('class', 'ship-container container-column');
         elements.submarineOne.setAttribute('class', 'ship-container container-column');
         elements.destroyerOne.setAttribute('class', 'ship-container container-column');
+
+        domManager.orientationOne = 'vertical';
     });
 
     elements.verticalOne.addEventListener('click', () => {
@@ -106,6 +178,8 @@ export default function setEventListeners(domManager) {
         elements.cruiserOne.setAttribute('class', 'ship-container container-row');
         elements.submarineOne.setAttribute('class', 'ship-container container-row');
         elements.destroyerOne.setAttribute('class', 'ship-container container-row');
+
+        domManager.orientationOne = 'horizontal';
     });
 
     elements.horizontalTwo.addEventListener('click', () => {
@@ -115,6 +189,8 @@ export default function setEventListeners(domManager) {
         elements.cruiserTwo.setAttribute('class', 'ship-container container-column');
         elements.submarineTwo.setAttribute('class', 'ship-container container-column');
         elements.destroyerTwo.setAttribute('class', 'ship-container container-column');
+
+        domManager.orientationTwo = 'vertical';
     });
 
     elements.verticalTwo.addEventListener('click', () => {
@@ -124,6 +200,8 @@ export default function setEventListeners(domManager) {
         elements.cruiserTwo.setAttribute('class', 'ship-container container-row');
         elements.submarineTwo.setAttribute('class', 'ship-container container-row');
         elements.destroyerTwo.setAttribute('class', 'ship-container container-row');
+
+        domManager.orientationTwo = 'horizontal';
     });
 
     elements.randomPlaceOne.addEventListener('click', () => {
