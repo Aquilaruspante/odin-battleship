@@ -316,3 +316,9 @@ dialog::backdrop {
 .miss {
 	background-color: rgb(55, 83, 104);
 }
+
+#start-game-dialog {
+	width: 200px;
+	font-size: large;
+	text-align: center;
+}

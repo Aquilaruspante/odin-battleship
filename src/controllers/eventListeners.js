@@ -220,6 +220,45 @@ export default function setEventListeners(domManager) {
         controller.managePlacingTurns();
     });
 
+    eventBus.addEventListener('startGame', () => {
+        elements.startGameDialog.showModal();
+        setTimeout(() => {
+            elements.startGameDialog.close();
+        }, 1500);
+
+        for (let child of elements.carrierOne.children) {
+            child.classList.toggle('miss');
+        };
+        for (let child of elements.battleshipOne.children) {
+            child.classList.toggle('miss');
+        };
+        for (let child of elements.cruiserOne.children) {
+            child.classList.toggle('miss');
+        };
+        for (let child of elements.submarineOne.children) {
+            child.classList.toggle('miss');
+        };
+        for (let child of elements.destroyerOne.children) {
+            child.classList.toggle('miss');
+        };
+
+        for (let child of elements.carrierTwo.children) {
+            child.classList.toggle('miss');
+        };
+        for (let child of elements.battleshipTwo.children) {
+            child.classList.toggle('miss');
+        };
+        for (let child of elements.cruiserTwo.children) {
+            child.classList.toggle('miss');
+        };
+        for (let child of elements.submarineTwo.children) {
+            child.classList.toggle('miss');
+        };
+        for (let child of elements.destroyerTwo.children) {
+            child.classList.toggle('miss');
+        };
+    });
+
     elements.horizontalOne.addEventListener('click', () => {
         elements.shipBoardOne.setAttribute('class', 'ships row-orientation');
         elements.carrierOne.setAttribute('class', 'ship-container container-column');

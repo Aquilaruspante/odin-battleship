@@ -53,7 +53,7 @@ export default class GameController {
     };
 
     startGame() {
-        console.log('starting');
+        eventBus.dispatchEvent(new Event('startGame'));
         this.#randomizeInitialPlayer();
         if (isModalityHumanVsHuman && this.activePlayer === this.playerTwo) {
             setTimeout(() => {
