@@ -166,57 +166,57 @@ export default function setEventListeners(domManager) {
         switch (ship) {
             case controller.playerOne.gameBoard.carrier:
                for (let child of elements.carrierOne.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
             case controller.playerOne.gameBoard.battleship:
                for (let child of elements.battleshipOne.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
             case controller.playerOne.gameBoard.cruiser:
                for (let child of elements.cruiserOne.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
             case controller.playerOne.gameBoard.submarine:
                for (let child of elements.submarineOne.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
             case controller.playerOne.gameBoard.destroyer:
                for (let child of elements.destroyerOne.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
 
             case controller.playerTwo.gameBoard.carrier:
                for (let child of elements.carrierTwo.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
             case controller.playerTwo.gameBoard.battleship:
                for (let child of elements.battleshipTwo.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
             case controller.playerTwo.gameBoard.cruiser:
                for (let child of elements.cruiserTwo.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
             case controller.playerTwo.gameBoard.submarine:
                for (let child of elements.submarineTwo.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
             case controller.playerTwo.gameBoard.destroyer:
                for (let child of elements.destroyerTwo.children) {
-                child.classList.toggle('hit');
+                child.classList.toggle('miss');
                };
                break;
-        }
-    })
+        };
+    });
 
     elements.horizontalOne.addEventListener('click', () => {
         elements.shipBoardOne.setAttribute('class', 'ships row-orientation');

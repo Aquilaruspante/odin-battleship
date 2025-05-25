@@ -162,10 +162,6 @@ dialog::backdrop {
 	margin-left: 15%;
 }
 
-.miss {
-	background-color: rgb(55, 83, 104);
-}
-
 #header {
 	width: 20%;
 	height: 20%;
@@ -315,4 +311,8 @@ dialog::backdrop {
 
 .hit {
 	background-color: rgb(122, 63, 44);
+}
+
+.miss {
+	background-color: rgb(55, 83, 104);
 }
