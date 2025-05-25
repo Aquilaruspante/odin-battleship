@@ -53,6 +53,7 @@ export default class GameController {
     };
 
     startGame() {
+        console.log('starting');
         this.#randomizeInitialPlayer();
         if (isModalityHumanVsHuman && this.activePlayer === this.playerTwo) {
             setTimeout(() => {
@@ -68,7 +69,6 @@ export default class GameController {
     
 
     composeGameBoard(player) {
-        console.log(player);
         for (let ship of player.gameBoard.shipArray) {
             while (!ship.isPlaced) {
                 const row = Math.floor(Math.random() * 10);
@@ -79,7 +79,7 @@ export default class GameController {
         };
 
         dispatchGridComposed(this);
-        
+
         eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { activePlayer: this.activePlayer }}));
     };
 

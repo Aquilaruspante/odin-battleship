@@ -79,12 +79,14 @@ export default class GameBoard {
                 this.grid[row][col + i] = ship.symbol;
             };        
             ship.isPlaced = true;
+            eventBus.dispatchEvent(new CustomEvent('shipPlaced', { detail: { ship }}));
         } else if (orientation === 'vertical' && this.#shipIsPlaceablevertically(ship, row, col)) {      
             for (let i = 0; i < ship.length; i++) {    
                 this.grid[row + i][col] = ship.symbol;
             };
             
             ship.isPlaced = true;
+            eventBus.dispatchEvent(new CustomEvent('shipPlaced', { detail: { ship }}));
         } else {
             ship.isPlaced = false;
         };
@@ -157,5 +159,5 @@ export default class GameBoard {
 
     allShipsPlaced() {
         return (this.destroyer.isPlaced && this.cruiser.isPlaced && this.submarine.isPlaced && this.battleship.isPlaced && this.carrier.isPlaced);
-    }
+    };
 };

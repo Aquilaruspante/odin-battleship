@@ -120,10 +120,6 @@ main {
 	box-sizing: border-box;
 }
 
-.hit {
-	background-color: rgb(122, 63, 44);
-}
-
 #game-over-dialog:not([open]) {
 	display: none;
 }
@@ -315,4 +311,8 @@ dialog::backdrop {
 
 .buttons button:active {
 	background-color: rgb(55, 83, 104);
+}
+
+.hit {
+	background-color: rgb(122, 63, 44);
 }
