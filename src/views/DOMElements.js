@@ -35,9 +35,7 @@ export function initDOMElements() {
         submarineTwo: document.querySelector('#submarine-2'),
         destroyerTwo: document.querySelector('#destroyer-2'),
         draggableShips: document.querySelectorAll('.ship-container'),
-        doneButtonOne: document.querySelector('#done-btn-1'),
         randomPlaceOne: document.querySelector('#place-randomly-btn-1'),
-        doneButtonTwo: document.querySelector('#done-btn-2'), 
         randomPlaceTwo: document.querySelector('#place-randomly-btn-2'),
     };
 };

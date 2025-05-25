@@ -124,4 +124,14 @@ export default class GameController {
         
         this.#checkWinner();
     };
+
+    managePlacingTurns() {
+        // Only for ships placement.
+        if (this.playerOne.gameBoard.allShipsPlaced()) {
+            this.placingTurn = this.playerTwo;
+            if (this.playerTwo.gameBoard.allShipsPlaced()) {
+                this.startGame();
+            };
+        };
+    };
 };

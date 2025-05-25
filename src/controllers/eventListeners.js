@@ -216,6 +216,8 @@ export default function setEventListeners(domManager) {
                };
                break;
         };
+
+        controller.managePlacingTurns();
     });
 
     elements.horizontalOne.addEventListener('click', () => {
