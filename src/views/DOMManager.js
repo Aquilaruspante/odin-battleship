@@ -67,7 +67,7 @@ export default class DOMManager {
     renderTimeOut(activePlayerName) {
         elements.timeOutDialog.showModal();
         elements.yourTurn.innerText = `${activePlayerName} get ready!`;
-        let timeOutCounter = 5;
+        let timeOutCounter = 3;
         elements.counter.innerText = timeOutCounter;
         const interval = setInterval(() => {
             timeOutCounter--;
@@ -196,7 +196,21 @@ export default class DOMManager {
             elements.destroyerOne.addEventListener('dragend', () => {
                 this.dragged = null;
             }); 
+
         } else if (player === 'player-2') {
+            elements.carrierOne.setAttribute('draggable', false);
+            elements.battleshipOne.setAttribute('draggable', false);
+            elements.cruiserOne.setAttribute('draggable', false);
+            elements.submarineOne.setAttribute('draggable', false);
+            elements.destroyerOne.setAttribute('draggable', false);
+
+            elements.carrierTwo.setAttribute('draggable', true);
+            elements.battleshipTwo.setAttribute('draggable', true);
+            elements.cruiserTwo.setAttribute('draggable', true);
+            elements.submarineTwo.setAttribute('draggable', true);
+            elements.destroyerTwo.setAttribute('draggable', true);
+
+
             elements.carrierTwo.addEventListener('dragstart', () => {
                 this.dragged = 'carrier-2';
             });
@@ -232,6 +246,5 @@ export default class DOMManager {
                 this.dragged = null;
             }); 
         }
-        
     };
 };

@@ -132,6 +132,7 @@ export default class GameController {
         switch (modality) {
             case true:
                 if (this.playerOne.gameBoard.allShipsPlaced()) {
+                    eventBus.dispatchEvent(new Event('playerTwoPlacingTurn'));
                     this.placingTurn = this.playerTwo;
                     if (this.playerTwo.gameBoard.allShipsPlaced()) {
                         this.startGame();

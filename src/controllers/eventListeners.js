@@ -142,13 +142,13 @@ export default function setEventListeners(domManager) {
                 shipToPlace = controller.playerTwo.gameBoard.battleship;
                 break;
             case 'cruiser-2':
-                shipToPlace = controller.playerOne.gameBoard.cruiser;
+                shipToPlace = controller.playerTwo.gameBoard.cruiser;
                 break;
             case 'submarine-2':
-                shipToPlace = controller.playerOne.gameBoard.submarine;
+                shipToPlace = controller.playerTwo.gameBoard.submarine;
                 break;
             case 'destroyer-2':
-                shipToPlace = controller.playerOne.gameBoard.destroyer;
+                shipToPlace = controller.playerTwo.gameBoard.destroyer;
                 break;
         }
 
@@ -158,8 +158,8 @@ export default function setEventListeners(domManager) {
         };
 
         dispatchGridComposed(controller);
-
         (isModalityHumanVsHuman(controller) && controller.placingTurn === controller.playerTwo) ? domManager.showCells(elements.boardTwo) : domManager.showCells(elements.boardOne);
+        controller.managePlacingTurns();
     });
 
     eventBus.addEventListener('shipPlaced', (e) => {
@@ -218,8 +218,6 @@ export default function setEventListeners(domManager) {
                };
                break;
         };
-
-        controller.managePlacingTurns();
     });
 
     eventBus.addEventListener('startGame', () => {
@@ -263,6 +261,10 @@ export default function setEventListeners(domManager) {
         for (let child of elements.destroyerTwo.children) {
             child.classList.toggle('miss');
         };
+    });
+
+    eventBus.addEventListener('playerTwoPlacingTurn', () => {
+        domManager.manageManualPlacing('player-2');
     });
 
     elements.horizontalOne.addEventListener('click', () => {
