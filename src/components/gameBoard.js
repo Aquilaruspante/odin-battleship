@@ -20,7 +20,7 @@ export default class GameBoard {
     };
 
     #shipContainedHorizotally(ship, col) {
-        if (col + ship.length >= 10){
+        if (col + ship.length - 1 >= 10){
             return false;
         } else {
             return true;
@@ -37,7 +37,7 @@ export default class GameBoard {
     };
 
     #shipContainedVertically(ship, row) {
-        if (row + ship.length >= 10) {
+        if (row + ship.length - 1 >= 10) {
             return false;
         } else {
             return true;
