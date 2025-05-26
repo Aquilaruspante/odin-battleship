@@ -158,7 +158,15 @@ export default function setEventListeners(domManager) {
         };
 
         dispatchGridComposed(controller);
-        (isModalityHumanVsHuman(controller) && controller.placingTurn === controller.playerTwo) ? domManager.showCells(elements.boardTwo) : domManager.showCells(elements.boardOne);
+        
+        if (isModalityHumanVsHuman(controller) && controller.placingTurn === controller.playerTwo) {
+            domManager.showCells(elements.boardTwo);
+            domManager.hideCellsValues(elements.boardOne);
+        } else {
+            domManager.showCells(elements.boardOne);
+            domManager.hideCellsValues(elements.boardTwo);
+        }
+
         controller.managePlacingTurns();
     });
 
@@ -221,6 +229,8 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('startGame', () => {
+        domManager.updateTurnBoard(controller.activePlayer, null);
+
         elements.randomPlaceOne.disabled = true;
         elements.randomPlaceTwo.disabled = true;
 
@@ -313,10 +323,12 @@ export default function setEventListeners(domManager) {
 
     elements.randomPlaceOne.addEventListener('click', () => {
         if (!controller.playerOne.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerOne);
+        controller.managePlacingTurns();
     });
 
     elements.randomPlaceTwo.addEventListener('click', () => {
         if (!controller.playerTwo.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerTwo);
+        controller.managePlacingTurns();
     });
 };
 

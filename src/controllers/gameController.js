@@ -53,8 +53,8 @@ export default class GameController {
     };
 
     startGame() {
-        eventBus.dispatchEvent(new Event('startGame'));
         this.#randomizeInitialPlayer();
+        eventBus.dispatchEvent(new Event('startGame'));
         if (!isModalityHumanVsHuman(this) && this.activePlayer === this.playerTwo) {
             setTimeout(() => {
                 this.aiController.attack();

@@ -58,7 +58,6 @@ export default class AIController {
     }
 
     attack() {
-        console.log('firstOrigin', this.firstOrigin);
         this.#checkFirstOriginDepleted();
 
         let x;

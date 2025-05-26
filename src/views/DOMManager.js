@@ -82,10 +82,13 @@ export default class DOMManager {
     };
     
     updateTurnBoard(activePlayer, placingTurn = null) {
+        console.log('updating board');
         if (activePlayer) {
+            console.log('active player present');
             elements.turnBoardTitle.innerText = 'Active Player';
             elements.turnBoardActivePlayer.innerText = activePlayer.name;
         } else if (placingTurn) {
+            console.log('using placing turn');
             elements.turnBoardTitle.innerText = 'Place Ships';
             elements.turnBoardActivePlayer.innerHTML = `<b>${placingTurn.name}</b> drag and drop your ships on the board`;
         }
@@ -141,6 +144,7 @@ export default class DOMManager {
     };
 
     hideCellsValues(board) {
+        console.log('removing cells');
         const gameBoardgrid = board === elements.boardOne ? this.gridOne : this.gridTwo;
         const domBoardName = board === elements.boardOne ? 'gameboard-1' : 'gameboard-2';
     
