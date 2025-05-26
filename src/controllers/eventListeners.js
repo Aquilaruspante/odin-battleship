@@ -56,8 +56,10 @@ export default function setEventListeners(domManager) {
 
     eventBus.addEventListener('initBoard', (e) => {
         if (isModalityHumanVsHuman(controller)) {
-            domManager.renderTimeOut(e.detail.activePlayer.name);
-            e.detail.activePlayer === controller.playerOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
+            if (e.detail.activePlayer) {
+                domManager.renderTimeOut(e.detail.activePlayer.name);
+                e.detail.activePlayer === controller.playerOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
+            };
         } else {
             domManager.showCells(elements.boardOne);
         };
@@ -221,7 +223,11 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('startGame', () => {
+        elements.randomPlaceOne.disabled = true;
+        elements.randomPlaceTwo.disabled = true;
+
         elements.startGameDialog.showModal();
+
         setTimeout(() => {
             elements.startGameDialog.close();
         }, 1500);

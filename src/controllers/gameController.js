@@ -55,7 +55,7 @@ export default class GameController {
     startGame() {
         eventBus.dispatchEvent(new Event('startGame'));
         this.#randomizeInitialPlayer();
-        if (isModalityHumanVsHuman && this.activePlayer === this.playerTwo) {
+        if (!isModalityHumanVsHuman(this) && this.activePlayer === this.playerTwo) {
             setTimeout(() => {
                 this.aiController.attack();
             }, 800);
@@ -127,11 +127,21 @@ export default class GameController {
 
     managePlacingTurns() {
         // Only for ships placement.
-        if (this.playerOne.gameBoard.allShipsPlaced()) {
-            this.placingTurn = this.playerTwo;
-            if (this.playerTwo.gameBoard.allShipsPlaced()) {
-                this.startGame();
-            };
+        const modality = isModalityHumanVsHuman(this);
+
+        switch (modality) {
+            case true:
+                if (this.playerOne.gameBoard.allShipsPlaced()) {
+                    this.placingTurn = this.playerTwo;
+                    if (this.playerTwo.gameBoard.allShipsPlaced()) {
+                        this.startGame();
+                    };
+                };
+                break;
+            case false:
+                this.composeGameBoard(this.playerTwo);
+                
+                if (this.playerOne.gameBoard.allShipsPlaced()) this.startGame();
         };
     };
 };
