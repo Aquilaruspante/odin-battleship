@@ -1,3 +1,5 @@
+import eventBus from "../utils/eventBus.js";
+
 export default class Ship {
     constructor (length, symbol) {
         if (length < 2 || length > 5) {
@@ -11,10 +13,17 @@ export default class Ship {
 
     hit() {
         this.hitsNumber += 1;
+        this.isSunk();
     }
 
     isSunk() {
-        return this.hitsNumber >= this.length;
-    }
-}
+          if (this.hitsNumber >= this.length) {
+            eventBus.dispatchEvent(new CustomEvent('shipSunk', { detail: { ship: this }}));
+            return true;
+        } else {
+            return false;
+        };      
+    };
+};
+
 

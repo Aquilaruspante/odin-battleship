@@ -251,4 +251,60 @@ export default class DOMManager {
             }); 
         }
     };
+
+    changeShipClass(ship, selectedClass) {
+        console.log('changin class', ship);
+        switch (ship) {
+            case 'carrier-1':
+                for (let child of elements.carrierOne.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'battleship-1':
+                for (let child of elements.battleshipOne.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'cruiser-1':
+                for (let child of elements.cruiserOne.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'submarine-1':
+                for (let child of elements.submarineOne.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'destroyer-1':
+                for (let child of elements.destroyerOne.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'carrier-2':
+                for (let child of elements.carrierTwo.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'battleship-2':
+                for (let child of elements.battleshipTwo.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'cruiser-2':
+                for (let child of elements.cruiserTwo.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'submarine-2':
+                for (let child of elements.submarineTwo.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+            case 'destroyer-2':
+                for (let child of elements.destroyerTwo.children) {
+                    child.classList.toggle(`${selectedClass}`);
+                };
+                break;
+        };
+    };
 };

@@ -96,7 +96,6 @@ export default class GameController {
                 this.switchPlayer();
             };
         };
-
         this.#checkWinner(); 
     };
 
@@ -121,7 +120,6 @@ export default class GameController {
                 };
             };
         };        
-        
         this.#checkWinner();
     };
 

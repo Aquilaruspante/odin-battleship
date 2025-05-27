@@ -275,6 +275,52 @@ export default function setEventListeners(domManager) {
 
     eventBus.addEventListener('playerTwoPlacingTurn', () => {
         domManager.manageManualPlacing('player-2');
+        domManager.hideCellsValues(elements.boardOne);
+    });
+
+    eventBus.addEventListener('shipSunk', (e) => {
+        console.log('ship sunk');
+        const { ship } = e.detail;
+
+        console.log(ship);
+
+        if (controller.activePlayer === controller.playerTwo) {
+            switch (ship.symbol) {
+                case 'A':
+                    domManager.changeShipClass('carrier-1', 'hit');
+                    break;
+                case 'B':
+                    domManager.changeShipClass('battleship-1', 'hit');
+                    break;
+                case 'C':
+                    domManager.changeShipClass('cruiser-1', 'hit');
+                    break;
+                case 'S':
+                    domManager.changeShipClass('submarine-1', 'hit');
+                    break;
+                case 'D':
+                    domManager.changeShipClass('destroyer-1', 'hit');
+                    break;
+            };
+        } else {
+            switch (ship.symbol) {
+                case 'A':
+                    domManager.changeShipClass('carrier-2', 'hit');
+                    break;
+                case 'B':
+                    domManager.changeShipClass('battleship-2', 'hit');
+                    break;
+                case 'C':
+                    domManager.changeShipClass('cruiser-2', 'hit');
+                    break;
+                case 'S':
+                    domManager.changeShipClass('submarine-2', 'hit');
+                    break;
+                case 'D':
+                    domManager.changeShipClass('destroyer-2', 'hit');
+                    break;
+            };
+        };            
     });
 
     elements.horizontalOne.addEventListener('click', () => {
