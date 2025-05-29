@@ -71,7 +71,6 @@ export default class AIController {
             const index = Math.floor(Math.random() * 4);
             switch (index) {
                 case 0:
-                    console.log('going north');
                     if (this.plotter.north) {
                         if (this.northPossible) this.path = 'north';
                         x = this.plotter.north[1];
@@ -79,14 +78,12 @@ export default class AIController {
                         this.plotter.getOrigin([x, y]);
                         this.controller.attackOnPlayerOne([x, y]);
                     } else {
-                        console.log('impossible');
                         this.northPossible = false;
                         this.path = null;
                         this.attack()
                     };
                     break;
                 case 1:
-                    console.log('going east');
                     if (this.plotter.east) {
                         if (this.eastPossible) this.path = 'east';
                         x = this.plotter.east[1];
@@ -94,14 +91,12 @@ export default class AIController {
                         this.plotter.getOrigin([x, y]);
                         this.controller.attackOnPlayerOne([x, y]);
                     } else {
-                        console.log('impossible');
                         this.eastPossible = false;
                         this.path = null;
                         this.attack()
                     };
                     break;
                 case 2:
-                    console.log('going south');
                     if (this.plotter.south) {
                         if (this.southPossible) this.path = 'south';
                         x = this.plotter.south[1];
@@ -109,14 +104,12 @@ export default class AIController {
                         this.plotter.getOrigin([x, y]);
                         this.controller.attackOnPlayerOne([x, y]);
                     } else {
-                        console.log('impossible');
                         this.southPossible = false;
                         this.path = null;
                         this.attack()
                     };
                     break;
                 case 3:
-                    console.log('going west');
                     if (this.plotter.west) {
                         if (this.westPossible) this.path = 'west';
                         x = this.plotter.west[1];
@@ -124,7 +117,6 @@ export default class AIController {
                         this.plotter.getOrigin([x, y]);
                         this.controller.attackOnPlayerOne([x, y]);
                     } else {
-                        console.log('impossible');
                         this.westPossible = false;
                         this.path = null;
                         this.attack()
@@ -134,56 +126,48 @@ export default class AIController {
         } else {
             switch (this.path) {
                 case 'north':
-                    console.log('going north');
                     if (this.plotter.north && this.northPossible) {
                         x = this.plotter.north[1];
                         y = this.plotter.north[0];
                         this.plotter.getOrigin([x, y]);
                         this.controller.attackOnPlayerOne([x, y]);
                     } else {
-                        console.log('impossible');
                         this.northPossible = false;
                         this.path = null;
                         this.attack();
                     };
                     break;
                 case 'east':
-                    console.log('going east');
                     if (this.plotter.east && this.eastPossible) {
                         x = this.plotter.east[1];
                         y = this.plotter.east[0];
                         this.plotter.getOrigin([x, y]);
                         this.controller.attackOnPlayerOne([x, y]);
                     } else {
-                        console.log('impossible');
                         this.eastPossible = false;
                         this.path = null;
                         this.attack();
                     };
                     break;
                 case 'south':
-                    console.log('going south');
                     if (this.plotter.south && this.southPossible) {
                         x = this.plotter.south[1];
                         y = this.plotter.south[0];
                         this.plotter.getOrigin([x, y]);
                         this.controller.attackOnPlayerOne([x, y]);
                     } else {
-                        console.log('impossible');
                         this.southPossible = false;
                         this.path = null;
                         this.attack();
                     };
                     break;
                 case 'west':
-                    console.log('going west');
                     if (this.plotter.west && this.westPossible) {
                         x = this.plotter.west[1];
                         y = this.plotter.west[0];
                         this.plotter.getOrigin([x, y]);
                         this.controller.attackOnPlayerOne([x, y]);
                     } else {
-                        console.log('impossible');
                         this.westPossible = false;
                         this.path = null;
                         this.attack();

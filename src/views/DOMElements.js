@@ -1,6 +1,8 @@
 export let elements = {};
 
 export function initDOMElements() {
+    console.debug('Inizializing DOMElements');
+    
     elements = {
         timeOutDialog: document.querySelector('#timeout-dialog'),
         yourTurn: document.querySelector('#active-player'),

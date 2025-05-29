@@ -10,14 +10,18 @@ export let controller;
 
 export function createController(modality, playerOneName, playerTwoName) {
     controller = new GameController(modality, playerOneName, playerTwoName);
+    console.debug('controller created');
     controller.initialize();
+    console.debug('controller initialized');
     eventBus.dispatchEvent(new CustomEvent('controllerCreated', { detail: { controller }}));
 };
 
 window.onload = (event) => {
     initDOMElements();
     domManager = new DOMManager();
+    console.debug('domManager created');
     setupEventListeners(domManager);
+    console.debug('event Listeners set up');
     domManager.showInitialDialog();
     domManager.initGame();
 };

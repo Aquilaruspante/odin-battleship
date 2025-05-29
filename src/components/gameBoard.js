@@ -135,7 +135,7 @@ export default class GameBoard {
     };
 
     allShipsSunk() {
-        if (this.destroyer.isSunk() && this.cruiser.isSunk() && this.submarine.isSunk() && this.battleship.isSunk() && this.carrier.isSunk()) {
+        if (!this.destroyer.sinkable && !this.cruiser.sinkable && !this.submarine.sinkable && !this.battleship.sinkable && !this.carrier.sinkable) {
             return true;
         } else {
             return false;

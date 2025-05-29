@@ -86,6 +86,8 @@ export default function setEventListeners(domManager) {
         elements.boardTwo.innerHTML = '';
         elements.gameOverDialog.close();
         domManager.showInitialDialog();
+        domManager.renderBoardOne();
+        domManager.renderBoardTwo();
     });
 
     eventBus.addEventListener('controllerCreated', (e) => {
@@ -279,10 +281,7 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('shipSunk', (e) => {
-        console.log('ship sunk');
         const { ship } = e.detail;
-
-        console.log(ship);
 
         if (controller.activePlayer === controller.playerTwo) {
             switch (ship.symbol) {

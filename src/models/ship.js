@@ -8,21 +8,27 @@ export default class Ship {
         this.length = length;
         this.hitsNumber = 0;
         this.isPlaced = false;
-        this.symbol = symbol
+        this.symbol = symbol;
+        this.sinkable = true;
     }
 
     hit() {
+        console.log('triggering hit');
         this.hitsNumber += 1;
         this.isSunk();
     }
 
     isSunk() {
-          if (this.hitsNumber >= this.length) {
+        if (this.sinkable) {
+              if (this.hitsNumber >= this.length) {
+            console.log('triggering sunk event');
+            this.sinkable = false;
             eventBus.dispatchEvent(new CustomEvent('shipSunk', { detail: { ship: this }}));
             return true;
         } else {
             return false;
-        };      
+        }; 
+        }     
     };
 };
 

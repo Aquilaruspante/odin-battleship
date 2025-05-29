@@ -19,6 +19,7 @@ export default class GameController {
         } else {
             this.activePlayer = this.playerTwo;
         };
+        console.debug('Initial player randomized');
     };
 
     #resetShipsHitsAndPlacement() {
@@ -31,6 +32,7 @@ export default class GameController {
             ship.hitsNumber = 0;
             ship.isPlaced = false;
         };
+        console.debug('ships reset');
     };
 
     #checkWinner() {
@@ -47,9 +49,9 @@ export default class GameController {
         this.#resetShipsHitsAndPlacement();
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
+        console.debug('both boards reset');
         this.placingTurn = this.playerOne;
         eventBus.dispatchEvent(new Event('shipsReadyForPlacement'));
-        //this.startGame();
     };
 
     startGame() {
@@ -60,6 +62,7 @@ export default class GameController {
                 this.aiController.attack();
             }, 800);
         };
+        console.debug('start game event fired');
     };
 
     switchPlayer() {
@@ -81,6 +84,7 @@ export default class GameController {
         dispatchGridComposed(this);
 
         eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { activePlayer: this.activePlayer }}));
+        console.debug('board composed for', player.name);
     };
 
     attackOnPlayerTwo(coordinates) {

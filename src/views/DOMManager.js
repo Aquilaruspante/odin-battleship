@@ -54,6 +54,7 @@ export default class DOMManager {
         });
         this.renderBoardOne();
         this.renderBoardTwo();
+        console.debug('Boards rendered');
     };
     
     startGame() {
@@ -82,13 +83,10 @@ export default class DOMManager {
     };
     
     updateTurnBoard(activePlayer, placingTurn = null) {
-        console.log('updating board');
         if (activePlayer) {
-            console.log('active player present');
             elements.turnBoardTitle.innerText = 'Active Player';
             elements.turnBoardActivePlayer.innerText = activePlayer.name;
         } else if (placingTurn) {
-            console.log('using placing turn');
             elements.turnBoardTitle.innerText = 'Place Ships';
             elements.turnBoardActivePlayer.innerHTML = `<b>${placingTurn.name}</b> drag and drop your ships on the board`;
         }
@@ -253,7 +251,7 @@ export default class DOMManager {
     };
 
     changeShipClass(ship, selectedClass) {
-        console.log('changin class', ship);
+        console.log('chaning class');
         switch (ship) {
             case 'carrier-1':
                 for (let child of elements.carrierOne.children) {
@@ -277,6 +275,7 @@ export default class DOMManager {
                 break;
             case 'destroyer-1':
                 for (let child of elements.destroyerOne.children) {
+                    console.log('changing destroyer 1');
                     child.classList.toggle(`${selectedClass}`);
                 };
                 break;
@@ -302,6 +301,7 @@ export default class DOMManager {
                 break;
             case 'destroyer-2':
                 for (let child of elements.destroyerTwo.children) {
+                    console.log('changing destroyer 2');
                     child.classList.toggle(`${selectedClass}`);
                 };
                 break;
