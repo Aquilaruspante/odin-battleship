@@ -13,7 +13,6 @@ export default class Ship {
     }
 
     hit() {
-        console.log('triggering hit');
         this.hitsNumber += 1;
         this.isSunk();
     }
@@ -21,7 +20,6 @@ export default class Ship {
     isSunk() {
         if (this.sinkable) {
               if (this.hitsNumber >= this.length) {
-            console.log('triggering sunk event');
             this.sinkable = false;
             eventBus.dispatchEvent(new CustomEvent('shipSunk', { detail: { ship: this }}));
             return true;

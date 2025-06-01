@@ -49,6 +49,8 @@ export default class GameController {
         this.#resetShipsHitsAndPlacement();
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
+        this.playerOne.gameBoard.unplaceAllShips();
+        this.playerTwo.gameBoard.unplaceAllShips();
         console.debug('both boards reset');
         this.placingTurn = this.playerOne;
         eventBus.dispatchEvent(new Event('shipsReadyForPlacement'));

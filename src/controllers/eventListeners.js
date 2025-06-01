@@ -82,12 +82,18 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('restartGame', () => {
+        console.debug('restart event fired.');
         elements.boardOne.innerHTML = '';
         elements.boardTwo.innerHTML = '';
         elements.gameOverDialog.close();
         domManager.showInitialDialog();
         domManager.renderBoardOne();
         domManager.renderBoardTwo();
+        domManager.resetFleetManagers();
+        controller.initialize();
+        console.log('enabling random allocation buttons');
+        elements.randomPlaceOne.removeAttribute('disabled');
+        elements.randomPlaceTwo.removeAttribute('disabled');
     });
 
     eventBus.addEventListener('controllerCreated', (e) => {
@@ -367,6 +373,7 @@ export default function setEventListeners(domManager) {
     });
 
     elements.randomPlaceOne.addEventListener('click', () => {
+        console.log(controller.playerOne.gameBoard.allShipsPlaced());
         if (!controller.playerOne.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerOne);
         controller.managePlacingTurns();
     });

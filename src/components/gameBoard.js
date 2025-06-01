@@ -160,4 +160,12 @@ export default class GameBoard {
     allShipsPlaced() {
         return (this.destroyer.isPlaced && this.cruiser.isPlaced && this.submarine.isPlaced && this.battleship.isPlaced && this.carrier.isPlaced);
     };
+
+    unplaceAllShips() {
+        this.carrier.isPlaced = false;
+        this.battleship.isPlaced = false;
+        this.cruiser.isPlaced = false;
+        this.submarine.isPlaced = false;
+        this.destroyer.isPlaced = false;
+    };
 };

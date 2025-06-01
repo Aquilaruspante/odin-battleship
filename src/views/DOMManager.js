@@ -119,7 +119,7 @@ export default class DOMManager {
                 col.addEventListener('drop', (event) => {
                     event.preventDefault();
                     const orientation = targetPlayer === 'playerOne' ? this.orientationOne : this.orientationTwo;
-                    eventBus.dispatchEvent(new CustomEvent('placeShip', { detail: { ship: this.dragged, coordinates: [x, y], targetPlayer, orientation }}));
+                    eventBus.dispatchEvent(new CustomEvent('placeShip', { detail: { ship: this.dragged, coordinates: [x, y], targetPlayer, orientation }}, { once: true }));
                 })
                 row.appendChild(col);
             }
@@ -250,8 +250,41 @@ export default class DOMManager {
         }
     };
 
+    resetFleetManagers() {
+        for (let child of elements.carrierOne.children) {
+            child.classList.remove('hit');
+        };
+        for (let child of elements.battleshipOne.children) {
+            child.classList.remove('hit');
+        };
+        for (let child of elements.cruiserOne.children) {
+            child.classList.remove('hit');
+        };
+        for (let child of elements.submarineOne.children) {
+            child.classList.remove('hit');
+        };
+        for (let child of elements.destroyerOne.children) {
+            child.classList.remove('hit');
+        };
+
+        for (let child of elements.carrierTwo.children) {
+            child.classList.remove('hit');
+        };
+        for (let child of elements.battleshipTwo.children) {
+            child.classList.remove('hit');
+        };
+        for (let child of elements.cruiserTwo.children) {
+            child.classList.remove('hit');
+        };
+        for (let child of elements.submarineTwo.children) {
+            child.classList.remove('hit');
+        };
+        for (let child of elements.destroyerTwo.children) {
+            child.classList.remove('hit');
+        };
+    }
+
     changeShipClass(ship, selectedClass) {
-        console.log('chaning class');
         switch (ship) {
             case 'carrier-1':
                 for (let child of elements.carrierOne.children) {
@@ -275,7 +308,6 @@ export default class DOMManager {
                 break;
             case 'destroyer-1':
                 for (let child of elements.destroyerOne.children) {
-                    console.log('changing destroyer 1');
                     child.classList.toggle(`${selectedClass}`);
                 };
                 break;
@@ -301,7 +333,6 @@ export default class DOMManager {
                 break;
             case 'destroyer-2':
                 for (let child of elements.destroyerTwo.children) {
-                    console.log('changing destroyer 2');
                     child.classList.toggle(`${selectedClass}`);
                 };
                 break;
