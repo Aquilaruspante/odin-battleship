@@ -373,13 +373,18 @@ export default function setEventListeners(domManager) {
     });
 
     elements.randomPlaceOne.addEventListener('click', () => {
-        console.log(controller.playerOne.gameBoard.allShipsPlaced());
         if (!controller.playerOne.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerOne);
-        controller.managePlacingTurns();
     });
 
     elements.randomPlaceTwo.addEventListener('click', () => {
         if (!controller.playerTwo.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerTwo);
+    });
+
+     elements.doneButtonOne.addEventListener('click', () => {
+        controller.managePlacingTurns();
+    });
+
+    elements.doneButtonTwo.addEventListener('click', () => {
         controller.managePlacingTurns();
     });
 };

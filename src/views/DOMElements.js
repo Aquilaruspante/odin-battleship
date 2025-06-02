@@ -39,6 +39,8 @@ export function initDOMElements() {
         draggableShips: document.querySelectorAll('.ship-container'),
         randomPlaceOne: document.querySelector('#place-randomly-btn-1'),
         randomPlaceTwo: document.querySelector('#place-randomly-btn-2'),
+        doneButtonOne: document.querySelector('#done-btn-1'),
+        doneButtonTwo: document.querySelector('#done-btn-2'),
         startGameDialog: document.querySelector('#start-game-dialog'),
     };
 };
