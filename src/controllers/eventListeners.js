@@ -94,6 +94,8 @@ export default function setEventListeners(domManager) {
         console.log('enabling random allocation buttons');
         elements.randomPlaceOne.removeAttribute('disabled');
         elements.randomPlaceTwo.removeAttribute('disabled');
+        elements.doneButtonOne.removeAttribute('disabled');
+        elements.doneButtonTwo.removeAttribute('disabled');
     });
 
     eventBus.addEventListener('controllerCreated', (e) => {
@@ -241,6 +243,8 @@ export default function setEventListeners(domManager) {
 
         elements.randomPlaceOne.disabled = true;
         elements.randomPlaceTwo.disabled = true;
+        elements.doneButtonOne.disabled = true;
+        elements.doneButtonTwo.disabled = true;
 
         elements.startGameDialog.showModal();
 
@@ -385,7 +389,7 @@ export default function setEventListeners(domManager) {
     });
 
     elements.doneButtonTwo.addEventListener('click', () => {
-        controller.managePlacingTurns();
+        if (isModalityHumanVsHuman(controller)) controller.managePlacingTurns();
     });
 };
 
