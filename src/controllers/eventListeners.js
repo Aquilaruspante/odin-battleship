@@ -128,43 +128,51 @@ export default function setEventListeners(domManager) {
 
         let shipToPlace;
 
-        switch (ship) {
-            case 'carrier-1':
-                shipToPlace = controller.playerOne.gameBoard.carrier;
-                break;
-            case 'battleship-1':
-                shipToPlace = controller.playerOne.gameBoard.battleship;
-                break;
-            case 'cruiser-1':
-                shipToPlace = controller.playerOne.gameBoard.cruiser;
-                break;
-            case 'submarine-1':
-                shipToPlace = controller.playerOne.gameBoard.submarine;
-                break;
-            case 'destroyer-1':
-                shipToPlace = controller.playerOne.gameBoard.destroyer;
-                break;
+        console.log('placing player', domManager.placingPlayer);
+        if (domManager.placingPlayer === 'playerOne') {
+            switch (ship) {
+                case 'carrier-1':
+                    shipToPlace = controller.playerOne.gameBoard.carrier;
+                    break;
+                case 'battleship-1':
+                    shipToPlace = controller.playerOne.gameBoard.battleship;
+                    break;
+                case 'cruiser-1':
+                    shipToPlace = controller.playerOne.gameBoard.cruiser;
+                    break;
+                case 'submarine-1':
+                    shipToPlace = controller.playerOne.gameBoard.submarine;
+                    break;
+                case 'destroyer-1':
+                    shipToPlace = controller.playerOne.gameBoard.destroyer;
+                    break;
+            };
+        } else if (domManager.placingPlayer === 'playerTwo') {
+            switch (ship) {
+                case 'carrier-2':
+                    shipToPlace = controller.playerTwo.gameBoard.carrier;
+                    break;
+                case 'battleship-2':
+                    shipToPlace = controller.playerTwo.gameBoard.battleship;
+                    break;
+                case 'cruiser-2':
+                    shipToPlace = controller.playerTwo.gameBoard.cruiser;
+                    break;
+                case 'submarine-2':
+                    shipToPlace = controller.playerTwo.gameBoard.submarine;
+                    break;
+                case 'destroyer-2':
+                    shipToPlace = controller.playerTwo.gameBoard.destroyer;
+                    break;
+            };
             
-            case 'carrier-2':
-                shipToPlace = controller.playerTwo.gameBoard.carrier;
-                break;
-            case 'battleship-2':
-                shipToPlace = controller.playerTwo.gameBoard.battleship;
-                break;
-            case 'cruiser-2':
-                shipToPlace = controller.playerTwo.gameBoard.cruiser;
-                break;
-            case 'submarine-2':
-                shipToPlace = controller.playerTwo.gameBoard.submarine;
-                break;
-            case 'destroyer-2':
-                shipToPlace = controller.playerTwo.gameBoard.destroyer;
-                break;
-        }
+        };
 
         const player = targetPlayer === 'playerOne' ? controller.playerOne : controller.playerTwo;
+        const placingPlayer = domManager.placingPlayer === 'playerOne' ? controller.playerOne : controller.playerTwo;
+
         if (!shipToPlace.isPlaced) {
-            controller.placingTurn === player && controller.placingTurn.gameBoard.place(shipToPlace, coordinates, orientation);
+            placingPlayer === player && controller.placingTurn.gameBoard.place(shipToPlace, coordinates, orientation);
         };
 
         dispatchGridComposed(controller);
@@ -175,9 +183,7 @@ export default function setEventListeners(domManager) {
         } else {
             domManager.showCells(elements.boardOne);
             domManager.hideCellsValues(elements.boardTwo);
-        }
-
-        controller.managePlacingTurns();
+        };
     });
 
     eventBus.addEventListener('shipPlaced', (e) => {
@@ -285,11 +291,6 @@ export default function setEventListeners(domManager) {
         };
     });
 
-    eventBus.addEventListener('playerTwoPlacingTurn', () => {
-        domManager.manageManualPlacing('player-2');
-        domManager.hideCellsValues(elements.boardOne);
-    });
-
     eventBus.addEventListener('shipSunk', (e) => {
         const { ship } = e.detail;
 
@@ -385,11 +386,11 @@ export default function setEventListeners(domManager) {
     });
 
      elements.doneButtonOne.addEventListener('click', () => {
-        controller.managePlacingTurns();
+        if (isModalityHumanVsHuman(controller)) domManager.manageManualPlacing('player-2');
     });
 
     elements.doneButtonTwo.addEventListener('click', () => {
-        if (isModalityHumanVsHuman(controller)) controller.managePlacingTurns();
+        eventBus.dispatchEvent(new Event('startGame'));
     });
 };
 

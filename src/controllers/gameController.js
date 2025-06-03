@@ -128,25 +128,4 @@ export default class GameController {
         };        
         this.#checkWinner();
     };
-
-    managePlacingTurns() {
-        // Only for ships placement.
-        const modality = isModalityHumanVsHuman(this);
-
-        switch (modality) {
-            case true:
-                if (this.playerOne.gameBoard.allShipsPlaced()) {
-                    eventBus.dispatchEvent(new Event('playerTwoPlacingTurn'));
-                    this.placingTurn = this.playerTwo;
-                    if (this.playerTwo.gameBoard.allShipsPlaced()) {
-                        this.startGame();
-                    };
-                };
-                break;
-            case false:
-                this.composeGameBoard(this.playerTwo);
-                
-                if (this.playerOne.gameBoard.allShipsPlaced()) this.startGame();
-        };
-    };
 };

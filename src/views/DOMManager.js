@@ -164,6 +164,10 @@ export default class DOMManager {
 
     manageManualPlacing(player) {
         if (player === 'player-1') {
+            this.placingPlayer = 'playerOne';
+            this.showCells(elements.boardOne);
+            this.hideCellsValues(elements.boardTwo);
+
             elements.carrierOne.addEventListener('dragstart', () => {
                 this.dragged = 'carrier-1';
             });
@@ -200,6 +204,10 @@ export default class DOMManager {
             }); 
 
         } else if (player === 'player-2') {
+            this.placingPlayer = 'playerTwo';
+            this.showCells(elements.boardTwo);
+            this.hideCellsValues(elements.boardOne);
+
             elements.carrierOne.setAttribute('draggable', false);
             elements.battleshipOne.setAttribute('draggable', false);
             elements.cruiserOne.setAttribute('draggable', false);
