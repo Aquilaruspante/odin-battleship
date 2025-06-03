@@ -103,9 +103,12 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('cellClicked', (e) => {
+        console.log('cell clicked fired with',  e.detail.targetPlayer, controller.activePlayer);
         if (e.detail.targetPlayer === 'playerOne' && controller.activePlayer === controller.playerTwo) {
+            console.log('attacking on player one');
             controller.attackOnPlayerOne(e.detail.coordinates);
-        } else if (e.detail.targetPlayer === 'playerTwo' && controller.activePlayer === controller.playerOne){
+        } else if (e.detail.targetPlayer === 'playerTwo' && controller.activePlayer === controller.playerOne) {
+            console.log('attacking on player 2');
             controller.attackOnPlayerTwo(e.detail.coordinates);
         };
     });
@@ -128,7 +131,6 @@ export default function setEventListeners(domManager) {
 
         let shipToPlace;
 
-        console.log('placing player', domManager.placingPlayer);
         if (domManager.placingPlayer === 'playerOne') {
             switch (ship) {
                 case 'carrier-1':
@@ -251,6 +253,12 @@ export default function setEventListeners(domManager) {
         elements.randomPlaceTwo.disabled = true;
         elements.doneButtonOne.disabled = true;
         elements.doneButtonTwo.disabled = true;
+
+        const activeBoard = controller.activePlayer === controller.playerOne ? elements.boardOne : elements.boardTwo;
+        const inactiveBoard = controller.activePlayer === controller.playerOne ? elements.boardTwo : elements.boardOne;
+
+        domManager.showCells(activeBoard);
+        domManager.hideCellsValues(inactiveBoard);
 
         elements.startGameDialog.showModal();
 
@@ -385,12 +393,18 @@ export default function setEventListeners(domManager) {
         if (!controller.playerTwo.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerTwo);
     });
 
-     elements.doneButtonOne.addEventListener('click', () => {
-        if (isModalityHumanVsHuman(controller)) domManager.manageManualPlacing('player-2');
+    elements.doneButtonOne.addEventListener('click', () => {
+        if (isModalityHumanVsHuman(controller)) {
+            domManager.manageManualPlacing('player-2');
+            domManager.updateTurnBoard(null, controller.playerTwo);
+        } else {
+            controller.composeGameBoard(controller.playerTwo);
+            controller.startGame();
+        };
     });
 
     elements.doneButtonTwo.addEventListener('click', () => {
-        eventBus.dispatchEvent(new Event('startGame'));
+        controller.startGame();
     });
 };
 

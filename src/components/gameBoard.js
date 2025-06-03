@@ -70,8 +70,6 @@ export default class GameBoard {
     };
     
     place(ship, coordinates, orientation) {
-        console.log('placing ship', ship);
-        
         const [row, col] = coordinates;
 
         if (row > 10 || col > 10) throw new Error('coordinates must be 2 numbers less than 10');
