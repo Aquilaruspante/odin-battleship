@@ -257,8 +257,10 @@ export default function setEventListeners(domManager) {
         const activeBoard = controller.activePlayer === controller.playerOne ? elements.boardOne : elements.boardTwo;
         const inactiveBoard = controller.activePlayer === controller.playerOne ? elements.boardTwo : elements.boardOne;
 
-        domManager.showCells(activeBoard);
-        domManager.hideCellsValues(inactiveBoard);
+        if (isModalityHumanVsHuman(controller)) {
+            domManager.showCells(activeBoard);
+            domManager.hideCellsValues(inactiveBoard);
+        };
 
         elements.startGameDialog.showModal();
 
@@ -394,13 +396,15 @@ export default function setEventListeners(domManager) {
     });
 
     elements.doneButtonOne.addEventListener('click', () => {
-        if (isModalityHumanVsHuman(controller)) {
-            domManager.manageManualPlacing('player-2');
-            domManager.updateTurnBoard(null, controller.playerTwo);
-        } else {
-            controller.composeGameBoard(controller.playerTwo);
-            controller.startGame();
-        };
+        if (controller.playerOne.gameBoard.allShipsPlaced()) {
+            if (isModalityHumanVsHuman(controller)) {
+                domManager.manageManualPlacing('player-2');
+                domManager.updateTurnBoard(null, controller.playerTwo);
+            } else {
+                controller.composeGameBoard(controller.playerTwo);
+                controller.startGame();
+            };
+        };     
     });
 
     elements.doneButtonTwo.addEventListener('click', () => {
