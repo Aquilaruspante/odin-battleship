@@ -55,10 +55,10 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('initBoard', (e) => {
+        console.log(e.detail.placingPlayer);
         if (isModalityHumanVsHuman(controller)) {
-            if (e.detail.activePlayer) {
-                domManager.renderTimeOut(e.detail.activePlayer.name);
-                e.detail.activePlayer === controller.playerOne ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
+            if (e.detail.placingPlayer) {
+                e.detail.placingPlayer === 'playerOne' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
             };
         } else {
             domManager.showCells(elements.boardOne);

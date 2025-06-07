@@ -85,7 +85,9 @@ export default class GameController {
 
         dispatchGridComposed(this);
 
-        eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { activePlayer: this.activePlayer }}));
+        const placingPlayer = player === this.playerOne ? 'playerOne' : 'playerTwo';
+
+        eventBus.dispatchEvent(new CustomEvent('initBoard', { detail: { placingPlayer }}));
         console.debug('board composed for', player.name);
     };
 
