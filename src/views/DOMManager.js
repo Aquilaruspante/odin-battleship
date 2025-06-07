@@ -10,6 +10,7 @@ export default class DOMManager {
         this.dragged = null;
         this.orientationOne = 'vertical';
         this.orientationTwo = 'vertical';
+        this.placingPhase = false;
     };
 
     setBackgroundImage() {
@@ -112,11 +113,13 @@ export default class DOMManager {
                 }, false);
                 col.addEventListener('drop', (event) => {
                     event.preventDefault();
-                    const orientation = targetPlayer === 'playerOne' ? this.orientationOne : this.orientationTwo;
-                    eventBus.dispatchEvent(new CustomEvent('placeShip', { detail: { ship: this.dragged, coordinates: [x, y], targetPlayer, orientation }}, { once: true }));
-                })
+                    if (this.placingPhase) {
+                        const orientation = targetPlayer === 'playerOne' ? this.orientationOne : this.orientationTwo;
+                        eventBus.dispatchEvent(new CustomEvent('placeShip', { detail: { ship: this.dragged, coordinates: [x, y], targetPlayer, orientation }}, { once: true }));
+                    };      
+                });
                 row.appendChild(col);
-            }
+            };
             DOMBoard.appendChild(row);
         };
     };

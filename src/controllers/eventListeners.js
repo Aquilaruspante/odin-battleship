@@ -114,6 +114,7 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('shipsReadyForPlacement', () => {
+        domManager.placingPhase = true;
         elements.carrierOne.setAttribute('draggable', true);
         elements.battleshipOne.setAttribute('draggable', true);
         elements.cruiserOne.setAttribute('draggable', true);
@@ -410,7 +411,17 @@ export default function setEventListeners(domManager) {
     });
 
     elements.doneButtonTwo.addEventListener('click', () => {
-        controller.startGame();
+        if (controller.placingTurn === controller.playerTwo && controller.playerTwo.gameBoard.allShipsPlaced()) {
+            domManager.placingPhase = false;
+            
+            elements.carrierTwo.removeAttribute('draggable');
+            elements.battleshipTwo.removeAttribute('draggable');
+            elements.cruiserTwo.removeAttribute('draggable');
+            elements.submarineTwo.removeAttribute('draggable');
+            elements.destroyerTwo.removeAttribute('draggable');
+
+            controller.startGame();
+        }
     });
 };
 
