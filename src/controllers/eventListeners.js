@@ -55,7 +55,6 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('initBoard', (e) => {
-        console.log(e.detail.placingPlayer);
         if (isModalityHumanVsHuman(controller)) {
             if (e.detail.placingPlayer) {
                 e.detail.placingPlayer === 'playerOne' ? domManager.showCells(elements.boardOne) : domManager.showCells(elements.boardTwo);
@@ -87,11 +86,10 @@ export default function setEventListeners(domManager) {
         elements.boardTwo.innerHTML = '';
         elements.gameOverDialog.close();
         domManager.showInitialDialog();
-        domManager.renderBoardOne();
-        domManager.renderBoardTwo();
+        domManager.renderBoard(elements.boardOne);
+        domManager.renderBoard(elements.boardTwo);
         domManager.resetFleetManagers();
         controller.initialize();
-        console.log('enabling random allocation buttons');
         elements.randomPlaceOne.removeAttribute('disabled');
         elements.randomPlaceTwo.removeAttribute('disabled');
         elements.doneButtonOne.removeAttribute('disabled');
@@ -103,12 +101,9 @@ export default function setEventListeners(domManager) {
     });
 
     eventBus.addEventListener('cellClicked', (e) => {
-        console.log('cell clicked fired with',  e.detail.targetPlayer, controller.activePlayer);
         if (e.detail.targetPlayer === 'playerOne' && controller.activePlayer === controller.playerTwo) {
-            console.log('attacking on player one');
             controller.attackOnPlayerOne(e.detail.coordinates);
         } else if (e.detail.targetPlayer === 'playerTwo' && controller.activePlayer === controller.playerOne) {
-            console.log('attacking on player 2');
             controller.attackOnPlayerTwo(e.detail.coordinates);
         };
     });
@@ -175,7 +170,6 @@ export default function setEventListeners(domManager) {
         const placingPlayer = domManager.placingPlayer === 'playerOne' ? controller.playerOne : controller.playerTwo;
 
         if (!shipToPlace.isPlaced) {
-            console.log('placing turn', controller.placingTurn);
             placingPlayer === player && controller.placingTurn.gameBoard.place(shipToPlace, coordinates, orientation);
         };
 
@@ -413,7 +407,7 @@ export default function setEventListeners(domManager) {
     elements.doneButtonTwo.addEventListener('click', () => {
         if (controller.placingTurn === controller.playerTwo && controller.playerTwo.gameBoard.allShipsPlaced()) {
             domManager.placingPhase = false;
-            
+
             elements.carrierTwo.removeAttribute('draggable');
             elements.battleshipTwo.removeAttribute('draggable');
             elements.cruiserTwo.removeAttribute('draggable');

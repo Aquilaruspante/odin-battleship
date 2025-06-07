@@ -1,6 +1,7 @@
 import Player from "../models/player.js";
 import eventBus from "../utils/eventBus.js";
 import isModalityHumanVsHuman from "../utils/switchModality.js";
+import { elements } from "../views/DOMElements.js";
 import AIController from "./aiController.js";
 import { dispatchGridComposed } from "./eventListeners.js";
 
@@ -49,8 +50,9 @@ export default class GameController {
         this.#resetShipsHitsAndPlacement();
         this.playerOne.gameBoard.resetBoard();
         this.playerTwo.gameBoard.resetBoard();
-        this.playerOne.gameBoard.unplaceAllShips();
-        this.playerTwo.gameBoard.unplaceAllShips();
+
+        dispatchGridComposed(this);
+
         console.debug('both boards reset');
         this.placingTurn = this.playerOne;
         eventBus.dispatchEvent(new Event('shipsReadyForPlacement'));

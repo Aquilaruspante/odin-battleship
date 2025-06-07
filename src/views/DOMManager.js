@@ -94,8 +94,6 @@ export default class DOMManager {
     renderBoard(DOMBoard) {
         const targetPlayer = DOMBoard === elements.boardOne ? 'playerOne': 'playerTwo';
 
-        console.log(targetPlayer);
-
         for (let x = 0; x < 10; x++) {
             const row = document.createElement('div');
             row.setAttribute('class', `row row-${x}`);
@@ -139,7 +137,6 @@ export default class DOMManager {
     };
 
     hideCellsValues(board) {
-        console.log('removing cells');
         const gameBoardgrid = board === elements.boardOne ? this.gridOne : this.gridTwo;
         const domBoardName = board === elements.boardOne ? 'gameboard-1' : 'gameboard-2';
     
