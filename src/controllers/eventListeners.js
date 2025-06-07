@@ -174,6 +174,7 @@ export default function setEventListeners(domManager) {
         const placingPlayer = domManager.placingPlayer === 'playerOne' ? controller.playerOne : controller.playerTwo;
 
         if (!shipToPlace.isPlaced) {
+            console.log('placing turn', controller.placingTurn);
             placingPlayer === player && controller.placingTurn.gameBoard.place(shipToPlace, coordinates, orientation);
         };
 
@@ -400,6 +401,7 @@ export default function setEventListeners(domManager) {
             if (isModalityHumanVsHuman(controller)) {
                 domManager.manageManualPlacing('player-2');
                 domManager.updateTurnBoard(null, controller.playerTwo);
+                controller.placingTurn = controller.playerTwo;
             } else {
                 controller.composeGameBoard(controller.playerTwo);
                 controller.startGame();

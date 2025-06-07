@@ -34,14 +34,6 @@ export default class DOMManager {
         };
     };
     
-    renderBoardOne() {
-        this.renderBoard(elements.boardOne);
-    };
-    
-    renderBoardTwo() {
-        this.renderBoard(elements.boardTwo);
-    };
-    
     showInitialDialog() {
         elements.initialDialog.showModal();
     };
@@ -52,8 +44,8 @@ export default class DOMManager {
             this.startGame();
             elements.initialDialog.close();
         });
-        this.renderBoardOne();
-        this.renderBoardTwo();
+        this.renderBoard(elements.boardOne);
+        this.renderBoard(elements.boardTwo);
         console.debug('Boards rendered');
     };
     
@@ -100,6 +92,8 @@ export default class DOMManager {
     
     renderBoard(DOMBoard) {
         const targetPlayer = DOMBoard === elements.boardOne ? 'playerOne': 'playerTwo';
+
+        console.log(targetPlayer);
 
         for (let x = 0; x < 10; x++) {
             const row = document.createElement('div');
