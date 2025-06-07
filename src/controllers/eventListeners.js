@@ -384,11 +384,11 @@ export default function setEventListeners(domManager) {
     });
 
     elements.randomPlaceOne.addEventListener('click', () => {
-        if (!controller.playerOne.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerOne);
+        if (!controller.playerOne.gameBoard.allShipsPlaced() && controller.placingTurn === controller.playerOne) controller.composeGameBoard(controller.playerOne);
     });
 
     elements.randomPlaceTwo.addEventListener('click', () => {
-        if (!controller.playerTwo.gameBoard.allShipsPlaced()) controller.composeGameBoard(controller.playerTwo);
+        if (!controller.playerTwo.gameBoard.allShipsPlaced() && controller.placingTurn === controller.playerTwo) controller.composeGameBoard(controller.playerTwo);
     });
 
     elements.doneButtonOne.addEventListener('click', () => {
