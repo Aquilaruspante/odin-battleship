@@ -322,3 +322,13 @@ dialog::backdrop {
 	font-size: large;
 	text-align: center;
 }
+
+button:disabled, button[disabled] {
+	background-color: #6d757a;
+}
+
+button:disabled:hover {
+	background-color: #6d757a;
+	box-shadow: none;
+	cursor: auto;
+}
