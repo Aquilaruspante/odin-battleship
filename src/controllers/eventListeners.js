@@ -96,6 +96,12 @@ export default function setEventListeners(domManager) {
         elements.doneButtonTwo.removeAttribute('disabled');
         elements.horizontalOne.removeAttribute('disabled');
         elements.verticalOne.removeAttribute('disabled');
+
+        if (elements.modality.value === 'computer') {
+            elements.playerTwoName.value = 'Computer';
+        } else {
+            elements.playerTwoName.value = '';
+        };
     });
 
     eventBus.addEventListener('controllerCreated', (e) => {
