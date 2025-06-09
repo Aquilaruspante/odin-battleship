@@ -118,6 +118,12 @@ export default function setEventListeners(domManager) {
 
         domManager.manageManualPlacing('player-1');
         domManager.updateTurnBoard(null, controller.playerOne);
+
+        elements.randomPlaceTwo.setAttribute('disabled', true);
+        elements.doneButtonTwo.setAttribute('disabled', true);
+
+        elements.horizontalTwo.setAttribute('disabled', true);
+        elements.verticalTwo.setAttribute('disabled', true);
     });
 
     eventBus.addEventListener('placeShip', (e) => {
@@ -393,7 +399,15 @@ export default function setEventListeners(domManager) {
 
     elements.doneButtonOne.addEventListener('click', () => {
         if (controller.playerOne.gameBoard.allShipsPlaced()) {
+            elements.horizontalOne.setAttribute('disabled', true);
+            elements.verticalOne.setAttribute('disabled', true);
+
             if (isModalityHumanVsHuman(controller)) {
+                elements.randomPlaceTwo.removeAttribute('disabled');
+                elements.doneButtonTwo.removeAttribute('disabled');
+                elements.horizontalTwo.removeAttribute('disabled');
+                elements.verticalTwo.removeAttribute('disabled');
+                
                 domManager.manageManualPlacing('player-2');
                 domManager.updateTurnBoard(null, controller.playerTwo);
                 controller.placingTurn = controller.playerTwo;
@@ -406,6 +420,9 @@ export default function setEventListeners(domManager) {
 
     elements.doneButtonTwo.addEventListener('click', () => {
         if (controller.placingTurn === controller.playerTwo && controller.playerTwo.gameBoard.allShipsPlaced()) {
+            elements.horizontalTwo.setAttribute('disabled', true);
+            elements.verticalTwo.setAttribute('disabled', true);
+            
             domManager.placingPhase = false;
 
             elements.carrierTwo.removeAttribute('draggable');
