@@ -332,3 +332,8 @@ button:disabled:hover {
 	box-shadow: none;
 	cursor: auto;
 }
+
+#initial-dialog h3 {
+	font-size: 1.3rem;
+	font-weight: 300;
+}
