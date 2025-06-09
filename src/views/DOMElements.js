@@ -42,5 +42,7 @@ export function initDOMElements() {
         doneButtonOne: document.querySelector('#done-btn-1'),
         doneButtonTwo: document.querySelector('#done-btn-2'),
         startGameDialog: document.querySelector('#start-game-dialog'),
+        modality: document.querySelector('#modality'),
+        playerTwoName: document.querySelector('#player-two'),
     };
 };

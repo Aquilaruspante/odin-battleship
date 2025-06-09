@@ -407,7 +407,7 @@ export default function setEventListeners(domManager) {
                 elements.doneButtonTwo.removeAttribute('disabled');
                 elements.horizontalTwo.removeAttribute('disabled');
                 elements.verticalTwo.removeAttribute('disabled');
-                
+
                 domManager.manageManualPlacing('player-2');
                 domManager.updateTurnBoard(null, controller.playerTwo);
                 controller.placingTurn = controller.playerTwo;
@@ -433,6 +433,16 @@ export default function setEventListeners(domManager) {
 
             controller.startGame();
         }
+    });
+
+    elements.modality.addEventListener('change', (event) => {
+        if (event.target.value === 'computer') {
+            elements.playerTwoName.value = 'Computer';
+            elements.playerTwoName.setAttribute('disabled', true);
+        } else {
+            elements.playerTwoName.value = '';
+            elements.playerTwoName.removeAttribute('disabled');
+        };
     });
 };
 

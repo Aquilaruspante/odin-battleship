@@ -37,6 +37,8 @@ export default class DOMManager {
     
     showInitialDialog() {
         elements.initialDialog.showModal();
+        elements.playerTwoName.value = 'Computer';
+        elements.playerTwoName.setAttribute('disabled', true);
     };
     
     initGame() {
