@@ -94,6 +94,8 @@ export default function setEventListeners(domManager) {
         elements.randomPlaceTwo.removeAttribute('disabled');
         elements.doneButtonOne.removeAttribute('disabled');
         elements.doneButtonTwo.removeAttribute('disabled');
+        elements.horizontalOne.removeAttribute('disabled');
+        elements.verticalOne.removeAttribute('disabled');
     });
 
     eventBus.addEventListener('controllerCreated', (e) => {
