@@ -1,7 +1,6 @@
 import Player from "../models/player.js";
 import eventBus from "../utils/eventBus.js";
 import isModalityHumanVsHuman from "../utils/switchModality.js";
-import { elements } from "../views/DOMElements.js";
 import AIController from "./aiController.js";
 import { dispatchGridComposed } from "./eventListeners.js";
 

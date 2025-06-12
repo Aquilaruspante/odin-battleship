@@ -101,6 +101,7 @@ export default function setEventListeners(domManager) {
             elements.playerTwoName.value = 'Computer';
         } else {
             elements.playerTwoName.value = '';
+            elements.playerTwoName.removeAttribute('disabled');
         };
     });
 
@@ -409,6 +410,8 @@ export default function setEventListeners(domManager) {
         if (controller.playerOne.gameBoard.allShipsPlaced()) {
             elements.horizontalOne.setAttribute('disabled', true);
             elements.verticalOne.setAttribute('disabled', true);
+            elements.randomPlaceOne.setAttribute('disabled', true);
+            elements.doneButtonOne.setAttribute('disabled', true);
 
             if (isModalityHumanVsHuman(controller)) {
                 elements.randomPlaceTwo.removeAttribute('disabled');
