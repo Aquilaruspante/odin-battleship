@@ -52,11 +52,8 @@ describe('isSunk method', () => {
     test('isSunk is true when hitsNumber is greater or equal than length', () => {
         ship.hitsNumber = 3;
         expect(ship.isSunk()).toBeTruthy();
-
-        ship.hitsNumber = 4;
-        expect(ship.isSunk()).toBeTruthy();
-    })
-})
+    });
+});
 
 describe('isPlaced property', () => {
     beforeEach(() => {

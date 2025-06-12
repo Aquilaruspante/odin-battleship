@@ -166,11 +166,11 @@ describe('allShipsSunk method', () => {
     })
 
     test('all ships are sunk so allShipsSunk should be true', () => {
-        gameBoard.destroyer.isSunk = jest.fn(() => true);
-        gameBoard.cruiser.isSunk = jest.fn(() => true);
-        gameBoard.submarine.isSunk = jest.fn(() => true);
-        gameBoard.battleship.isSunk = jest.fn(() => true);
-        gameBoard.carrier.isSunk = jest.fn(() => true);
+        gameBoard.destroyer.sinkable = false;
+        gameBoard.cruiser.sinkable = false;
+        gameBoard.submarine.sinkable = false;
+        gameBoard.battleship.sinkable = false;
+        gameBoard.carrier.sinkable = false;
 
         expect(gameBoard.allShipsSunk()).toBeTruthy();
     })

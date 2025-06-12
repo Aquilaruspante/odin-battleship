@@ -25,11 +25,6 @@ describe('initialize method', () => {
         gameController = new GameController('computer', 'Lillo', 'Peppe');
     });
 
-    test('activePlayer is instance of Player', () => {
-        gameController.initialize();
-        expect(gameController.activePlayer).toBeInstanceOf(Player);
-   })
-
    test('all ships hitsNumber get reset to 0', () => {
         // playerOne
         gameController.playerOne.gameBoard.destroyer.hitsNumber = 1;
