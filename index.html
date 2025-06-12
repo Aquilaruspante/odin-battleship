@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Battleship</title>
+<script defer src="main.js"></script></head>
+<body>
+    <img alt="battleship-image" id="background-image">
+    <section id="game" class="share-tech-mono-regular">
+        <section id="header">
+            <div id="turn-board">
+                <h3></h3>
+                <p></p>
+            </div>
+        </section>
+        <main>
+            <div class="fleet-manager">
+                <div class="ships" id="ships-board-1">
+                    <div class="draggable-wrapper">
+                        <div class="ship-container" id="carrier-1">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                    <div class="draggable-wrapper">
+                        <div class="ship-container" id="battleship-1">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                    <div class="draggable-wrapper">
+                         <div class="ship-container" id="cruiser-1">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                   <div class="draggable-wrapper">
+                        <div class="ship-container" id="submarine-1">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                   </div>
+                    <div class="draggable-wrapper">
+                        <div class="ship-container" id="destroyer-1">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                </div>
+                
+                <fieldset>
+                    <legend>Choose orientation</legend>
+                    <div class="menu">
+                        <input type="radio" id="vertical-1" name="orientation-1">
+                        <label for="horizontal">Horizontal</label>
+                        <input type="radio" id="horizontal-1" name="orientation-1" checked>
+                        <label for="vertical">Vertical</label>
+                    </div>
+                </fieldset>
+                <div class="buttons">
+                    <button type="button" id="place-randomly-btn-1">Random</button>
+                    <button type="button" id="done-btn-1">Done</button>
+                </div>
+            </div>
+            <div class="gameboard gameboard-1"></div>
+            <div class="gameboard gameboard-2"></div>
+            <div class="fleet-manager">
+                <div class="ships" id="ships-board-2">
+                    <div class="draggable-wrapper">
+                        <div class="ship-container" id="carrier-2">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                    <div class="draggable-wrapper">
+                        <div class="ship-container" id="battleship-2">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                    <div class="draggable-wrapper">
+                        <div class="ship-container" id="cruiser-2">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                    <div class="draggable-wrapper">
+                        <div class="ship-container" id="submarine-2">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                    <div class="draggable-wrapper">
+                        <div class="ship-container" id="destroyer-2">
+                        <div class="ship-on-board"></div>
+                        <div class="ship-on-board"></div>
+                    </div>
+                    </div>
+                </div>
+                
+                <fieldset>
+                    <legend>Choose orientation</legend>
+                    <div class="menu">
+                        <input type="radio" id="vertical-2" name="orientation-2">
+                        <label for="horizontal">Horizontal</label>
+                        <input type="radio" id="horizontal-2" name="orientation-2" checked>
+                        <label for="vertical">Vertical</label>
+                    </div>
+                </fieldset>
+                <div class="buttons">
+                    <button type="button" id="place-randomly-btn-2">Random</button>
+                    <button type="button" id="done-btn-2">Done</button>
+                </div>
+            </div>
+        </main>
+        <section id="bottom"></section>
+        <dialog id="game-over-dialog" hidden>
+            <h3>Game Over</h3>
+            <p id="announce-winner"></p>
+            <button type="button" id="play-again-button" autofocus>Play again!</button>
+        </dialog>
+        <dialog id="timeout-dialog">
+            <h3 id="active-player"></h3>
+            <div id="counter"></div>
+        </dialog>
+        <dialog id="initial-dialog">
+            <form id="initial-form">
+                <h3>Select Modality</h3>
+                <select name="modality" id="modality">
+                    <option value="human">Human vs Human</option>
+                    <option value="computer" selected>Human vs Computer</option>
+                </select>
+                <section id="choose-player-names">
+                    <div class="name-element">
+                        <label for="player-one">Player One</label>
+                        <input type="text" name="player-one" id="player-one" required>
+                    </div>
+                    <div class="name-element">
+                        <label for="player-two">Player Two</label>
+                        <input type="text" name="player-two" id="player-two" required>
+                    </div>
+                </section>
+                <button type="submit" id="start-game-btn">Start Game!</button>
+            </form>
+            
+        </dialog>
+        <dialog id="start-game-dialog">
+            <h3>get ready!</h3>
+        </dialog>
+    </section>
+</body>
+</html>
