@@ -142,22 +142,25 @@
             <div id="counter"></div>
         </dialog>
         <dialog id="initial-dialog">
-            <h3>Select Modality</h3>
-            <select name="modality" id="modality">
-                <option value="human">Human vs Human</option>
-                <option value="computer" selected>Human vs Computer</option>
-            </select>
-            <section id="choose-player-names">
-                <div class="name-element">
-                    <label for="player-one">Player One</label>
-                    <input type="text" name="player-one" id="player-one">
-                </div>
-                <div class="name-element">
-                    <label for="player-two">Player Two</label>
-                    <input type="text" name="player-two" id="player-two">
-                </div>
-            </section>
-            <button type="button" id="start-game-btn">Start Game!</button>
+            <form id="initial-form">
+                <h3>Select Modality</h3>
+                <select name="modality" id="modality">
+                    <option value="human">Human vs Human</option>
+                    <option value="computer" selected>Human vs Computer</option>
+                </select>
+                <section id="choose-player-names">
+                    <div class="name-element">
+                        <label for="player-one">Player One</label>
+                        <input type="text" name="player-one" id="player-one" required>
+                    </div>
+                    <div class="name-element">
+                        <label for="player-two">Player Two</label>
+                        <input type="text" name="player-two" id="player-two" required>
+                    </div>
+                </section>
+                <button type="submit" id="start-game-btn">Start Game!</button>
+            </form>
+            
         </dialog>
         <dialog id="start-game-dialog">
             <h3>get ready!</h3>

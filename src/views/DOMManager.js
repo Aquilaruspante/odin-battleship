@@ -43,10 +43,18 @@ export default class DOMManager {
     
     initGame() {
         this.setBackgroundImage();
-        elements.startGameButton.addEventListener('click', () => {
+        elements.startGameButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const form = elements.initialDialog.querySelector('form');
+
+            if (!form.checkValidity()) {
+                form.reportValidity(); // mostra i messaggi di errore
+                return; // blocca il gioco se i campi non sono validi
+            };
             this.startGame();
             elements.initialDialog.close();
         });
+
         this.renderBoard(elements.boardOne);
         this.renderBoard(elements.boardTwo);
         console.debug('Boards rendered');
